@@ -23,7 +23,8 @@ Route::middleware('login')->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     });
-//
+
+    //
     Route::group(['prefix' => 'user-pages'], function () {
         Route::group(['prefix' => 'manage-account'], function () {
             Route::get('/', function () {
