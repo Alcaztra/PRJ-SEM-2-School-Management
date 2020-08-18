@@ -23,7 +23,7 @@ Route::middleware('login')->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     });
-
+//
     Route::group(['prefix' => 'user-pages'], function () {
         Route::group(['prefix' => 'manage-account'], function () {
             Route::get('/', function () {
@@ -45,7 +45,7 @@ Route::middleware('login')->group(function () {
                 });
                 Route::post('submit', "AccountController@submit");
             });
-       
+
             Route::group(['prefix' => 'student'], function () {
                 Route::get('list', function () {
                     $student = User::where('user_role', 3)->get();
