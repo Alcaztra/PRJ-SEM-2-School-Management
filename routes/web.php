@@ -26,13 +26,13 @@ Route::middleware('login')->group(function () {
 
     Route::group(['prefix' => 'user-pages'], function () {
         Route::group(['prefix' => 'manage-account'], function () {
-            Route::get('/', function () {
-                $id = session()->get('user');
-                $user = User::where('user_id', $id)->first();
-                return view('pages.user-pages.account-info')->with('user', $user);
-            });
+
             Route::get('update-{user_id}', "AccountController@update");
             Route::post('submit', "AccountController@submit");
+            Route::post('change-image-{user_id}/submit', "AccountController@changeImage");
+            Route::get('change-password-{user_id}', "AccountController@changePassword");
+            Route::post('change-password-{user_id}/submit', "AccountController@changePassword");
+            Route::get('/', "AccountController@index");
         });
         Route::middleware('isAdmin')->group(function () {
             Route::group(['prefix' => 'teacher'], function () {
@@ -44,8 +44,12 @@ Route::middleware('login')->group(function () {
                     return view('pages.user-pages.account-add');
                 });
                 Route::post('submit', "AccountController@submit");
+                Route::get('edit-{user_id}', function ($user_id) {
+                    $teacher = User::where('user_id', $user_id)->first();
+                    return view('pages.user-pages.account-add', ['user' => $teacher]);
+                });
             });
-       
+
             Route::group(['prefix' => 'student'], function () {
                 Route::get('list', function () {
                     $student = User::where('user_role', 3)->get();
