@@ -10,10 +10,11 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $validatedData = $request->validate([
-            'user_name' => 'required|min:6|regex:/[a-zA-z0-9]*/',
-            'password' => 'required|min:6|regex:/[a-zA-z0-9]*/'
-        ]);
+        if (session()->has('user') && session('user') !== null) {
+            return redirect('/');
+        }
+        $this->store($request);
+
         $user_name = $request->input('user_name');
         $password = $request->input('password');
 
@@ -27,7 +28,18 @@ class LoginController extends Controller
                 'user-name' => $user->user_name,
                 'user-image' => $user->user_image
             ]);
+
+            User::where('user_id', $user_name)->update(['user_state' => 1]);
+
             return redirect('/');
         }
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'user_name' => 'bail|required|min:6|alpha_num|exists:users,user_id',
+            'password' => 'bail|required|alpha_num'
+        ]);
     }
 }
