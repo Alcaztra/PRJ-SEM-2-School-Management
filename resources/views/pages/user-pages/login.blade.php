@@ -7,7 +7,7 @@
     <div class="content-wrapper d-flex align-items-center justify-content-center auth theme-one"
         style="background-image: url({{ url('assets/images/auth/login_1.jpg') }}); background-size: cover;">
         <div class="row w-100">
-            <div class="col-lg-4 mx-auto">
+            <div class="col-lg-4 mx-auto" style="max-width: 400px">
                 <div class="auto-form-wrapper">
                     <form action="submit" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -17,10 +17,17 @@
                                 <input type="text" name="user_name" class="form-control" placeholder="Username">
                                 <div class="input-group-append">
                                     <span class="input-group-text">
-                                        <i class="mdi mdi-check-circle-outline"></i>
+                                        @if ($errors->has('user_name'))
+                                            <i class="mdi mdi-close text-danger"></i>
+                                        @else
+                                            <i class="mdi mdi-check text-success"></i>
+                                        @endif
                                     </span>
                                 </div>
                             </div>
+                            @if ($errors->any())
+                                <small class="text-danger">{{ $errors->first('user_name') }}</small>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label class="label">Password</label>
@@ -28,10 +35,17 @@
                                 <input type="password" name="password" class="form-control" placeholder="*********">
                                 <div class="input-group-append">
                                     <span class="input-group-text">
-                                        <i class="mdi mdi-check-circle-outline"></i>
+                                        @if ($errors->has('password'))
+                                            <i class="mdi mdi-close text-danger"></i>
+                                        @else
+                                            <i class="mdi mdi-check text-success"></i>
+                                        @endif
                                     </span>
                                 </div>
                             </div>
+                            @if ($errors->any())
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
