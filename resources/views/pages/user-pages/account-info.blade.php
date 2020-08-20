@@ -56,8 +56,36 @@
                         </table>
                     </div>
                     <hr>
-                    <a class="btn btn-warning" href="{{ url("user-pages/manage-account/update-{$user->user_id}") }}" role="button">Change
-                        Info</a>
+                    <a class="btn btn-warning" href="{{ url("user-pages/manage-account/update-{$user->user_id}") }}"
+                        role="button">Change Info</a>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-1"><img src="" class="img-thumbnail" style="max-width: 100px" id="preview_image"
+                                alt=""></div>
+                        <div class="col">
+                            <form action="{{ url("user-pages/manage-account/change-image-{$user->user_id}/submit") }}"
+                                method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="border border-dark custom-file-input"
+                                            name="user_image_upload" id="user_image_upload">
+                                        <label for="user_image_upload" class="custom-file-label"> Profile image </label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <div class="btn-group" role="group" aria-label="">
+                                            <button type="submit" class="btn btn-outline-primary">Upload</button>
+                                            <button type="reset" class="btn btn-outline-danger">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <a name="" id="" class="btn btn-primary"
+                        href="{{ url("user-pages/manage-account/change-password-{$user->user_id}") }}" role="button">Change
+                        Password</a>
                 </div>
             </div>
         </div>
@@ -66,6 +94,7 @@
 
 @push('plugin-scripts')
     {!! Html::script('/assets/plugins/dragula/dragula.min.js') !!}
+    {!! Html::script('/js/getInputFilename.js') !!}
 @endpush
 
 @push('custom-scripts')

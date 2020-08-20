@@ -13,7 +13,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th> User ID </th>
+                                    <th colspan="2"> User ID </th>
                                     <th> User name </th>
                                     <th> Password </th>
                                     <th> Profile Image </th>
@@ -27,6 +27,7 @@
                             <tbody>
                                 @foreach ($users as $u)
                                     <td>{{ $u->user_id }}</td>
+                                    <td><a class="btn btn-outline-warning" href="{{ url("user-pages/teacher/edit-{$u->user_id}") }}" role="button">Edit</a></td>
                                     <td>{{ $u->user_name }}</td>
                                     <td>{{ $u->password }}</td>
                                     <td><img src="{{ url($u->user_image ?? '') }}" class="img-thumbnail"
