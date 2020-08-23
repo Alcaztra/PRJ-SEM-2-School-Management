@@ -60,7 +60,7 @@
                         role="button">Change Info</a>
                     <hr>
                     <div class="row">
-                        <div class="col-md-1"><img src="" class="img-thumbnail" style="max-width: 100px" id="preview_image"
+                        <div class="col-md-2"><img src="" class="img-thumbnail" style="max-width: 100px" id="preview_image"
                                 alt=""></div>
                         <div class="col">
                             <form action="{{ url("user-pages/manage-account/change-image-{$user->user_id}/submit") }}"
