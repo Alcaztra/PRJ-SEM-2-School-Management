@@ -579,40 +579,12 @@
         <div class="col-md-12 grid-margin">
             <div class="card border border-primary">
                 <div class="card-body">
-                    @php
-                    $d = 1;
-                    date_default_timezone_set("Asia/Ho_Chi_Minh");
-                    $dayW = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-                    $mon = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JULY', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-                    $getdate = getdate(time());
-                    $sunday = getdate(strtotime('last sunday',strtotime('1 '.$getdate['month'].' '.$getdate['year'])));
-                    $s = date_create($sunday['year'].'-'.$sunday['mon'].'-'.($sunday['mday']-1));
-                    @endphp
-                    <div class="row justify-content-between">
-                        <span>{{ $getdate['weekday'] . ', ' . $mon[$getdate['mon'] - 1] . ' ' . $getdate['mday'] . ' ' . $getdate['year'] }}</span>
-                        <div class="btn-group" role="group" aria-label="">
-                            <button type="button" class="btn btn-dark" onclick=""><i class="mdi mdi-arrow-left"></i></button>
-                            <button type="button" class="btn btn-dark" onclick=""><i class="mdi mdi-arrow-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="row justify-content-around text-center">
-                        @foreach ($dayW as $dw)
-                            <div class="col bg-dark text-light p-2">{{ $dw }}</div>
-                        @endforeach
-                    </div>
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="row justify-content-around">
-                            @for ($j = 0; $j < 7; $j++)
-                                <div class="col btn btn-outline-success font-weight-bolder" style="height: 6em">
-                                    {{ date_format(date_add($s, date_interval_create_from_date_string('1 days')), 'd') }}
-                                </div>
-                            @endfor
-                        </div>
-                    @endfor
+                    <div id='calendar'></div>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 
 @push('plugin-scripts')
@@ -622,4 +594,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/assets/js/calendar.js') !!}
 @endpush

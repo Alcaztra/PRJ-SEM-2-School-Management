@@ -2,7 +2,7 @@
   "_args": [
     [
       "@mdi/font@4.9.95",
-      "/Users/jyothish/Documents/star-laravel-free/template"
+      "D:\\project-sem2-aptech\\PRJ-SEM-2-School-Management"
     ]
   ],
   "_from": "@mdi/font@4.9.95",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@mdi/font/-/font-4.9.95.tgz",
   "_spec": "4.9.95",
-  "_where": "/Users/jyothish/Documents/star-laravel-free/template",
+  "_where": "D:\\project-sem2-aptech\\PRJ-SEM-2-School-Management",
   "author": {
     "name": "Austin Andrews",
     "url": "http://twitter.com/templarian"
