@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label class="label">Username</label>
                             <div class="input-group">
-                                <input type="text" name="user_name" class="form-control" placeholder="Username">
+                                <input type="text" name="user_name" class="form-control" placeholder="Username" value="">
                                 <div class="input-group-append">
                                     <span class="input-group-text">
                                         @if ($errors->has('user_name'))
@@ -60,12 +60,14 @@
                         </div> --}}
                         {{-- <div class="form-group">
                             <button class="btn btn-block g-login">
-                                <img class="mr-3" src="{{ url('assets/images/file-icons/icon-google.svg') }}" alt="">Log in
+                                <img class="mr-3" src="{{ url('assets/images/file-icons/icon-google.svg') }}" alt="">Log
+                                in
                                 with Google</button>
                         </div>
                         <div class="text-block text-center my-3">
                             <span class="text-small font-weight-semibold">Not a member ?</span>
-                            <a href="{{ url('/user-pages/register') }}" class="text-black text-small">Create new account</a>
+                            <a href="{{ url('/user-pages/register') }}" class="text-black text-small">Create new
+                                account</a>
                         </div> --}}
                     </form>
                 </div>
