@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "4.0",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.5.*"
     },
@@ -51,6 +51,9 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-create-storage-link": [
+            "@php artisan storage:link"
         ]
     },
     "config": {
