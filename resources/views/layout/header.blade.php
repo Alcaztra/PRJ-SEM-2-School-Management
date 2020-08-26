@@ -10,7 +10,7 @@
             <span class="mdi mdi-menu"></span>
         </button>
         <ul class="navbar-nav navbar-nav-left header-links">
-            {{-- <li class="nav-item d-none d-xl-flex">
+            <li class="nav-item d-none d-xl-flex">
                 <a href="#" class="nav-link">Sản phẩm <span class="badge badge-primary ml-1">New</span>
                 </a>
             </li>
@@ -30,7 +30,7 @@
                     <a href="#" class="dropdown-item"><i class="mdi mdi-elevation-rise"></i>Reports</a>
                     <a href="#" class="dropdown-item"><i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
                 </div>
-            </li> --}}
+            </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">
@@ -46,7 +46,7 @@
                         <span class="badge badge-pill badge-primary float-right">View all</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    {{-- <a class="dropdown-item preview-item">
+                    <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
                             <img src="{{ url('assets/images/faces/face10.jpg') }}" alt="image"
                                 class="img-sm profile-pic"> </div>
@@ -54,7 +54,25 @@
                             <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
                             <p class="font-weight-light small-text"> The meeting is cancelled </p>
                         </div>
-                    </a> --}}
+                    </a>
+                    <a class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <img src="{{ url('assets/images/faces/face12.jpg') }}" alt="image"
+                                class="img-sm profile-pic"> </div>
+                        <div class="preview-item-content flex-grow py-2">
+                            <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
+                            <p class="font-weight-light small-text"> The meeting is cancelled </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <img src="{{ url('assets/images/faces/face3.jpg') }}" alt="image"
+                                class="img-sm profile-pic"> </div>
+                        <div class="preview-item-content flex-grow py-2">
+                            <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
+                            <p class="font-weight-light small-text"> The meeting is cancelled </p>
+                        </div>
+                    </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -69,7 +87,7 @@
                         <p class="mb-0 font-weight-medium float-left">4 new notifications </p>
                         <span class="badge badge-pill badge-primary float-right">View all</span>
                     </a>
-                    {{-- <a class="dropdown-item preview-item py-3">
+                    <a class="dropdown-item preview-item py-3">
                         <div class="preview-thumbnail">
                             <i class="mdi mdi-alert m-auto text-primary"></i>
                         </div>
@@ -95,15 +113,14 @@
                             <h6 class="preview-subject font-weight-normal text-dark mb-1">Đăng ký</h6>
                             <p class="font-weight-light small-text mb-0"> 2 ngày </p>
                         </div>
-                    </a> --}}
+                    </a>
                 </div>
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-block">
                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
-                    <span class="profile-text d-none d-md-inline-flex">{{ session()->get('user-name') }}</span>
-                    <img class="img-xs rounded-circle"
-                        src="{{ session()->get('user-image') ? asset(session()->get('user-image')) : asset('assets/images/faces-clipart/pic-1.png') }}"
+                    <span class="profile-text d-none d-md-inline-flex">Tên</span>
+                    <img class="img-xs rounded-circle" src="{{ url('assets/images/faces/face8.jpg') }}"
                         alt="Profile image"> </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <a class="dropdown-item p-0">
@@ -120,12 +137,10 @@
                             </div>
                         </div>
                     </a>
-                    <a class="dropdown-item mt-2" href="{{ url('user-pages/manage-account') }}"> Manage Accounts </a>
-                    <a class="dropdown-item"
-                        href="{{ url('user-pages/manage-account/change-password-' . session('user')) }}"> Change
-                        Password </a>
+                    <a class="dropdown-item mt-2"> Manage Accounts </a>
+                    <a class="dropdown-item"> Change Password </a>
                     <a class="dropdown-item"> Check Inbox </a>
-                    <a class="dropdown-item" href="{{ url('logout') }}"> Sign Out </a>
+                    <a class="dropdown-item"> Sign Out </a>
                 </div>
             </li>
         </ul>
