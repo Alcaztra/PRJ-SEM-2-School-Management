@@ -9,13 +9,8 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-<<<<<<< Updated upstream
         "fideloper/proxy": "4.0",
         "laravel/framework": "5.7.*",
-=======
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "^5.7.0",
->>>>>>> Stashed changes
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.5.*"
     },
