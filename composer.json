@@ -12,7 +12,7 @@
         "fideloper/proxy": "4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "5.5.*"
+        "laravelcollective/html": "5.7.*"
     },
     "require-dev": {
         "composer/composer": "^1.10",
