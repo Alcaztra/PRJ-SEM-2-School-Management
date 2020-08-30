@@ -9,7 +9,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
         </button>
-        <ul class="navbar-nav navbar-nav-left header-links">
+        {{-- <ul class="navbar-nav navbar-nav-left header-links">
             <li class="nav-item d-none d-xl-flex">
                 <a href="#" class="nav-link">Sản phẩm <span class="badge badge-primary ml-1">New</span>
                 </a>
@@ -31,9 +31,9 @@
                     <a href="#" class="dropdown-item"><i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
                 </div>
             </li>
-        </ul>
+        </ul> --}}
         <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
                     <i class="mdi mdi-file-outline"></i>
@@ -74,7 +74,7 @@
                         </div>
                     </a>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                     data-toggle="dropdown">
@@ -119,10 +119,11 @@
             <li class="nav-item dropdown d-none d-xl-inline-block">
                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
-                    <span class="profile-text d-none d-md-inline-flex">{{ session()->get('user-name') }}</span>
+                    <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('admin')->user()->name }}</span>
                     <img class="img-xs rounded-circle"
-                        src="{{ session()->get('user-image') ? asset(session()->get('user-image')) : asset('assets/images/faces-clipart/pic-1.png') }}"
-                        alt="Profile image"> </a>
+                        src="{{ asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) }}"
+                        alt="Profile image">
+                </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <a class="dropdown-item p-0">
                         <div class="d-flex border-bottom w-100 justify-content-center">
@@ -138,10 +139,12 @@
                             </div>
                         </div>
                     </a>
-                    <a class="dropdown-item mt-2" href="{{ url('user-pages/manage-account') }}"> Manage Accounts </a>
-                    <a class="dropdown-item"> Change Password </a>
-                    <a class="dropdown-item"> Check Inbox </a>
-                    <a class="dropdown-item" href="{{ url('logout') }}"> Sign Out </a>
+                    <a class="dropdown-item mt-2" href="{{ route('dashboard') }}"> Dashboard </a>
+                    <a class="dropdown-item mt-2" href="{{ route('profile') }}"> Manage Accounts </a>
+                    <a class="dropdown-item" href="{{ route('profile.update.password') }}"> Change Password </a>
+                    <a class="dropdown-item"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Sign Out
+                    </a>
                 </div>
             </li>
         </ul>
@@ -149,5 +152,8 @@
             data-toggle="offcanvas">
             <span class="mdi mdi-menu icon-menu"></span>
         </button>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
 </nav>

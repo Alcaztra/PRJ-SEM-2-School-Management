@@ -11,208 +11,83 @@
 |
 */
 
-use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
-Route::middleware('login')->group(function () {
+Auth::routes();
 
-    Route::get('/', function () {
-        return view('dashboard');
-    });
-//
-    Route::group(['prefix' => 'user-pages'], function () {
-        Route::group(['prefix' => 'manage-account'], function () {
+// go to dashboard
+Route::get('/', function () {
+    return redirect()->intended(route('dashboard'));
+});
+Route::get('/home', function () {
+    return redirect()->intended(route('dashboard'));
+})->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-            Route::get('update-{user_id}', "AccountController@update");
-            Route::post('submit', "AccountController@submit");
-            Route::post('change-image-{user_id}/submit', "AccountController@changeImage");
-            Route::get('change-password-{user_id}', "AccountController@changePassword");
-            Route::post('change-password-{user_id}/submit', "AccountController@changePassword");
-            Route::get('/', "AccountController@index");
-        });
-        Route::middleware('isAdmin')->group(function () {
-            Route::group(['prefix' => 'teacher'], function () {
-                Route::get('list', function () {
-                    $teacher = User::where('user_role', 2)->get();
-                    return view('pages.user-pages.list-user', ['users' => $teacher, 'role' => 'teacher']);
-                });
-                Route::get('add', function () {
-                    return view('pages.user-pages.account-add');
-                });
-                Route::post('submit', "AccountController@submit");
-                Route::get('edit-{user_id}', function ($user_id) {
-                    $teacher = User::where('user_id', $user_id)->first();
-                    return view('pages.user-pages.account-add', ['user' => $teacher]);
-                });
-            });
+// redirect if user already logged in
+if (!Auth::guard('admin')->check()) {
+    Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\AdminLoginController@login');
+}
 
-            Route::group(['prefix' => 'student'], function () {
-                Route::get('list', function () {
-                    $student = User::where('user_role', 3)->get();
-                    return view('pages.user-pages.list-user', ['users' => $student, 'role' => 'student']);
-                });
-                Route::get('add', function () {
-                    return view('pages.user-pages.account-add');
-                });
-                Route::post('submit', "AccountController@submit");
-            });
-        });
-    });
+// profile
+Route::group(['prefix' => 'group'], function () {
+    //  profile pages
+    Route::get('/', 'ProfileController@index')->name('profile');
+    //  update profile
+    Route::get('update/profile', 'ProfileController@showFormProfile')->name('profile.update.profile');
+    Route::post('update/profile', 'ProfileController@updateProfile')->name('profile.update.profile.submit');
+    //  update password
+    Route::get('update/password', 'ProfileController@showFormPassword')->name('profile.update.password');
+    Route::post('update/password', 'ProfileController@updatePassword')->name('profile.update.password.submit');
+    //  update avatar
+    Route::post('update/avatar', 'ProfileController@updateAvatar')->name('profile.update.avatar');
+});
 
-
-
-    Route::group(['prefix' => 'basic-ui'], function () {
-        // Route::get('accordions', function () { return view('pages.basic-ui.accordions'); });
-        Route::get('buttons', function () {
-            return view('pages.basic-ui.buttons');
-        });
-        // Route::get('badges', function () { return view('pages.basic-ui.badges'); });
-        // Route::get('breadcrumbs', function () { return view('pages.basic-ui.breadcrumbs'); });
-        Route::get('dropdowns', function () {
-            return view('pages.basic-ui.dropdowns');
-        });
-        // Route::get('modals', function () { return view('pages.basic-ui.modals'); });
-        // Route::get('progress-bar', function () { return view('pages.basic-ui.progress-bar'); });
-        // Route::get('pagination', function () { return view('pages.basic-ui.pagination'); });
-        // Route::get('tabs', function () { return view('pages.basic-ui.tabs'); });
-        Route::get('typography', function () {
-            return view('pages.basic-ui.typography');
-        });
-        // Route::get('tooltips', function () { return view('pages.basic-ui.tooltips'); });
-    });
-
-    // Route::group(['prefix' => 'advanced-ui'], function(){
-    //     Route::get('dragula', function () { return view('pages.advanced-ui.dragula'); });
-    //     Route::get('clipboard', function () { return view('pages.advanced-ui.clipboard'); });
-    //     Route::get('context-menu', function () { return view('pages.advanced-ui.context-menu'); });
-    //     Route::get('popups', function () { return view('pages.advanced-ui.popups'); });
-    //     Route::get('sliders', function () { return view('pages.advanced-ui.sliders'); });
-    //     Route::get('carousel', function () { return view('pages.advanced-ui.carousel'); });
-    //     Route::get('loaders', function () { return view('pages.advanced-ui.loaders'); });
-    //     Route::get('tree-view', function () { return view('pages.advanced-ui.tree-view'); });
-    // });
-
-    // Route::group(['prefix' => 'forms'], function(){
-    //     Route::get('basic-elements', function () { return view('pages.forms.basic-elements'); });
-    //     Route::get('advanced-elements', function () { return view('pages.forms.advanced-elements'); });
-    //     Route::get('dropify', function () { return view('pages.forms.dropify'); });
-    //     Route::get('form-validation', function () { return view('pages.forms.form-validation'); });
-    //     Route::get('step-wizard', function () { return view('pages.forms.step-wizard'); });
-    //     Route::get('wizard', function () { return view('pages.forms.wizard'); });
-    // });
-
-    // Route::group(['prefix' => 'editors'], function(){
-    //     Route::get('text-editor', function () { return view('pages.editors.text-editor'); });
-    //     Route::get('code-editor', function () { return view('pages.editors.code-editor'); });
-    // });
-
-    Route::group(['prefix' => 'charts'], function () {
-        Route::get('chartjs', function () {
-            return view('pages.charts.chartjs');
-        });
-        // Route::get('morris', function () { return view('pages.charts.morris'); });
-        // Route::get('flot', function () { return view('pages.charts.flot'); });
-        // Route::get('google-charts', function () { return view('pages.charts.google-charts'); });
-        // Route::get('sparklinejs', function () { return view('pages.charts.sparklinejs'); });
-        // Route::get('c3-charts', function () { return view('pages.charts.c3-charts'); });
-        // Route::get('chartist', function () { return view('pages.charts.chartist'); });
-        // Route::get('justgage', function () { return view('pages.charts.justgage'); });
-    });
-
-    Route::group(['prefix' => 'tables'], function () {
-        Route::get('basic-table', function () {
-            return view('pages.tables.basic-table');
-        });
-        // Route::get('data-table', function () { return view('pages.tables.data-table'); });
-        // Route::get('js-grid', function () { return view('pages.tables.js-grid'); });
-        // Route::get('sortable-table', function () { return view('pages.tables.sortable-table'); });
-    });
-
-    // Route::get('notifications', function () {
-    //     return view('pages.notifications.index');
-    // });
-
-    Route::group(['prefix' => 'icons'], function () {
-        Route::get('material', function () {
-            return view('pages.icons.material');
-        });
-        // Route::get('flag-icons', function () { return view('pages.icons.flag-icons'); });
-        // Route::get('font-awesome', function () { return view('pages.icons.font-awesome'); });
-        // Route::get('simple-line-icons', function () { return view('pages.icons.simple-line-icons'); });
-        // Route::get('themify', function () { return view('pages.icons.themify'); });
-    });
-
-    // Route::group(['prefix' => 'maps'], function(){
-    //     Route::get('vector-map', function () { return view('pages.maps.vector-map'); });
-    //     Route::get('mapael', function () { return view('pages.maps.mapael'); });
-    //     Route::get('google-maps', function () { return view('pages.maps.google-maps'); });
-    // });
-
-
-    // Route::group(['prefix' => 'general-pages'], function(){
-    //     Route::get('blank-page', function () { return view('pages.general-pages.blank-page'); });
-    //     Route::get('landing-page', function () { return view('pages.general-pages.landing-page'); });
-    //     Route::get('profile', function () { return view('pages.general-pages.profile'); });
-    //     Route::get('email-templates', function () { return view('pages.general-pages.email-templates'); });
-    //     Route::get('faq', function () { return view('pages.general-pages.faq'); });
-    //     Route::get('faq-2', function () { return view('pages.general-pages.faq-2'); });
-    //     Route::get('news-grid', function () { return view('pages.general-pages.news-grid'); });
-    //     Route::get('timeline', function () { return view('pages.general-pages.timeline'); });
-    //     Route::get('search-results', function () { return view('pages.general-pages.search-results'); });
-    //     Route::get('portfolio', function () { return view('pages.general-pages.portfolio'); });
-    //     Route::get('user-listing', function () { return view('pages.general-pages.user-listing'); });
-    // });
-
-    // Route::group(['prefix' => 'ecommerce'], function(){
-    //     Route::get('invoice', function () { return view('pages.ecommerce.invoice'); });
-    //     Route::get('invoice-2', function () { return view('pages.ecommerce.invoice-2'); });
-    //     Route::get('pricing', function () { return view('pages.ecommerce.pricing'); });
-    //     Route::get('product-catalogue', function () { return view('pages.ecommerce.product-catalogue'); });
-    //     Route::get('project-list', function () { return view('pages.ecommerce.project-list'); });
-    //     Route::get('orders', function () { return view('pages.ecommerce.orders'); });
-    // });
+//student
+Route::group(['prefix' => 'student'], function () {
 
 });
 
-Route::group(['prefix' => 'user-pages'], function () {
-    Route::get('login', function () {
-        return view('pages.user-pages.login');
-    });
-    Route::post('submit', "LoginController@login");
-    // Route::get('login-2', function () { return view('pages.user-pages.login-2'); });
-    // Route::get('multi-step-login', function () { return view('pages.user-pages.multi-step-login'); });
-    // Route::get('register', function () { return view('pages.user-pages.register'); });
-    // Route::get('register-2', function () { return view('pages.user-pages.register-2'); });
-    Route::get('lock-screen', function () {
-        return view('pages.user-pages.lock-screen');
-    });
+// teacher
+Route::group(['prefix' => 'teacher'], function () {
+
 });
 
-Route::get('logout', function () {
-    session()->flush();
-    return redirect('/');
+// course
+Route::group(['prefix' => 'course'], function () {
+
 });
 
-Route::group(['prefix' => 'error-pages'], function () {
-    Route::get('error-404', function () {
-        return view('pages.error-pages.error-404');
-    });
-    Route::get('error-500', function () {
-        return view('pages.error-pages.error-500');
-    });
+// subject
+Route::group(['prefix' => 'subject'], function () {
+
+});
+
+// class
+Route::group(['prefix' => 'class'], function () {
+
+});
+
+// schedule
+
+//demo
+Route::get('demo', function () {
+    return redirect()->away('https://www.bootstrapdash.com/demo/star-laravel-free/template/');
 });
 
 // For Clear cache
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
+    Artisan::call('route:clear');
     return "Cache is cleared";
-});
+})->name('clear-cache');
 
 // 404 for undefined routes
 Route::any('/{page?}', function () {
     return View::make('pages.error-pages.error-404');
-})->where('page', '.*');
+})->where('page', '.*')->name('404-error');
