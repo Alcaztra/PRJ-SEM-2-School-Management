@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable
+class Student extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'Admins';
+    protected $table = 'Students';
     protected $primaryKey = 'user_id';
     /**
      * The "type" of the auto-incrementing ID.
@@ -25,7 +25,7 @@ class Admin extends Authenticatable
      */
     public $incrementing = false;
 
-    protected $guard = 'admin';
+    protected $guard = 'student';
 
     /**
      * The attributes that are mass assignable.
