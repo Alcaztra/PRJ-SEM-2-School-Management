@@ -121,7 +121,8 @@
                     aria-expanded="false">
                     <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('admin')->user()->name }}</span>
                     <img class="img-xs rounded-circle"
-                        src="{{ asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) }}" alt="Profile image">
+                        src="{{ asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) }}"
+                        alt="Profile image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <a class="dropdown-item p-0">
@@ -138,9 +139,9 @@
                             </div>
                         </div>
                     </a>
-                    <a class="dropdown-item mt-2" href="{{ route('dashboard') }}"> Manage Accounts </a>
-                    <a class="dropdown-item"> Change Password </a>
-                    <a class="dropdown-item"> Check Inbox </a>
+                    <a class="dropdown-item mt-2" href="{{ route('dashboard') }}"> Dashboard </a>
+                    <a class="dropdown-item mt-2" href="{{ route('profile') }}"> Manage Accounts </a>
+                    <a class="dropdown-item" href="{{ route('profile.update.password') }}"> Change Password </a>
                     <a class="dropdown-item"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Sign Out
                     </a>
