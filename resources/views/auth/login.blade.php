@@ -10,18 +10,18 @@
                         @csrf
                         <div class="form-group">
                             <label for="user_id">Account</label>
-                            {!! Form::text('user_id', $user_id ?? '', ['id' => 'user_id', 'class' => 'form-control']) !!}
+                            {!! Form::text('user_id', $user_id ?? '', ['id' => 'user_id', 'class' => 'form-control','placeholder'=>'user id']) !!}
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            {!! Form::password('password', ['id' => 'password', 'class' => 'form-control']) !!}
+                            {!! Form::password('password', ['id' => 'password', 'class' => 'form-control','placeholder'=>'*********']) !!}
                         </div>
                         {!! Form::submit('Login', ['class' => 'btn btn-outline-primary']) !!}
                     </form>
                     @if ($errors->any())
-                        <div class="error">
+                        <div class="status-error">
                             @foreach ($errors->all() as $e)
-                                <span class="error">{{ print_r($e) }}</span>
+                                <p class="text-danger">* {{ $e }}</p>
                             @endforeach
                         </div>
                     @endif
