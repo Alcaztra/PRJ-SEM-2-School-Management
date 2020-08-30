@@ -10,7 +10,20 @@ class Admin extends Authenticatable
     use Notifiable;
 
     protected $table = 'Admins';
-    // protected $primaryKey = 'user_id';
+    protected $primaryKey = 'user_id';
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 
     protected $guard = 'admin';
 
@@ -22,6 +35,7 @@ class Admin extends Authenticatable
     protected $fillable = [
         'user_id',
         'name',
+        'image',
         'gender',
         'email',
         'phone',
@@ -35,7 +49,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'created_at', 'updated_at'
     ];
 
     /**
