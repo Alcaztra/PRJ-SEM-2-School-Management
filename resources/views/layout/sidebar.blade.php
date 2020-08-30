@@ -4,11 +4,12 @@
             <div class="nav-link">
                 <div class="user-wrapper">
                     <div class="profile-image">
-                        <img src="{{ url('assets/images/faces/face8.jpg') }}" alt="profile image">
+                        <img src="{{ asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) }}"
+                            alt="profile image">
                     </div>
                     <div class="text-wrapper">
-                        <p class="profile-name">Tên tài khoản</p>
-                        <div class="dropdown" data-display="static">
+                        <p class="profile-name">{{ Auth::guard('admin')->user()->name }}</p>
+                        {{-- <div class="dropdown" data-display="static">
                             <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown"
                                 href="#" data-toggle="dropdown" aria-expanded="false">
                                 <small class="designation text-muted">Mô tả tài khoản</small>
@@ -31,24 +32,44 @@
                                 </a>
                                 <a class="dropdown-item mt-2"> Manage Accounts </a>
                                 <a class="dropdown-item"> Change Password </a>
-                                <a class="dropdown-item"> Check Inbox </a>
                                 <a class="dropdown-item"> Sign Out </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </li>
-        <li class="nav-item {{ active_class(['/']) }}">
-            <a class="nav-link" href="{{ url('/') }}">
+        <li class="nav-item {{ active_class(['dashboard', 'dashboard/*']) }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="menu-icon mdi mdi-television"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+        <li class="nav-item {{ active_class(['profile', 'profile/*']) }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="menu-icon mdi mdi-clipboard-account"></i>
+                <span class="menu-title">Profile</span>
+            </a>
+        </li>
+        <li class="nav-item {{ active_class(['teacher/*']) }}">
+            <a class="nav-link" data-toggle="collapse" href="#teacher"
+                aria-expanded="{{ is_active_route(['teacher/*']) }}" aria-controls="">
+                <i class="menu-icon mdi mdi mdi-bulletin-board"></i>
+                <span class="menu-title">Teacher Management</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse {{ show_class(['teacher/*']) }}" id="teacher">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item {{ active_class(['teacher/list']) }}">
+                        <a class="nav-link" href="{{ url('teacher/list') }}">List Teacher</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
         <li class="nav-item {{ active_class(['student/*']) }}">
             <a class="nav-link" data-toggle="collapse" href="#student"
                 aria-expanded="{{ is_active_route(['student/*']) }}" aria-controls="">
-                <i class="menu-icon mdi mdi-dna"></i>
+                <i class="menu-icon mdi mdi mdi-bulletin-board"></i>
                 <span class="menu-title">Student Management</span>
                 <i class="menu-arrow"></i>
             </a>
