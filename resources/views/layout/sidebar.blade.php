@@ -47,94 +47,21 @@
         </li>
         <li class="nav-item {{ active_class(['profile', 'profile/*']) }}">
             <a class="nav-link" href="{{ route('profile') }}">
-                <i class="menu-icon mdi mdi-folder-account"></i>
+                <i class="menu-icon mdi mdi-clipboard-account"></i>
                 <span class="menu-title">Profile</span>
             </a>
-        </li>
-        <li class="nav-item {{ active_class(['course/*']) }}">
-            <a class="nav-link" data-toggle="collapse" href="#course"
-                aria-expanded="{{ is_active_route(['course/*']) }}" aria-controls="">
-                <i class="menu-icon mdi mdi-tag-text-outline"></i>
-                <span class="menu-title">Course Management</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse {{ show_class(['course/*']) }}" id="course">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item {{ active_class(['course/list']) }}">
-                        <a class="nav-link" href="{{ url('course/list') }}">
-                            <i class="menu-icon mdi mdi-view-list"></i>
-                            List Courses</a>
-                    </li>
-                    <li class="nav-item {{ active_class(['course/create']) }}">
-                        <a class="nav-link" href="{{ url('course/create') }}">
-                            <i class="menu-icon mdi mdi-plus-circle-outline"></i>
-                            Create New Course</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item {{ active_class(['subject/*']) }}">
-            <a class="nav-link" data-toggle="collapse" href="#subject" aria-expanded="{{ is_active_route(['subject/*']) }}"
-                aria-controls="">
-                <i class="menu-icon mdi mdi-tag-text-outline"></i>
-                <span class="menu-title">Subject Management</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse {{ show_class(['subject/*']) }}" id="subject">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item {{ active_class(['subject/list']) }}">
-                        <a class="nav-link" href="{{ url('subject/list') }}">
-                            <i class="menu-icon mdi mdi-book-multiple"></i>
-                            List Subjects</a>
-                    </li>
-                    <li class="nav-item {{ active_class(['subject/create']) }}">
-                        <a class="nav-link" href="{{ url('subject/create') }}">
-                            <i class="menu-icon mdi mdi-book-plus"></i>
-                            Create New Subject</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item {{ active_class(['class/*']) }}">
-            <a class="nav-link" data-toggle="collapse" href="#class" aria-expanded="{{ is_active_route(['class/*']) }}"
-                aria-controls="">
-                <i class="menu-icon mdi mdi-tag-text-outline"></i>
-                <span class="menu-title">Class Management</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse {{ show_class(['class/*']) }}" id="class">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item {{ active_class(['class/list']) }}">
-                        <a class="nav-link" href="{{ url('class/list') }}">
-                            <i class="menu-icon mdi mdi-view-list"></i>
-                            List Classes</a>
-                    </li>
-                    <li class="nav-item {{ active_class(['class/create']) }}">
-                        <a class="nav-link" href="{{ url('class/create') }}">
-                            <i class="menu-icon mdi mdi-plus-circle-outline"></i>
-                            Create New Class</a>
-                    </li>
-                </ul>
-            </div>
         </li>
         <li class="nav-item {{ active_class(['teacher/*']) }}">
             <a class="nav-link" data-toggle="collapse" href="#teacher"
                 aria-expanded="{{ is_active_route(['teacher/*']) }}" aria-controls="">
-                <i class="menu-icon mdi mdi-tag-faces"></i>
+                <i class="menu-icon mdi mdi mdi-bulletin-board"></i>
                 <span class="menu-title">Teacher Management</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse {{ show_class(['teacher/*']) }}" id="teacher">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item {{ active_class(['teacher/list']) }}">
-                        <a class="nav-link" href="{{ url('teacher/list') }}">
-                            <i class="menu-icon mdi mdi-view-list"></i>
-                            List Teachers</a>
-                    </li>
-                    <li class="nav-item {{ active_class(['teacher/create']) }}">
-                        <a class="nav-link" href="{{ url('teacher/create') }}">
-                            <i class="menu-icon mdi mdi-account-plus"></i>
-                            Create New Teacher</a>
+                        <a class="nav-link" href="{{ url('teacher/list') }}">List Teacher</a>
                     </li>
                 </ul>
             </div>
@@ -142,35 +69,15 @@
         <li class="nav-item {{ active_class(['student/*']) }}">
             <a class="nav-link" data-toggle="collapse" href="#student"
                 aria-expanded="{{ is_active_route(['student/*']) }}" aria-controls="">
-                <i class="menu-icon mdi mdi-tag-faces"></i>
+                <i class="menu-icon mdi mdi mdi-bulletin-board"></i>
                 <span class="menu-title">Student Management</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse {{ show_class(['student/*']) }}" id="student">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item {{ active_class(['student/list']) }}">
-                        <a class="nav-link" href="{{ url('student/list') }}">
-                            <i class="menu-icon mdi mdi-view-list"></i>
-                            List Students</a>
+                        <a class="nav-link" href="{{ url('student/list') }}">List Student</a>
                     </li>
-                    <li class="nav-item {{ active_class(['student/create']) }}">
-                        <a class="nav-link" href="{{ url('student/create') }}">
-                            <i class="menu-icon mdi mdi-account-plus"></i>
-                            Create New Student</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item {{ active_class(['schedule/*']) }}">
-            <a class="nav-link" data-toggle="collapse" href="#schedule" aria-expanded="{{ is_active_route(['subject/*']) }}"
-                aria-controls="">
-                <i class="menu-icon mdi mdi-table-large"></i>
-                <span class="menu-title">Schedule</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse {{ show_class(['schedule/*']) }}" id="schedule">
-                <ul class="nav flex-column sub-menu">
-                    
                 </ul>
             </div>
         </li>

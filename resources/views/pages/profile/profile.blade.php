@@ -9,7 +9,6 @@
         <div class="col-lg-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    {!! $notify_update ?? "" !!}
                     <h4 class="card-title">Profile Information</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -17,12 +16,28 @@
                                 <tr>
                                     <th class="text-uppercase">{{ $key }}</th>
                                     <td>
-                                        @if($key == 'avatar')
+                                        @switch($key)
+                                            @case('gender')
+                                            {{-- fake value gender
+                                            ['male'=>0,'female'=>1,'other'=>2] --}}
+                                            @switch($value)
+                                                @case(1)
+                                                Male
+                                                @break
+                                                @case(2)
+                                                Female
+                                                @break
+                                                @default
+                                                Other
+                                            @endswitch
+                                            @break
+                                            @case('avatar')
                                             <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}"
-                                                 class="img-thumbnail" alt="">
-                                        @else
+                                                class="img-thumbnail" alt="">
+                                            @break
+                                            @default
                                             {{ $value }}
-                                        @endif
+                                        @endswitch
                                     </td>
                                 </tr>
                             @endforeach
@@ -35,13 +50,6 @@
     <div class="row">
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
-                <div class="card-body">
-                    <h4>Update Profile</h4>
-                    <div class="">
-                        <a class="btn btn-warning" href="{{ route('profile.update.profile') }}" role="button">Update
-                            Profile</a>
-                    </div>
-                </div>
                 <div class="card-body">
                     <h4>Update Password</h4>
                     <div class="">
@@ -57,15 +65,14 @@
                     <h4>Update Avatar</h4>
                     <div class="d-flex justify-content-between">
                         <div class="col">
-                            <form action="{{ route('profile.update.avatar') }}" method="post"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('profile.update.avatar') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="preview_image"
-                                               id="preview_image">
+                                            id="preview_image">
                                         <label class="custom-file-label" for="preview_image"
-                                               aria-describedby="inputGroupFileAddon02">Choose
+                                            aria-describedby="inputGroupFileAddon02">Choose
                                             file</label>
                                     </div>
                                     <div class="input-group-append">
@@ -76,9 +83,8 @@
                             </form>
                         </div>
                         <div class="col-md-3">
-                            <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}"
-                                 class="img-thumbnail"
-                                 id="preview_image" alt="">
+                            <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}" class="img-thumbnail"
+                                id="preview_image" alt="">
                         </div>
                     </div>
                     @if ($errors->any() && $errors->has('preview_image'))
