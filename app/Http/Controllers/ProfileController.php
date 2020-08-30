@@ -10,15 +10,52 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function index()
     {
         // $user = Auth::guard('admin')->user();
         return view('pages.profile.profile');
     }
 
-    public function showFormPassword(Request $requset)
+    public function showFormProfile()
+    {
+        $user = Auth::guard('admin')->user();
+        return view('pages.profile.update.profile')->with('user_profile', $user);
+    }
+
+    public function showFormPassword()
     {
         return view('pages.profile.update.password');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validate_result = $request->validate([
+            // 
+        ]);
+        $user = Admin::where('user_id', $request->user_id)->first();
+        $user->name = $request->name;
+        $user->gender = $request->gender;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->birthday = $request->birthday;
+        $user->address = $request->address;
+        // dd($user);
+        $user->save();
+
+        $notify_update = "<div class='alert alert-info alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+        <strong>Notify !</strong> Profile updated, please login againt.</div>";
+        return view('pages.profile.profile')->with('notify_update', $notify_update);
     }
 
     public function updatePassword(Request $request)
