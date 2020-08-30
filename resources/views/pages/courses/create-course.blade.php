@@ -1,5 +1,5 @@
 @extends('layout.master')
-
+@section('page_title', 'Create Course')
 @push('plugin-styles')
     <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
 @endpush

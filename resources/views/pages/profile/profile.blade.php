@@ -1,5 +1,5 @@
 @extends('layout.master')
-
+@section('page_title', 'Account Profile')
 @push('plugin-styles')
     <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
 @endpush
