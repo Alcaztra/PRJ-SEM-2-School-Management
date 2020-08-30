@@ -17,21 +17,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
-Route::get('/', function(){
-   return redirect()->intended(route('dashboard'));
-});
-
 Auth::routes();
 
-// Route::get('login', function() {
-//     return view('auth.login');
-// })->name('login');
-// Route::post('login', 'Auth\\LoginController@login');
+Route::get('/', function () {
+    return redirect()->intended(route('dashboard'));
+});
+Route::get('/home', function () {
+    return redirect()->intended(route('dashboard'));
+})->name('home');
+
+if (!Auth::guard('admin')->check()) {
+    Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\AdminLoginController@login');
+    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::get('profile/update/password', 'ProfileController@showFormPassword')->name('profile.update.password');
+    Route::post('profile/update/password', 'ProfileController@updatePassword')->name('profile.update.password.submit');
+    Route::post('profile/update/avatar', 'ProfileController@updateAvatar')->name('profile.update.avatar');
+}
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 //demo
-Route::get('demo', function(){
+Route::get('demo', function () {
     return redirect()->away('https://www.bootstrapdash.com/demo/star-laravel-free/template/');
 });
 
