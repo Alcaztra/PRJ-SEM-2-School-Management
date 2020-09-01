@@ -63,7 +63,7 @@
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="preview_image"
-                                               id="preview_image">
+                                               id="preview_image" accept=".jpg,.jpeg,.svg,.png,.gif">
                                         <label class="custom-file-label" for="preview_image"
                                                aria-describedby="inputGroupFileAddon02">Choose
                                             file</label>
