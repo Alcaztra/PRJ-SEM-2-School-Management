@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('page_title', 'List Classes')
+@section('page_title', 'List Subjects')
 @push('plugin-styles')
   <!-- {!! Html::style('/assets/plugins/plugin.css') !!} -->
 @endpush
