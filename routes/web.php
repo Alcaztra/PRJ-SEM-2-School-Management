@@ -50,27 +50,37 @@ Route::group(['prefix' => 'group'], function () {
 
 //student
 Route::group(['prefix' => 'student'], function () {
-
+    Route::get('list', 'StudentController@listStudents')->name('student.list');
+    Route::get('create', 'StudentController@showFormCreateStudent')->name('student.create');
+    Route::post('create')->name('student.create.submit');
 });
 
 // teacher
 Route::group(['prefix' => 'teacher'], function () {
-
+    Route::get('list', 'TeacherController@listTeachers')->name('teacher.list');
+    Route::get('create', 'TeacherController@showFormCreateTeacher')->name('teacher.create');
+    Route::post('create')->name('teacher.create.submit');
 });
 
 // course
 Route::group(['prefix' => 'course'], function () {
-
+    Route::get('list', 'CourseController@listCourses')->name('course.list');
+    Route::get('create', 'CourseController@showFormCreateCourse')->name('course.create');
+    Route::post('create')->name('course.create.submit');
 });
 
 // subject
 Route::group(['prefix' => 'subject'], function () {
-
+    Route::get('list', 'SubjectController@listSubjects')->name('subject.list');
+    Route::get('create', 'SubjectController@showFormCreateSubject')->name('subject.create');
+    Route::post('create')->name('subject.create.submit');
 });
 
 // class
 Route::group(['prefix' => 'class'], function () {
-
+    Route::get('list', 'ClassController@listClasses')->name('class.list');
+    Route::get('create', 'ClassController@showFormCreateClass')->name('class.create');
+    Route::post('create')->name('class.create.submit');
 });
 
 // schedule
