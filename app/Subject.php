@@ -2,15 +2,12 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Authenticatable
+class Subject extends Model
 {
-    use Notifiable;
-
-    protected $table = 'Admins';
-    protected $primaryKey = 'user_id';
+    protected $table = 'Subjects';
+    protected $primaryKey = 'subject_id';
     /**
      * The "type" of the auto-incrementing ID.
      *
@@ -25,22 +22,17 @@ class Admin extends Authenticatable
      */
     public $incrementing = false;
 
-    protected $guard = 'admin';
+    // protected $guard = 'subject';
 
     /**
      * The attributes that are mass assignable.
-     *
+     * NoS number of sessions
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'subject_id',
         'name',
-        'avatar',
-        'gender',
-        'email',
-        'phone',
-        'birthday',
-        'address',
+        'NoS',
     ];
 
     /**
@@ -49,7 +41,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'created_at', 'updated_at'
+        'created_at', 'updated_at'
     ];
 
     /**
@@ -57,7 +49,5 @@ class Admin extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'birthday' => 'date'
-    ];
+    protected $casts = [];
 }
