@@ -22,14 +22,14 @@
                         <div class="form-group">
                             <label for="">Semester</label>
                             <div class="input-group pb-2">
-                                <select class="custom-select col-md-4" id="semester_opt">
+                                <select class="custom-select col-md-4" id="sem_opt">
                                     <option value="">- Select semester -</option>
                                     <option value="1">Semester 1</option>
                                     <option value="2">Semester 2</option>
                                     <option value="3">Semester 3</option>
                                     <option value="4">Semester 4</option>
                                 </select>
-                                <select class="custom-select" id="subject_opt">
+                                <select class="custom-select" id="sub_opt">
                                     <option value="">- Select subject -</option>
                                     @isset($subjects)
                                         @foreach ($subjects as $s)
@@ -45,7 +45,6 @@
                             <div id="data_table">
                                 <div id="sem_1">
                                     <h4>Semester 1</h4>
-                                    <div class="d-flex"></div>
                                 </div>
                                 <div id="sem_2">
                                     <h4>Semester 2</h4>
