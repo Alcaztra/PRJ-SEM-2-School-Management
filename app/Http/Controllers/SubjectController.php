@@ -25,6 +25,7 @@ class SubjectController extends Controller
         $subject->subject_id = $request->subject_id;
         $subject->name = $request->name;
         $subject->NoS = $request->NoS;
+        $subject->duration = $request->NoS * 2;
 
         $subject->save();
 

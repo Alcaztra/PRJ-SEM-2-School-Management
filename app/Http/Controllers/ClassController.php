@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\_class;
+use App\Course;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -15,7 +16,8 @@ class ClassController extends Controller
 
     public function showFormCreateClass()
     {
-        return view('pages.classes.create-class');
+        $courses = Course::all();
+        return view('pages.classes.create-class', ['courses' => $courses]);
     }
 
     public function createClass(Request $request)
@@ -23,7 +25,10 @@ class ClassController extends Controller
         $class = new _class();
         $class->class_id = $request->class_id;
         $class->room = $request->room;
-        $class->date_start = $request->date_start;
+        $class->start_day = $request->start_day;
+        $class->course_id = $request->course_id;
+        $class->total_duration = $class->calcDuration();
+        $class->step = 2;
 
         $class->save();
 
