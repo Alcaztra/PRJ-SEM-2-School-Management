@@ -3,7 +3,7 @@ function insertSubject() {
     let sub_opt = $("#sub_opt").val();
     let sub_opt_title = $("#sub_opt>option[value=" + sub_opt + "]").html();
     let data_table = $("#data_table");
-    let input = "<input type='text' readonly class='sr-only' name='semester_" + sem_opt + "[]' value='" + sub_opt + "'>";
+    let input = "<input type='hidden' readonly name='semester_" + sem_opt + "[]' value='" + sub_opt + "'>";
     let class_name = "btn btn-outline-primary p-2 m-1 text-uppercase cursor-pointer";
     let test = "<p role='button' class='" + class_name + "' data-toggle='tooltip' title='" + sub_opt_title + "' onclick='removeSubject( this,\"" + sub_opt + "\" )'>" + sub_opt + " <span class='mx-1'>&times;</span></p>";
     if (sem_opt !== "" && sub_opt !== "") {
