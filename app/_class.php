@@ -84,7 +84,7 @@ class _class extends Model
     public function calcSize()
     {
         $size = 0;
-        $size = DB::table('class-management')->where('class_id', $this->class_id)->count('user_id');
+        $size = DB::table('class-management')->where([['class_id', '=', $this->class_id], ['user_id', 'like', 'student%']])->count('user_id');
         // dd($size);
         return $size;
     }
@@ -115,5 +115,14 @@ class _class extends Model
     public function getEndDay()
     {
         return date_format($this->calcEndDay(), "Y-m-d");
+    }
+
+    public function getTeacher()
+    {
+        $teacher = DB::table('class-management')
+            ->leftJoin('teachers', 'class-management.user_id', '=', 'teachers.user_id')
+            ->where('class_id', $this->class_id)
+            ->first();
+        return $teacher;
     }
 }

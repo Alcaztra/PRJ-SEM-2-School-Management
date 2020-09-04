@@ -24,6 +24,7 @@
                                     <th scope="col">Class ID</th>
                                     <th scope="col">Room</th>
                                     <th scope="col">Course ID</th>
+                                    <th scope="col">Teacher</th>
                                     <th scope="col">Size</th>
                                     <th scope="col">Total Duration (hour)</th>
                                     <th scope="col">Start Day</th>
@@ -37,6 +38,7 @@
                                             <td scope="row">{{ $c->class_id }}</td>
                                             <td>{{ $c->room }}</td>
                                             <td>{{ $c->course_id }}</td>
+                                            <td>{{ $c->getTeacher()->name }}</td>
                                             <td>{{ $c->calcSize() }}</td>
                                             {{-- <td>{{ $c->calcDuration() }}</td>
                                             --}}

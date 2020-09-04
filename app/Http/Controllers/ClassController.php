@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
+    public function getClasses()
+    {
+        return _class::all();
+    }
+
     public function listClasses()
     {
-        $classes = _class::all();
-        return view('pages.classes.list-classes')->with('classes', $classes);
+        return view('pages.classes.list-classes')->with('classes', $this->getClasses());
     }
 
     public function showFormCreateClass()
@@ -48,6 +52,8 @@ class ClassController extends Controller
     public function addUser(Request $request)
     {
         $class_id = $request->class_id;
+        $teacher = $request->teacher_id;
+        DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $teacher]);
         $students = $request->students;
         foreach ($students as $s) {
             DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $s]);
