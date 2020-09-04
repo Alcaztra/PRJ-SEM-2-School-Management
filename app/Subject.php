@@ -33,6 +33,7 @@ class Subject extends Model
         'subject_id',
         'name',
         'NoS',
+        'duration',
     ];
 
     /**
