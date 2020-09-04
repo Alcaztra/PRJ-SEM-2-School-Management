@@ -54,4 +54,8 @@ mix.copyDirectory("node_modules/@mdi", "public/assets/plugins/@mdi")
     .copyDirectory(
         "node_modules/jquery.easing/jquery.easing.min.js",
         "public/assets/plugins/jquery.easing/jquery.easing.min.js"
+    )
+    .copyDirectory(
+        "node_modules/fullcalendar",
+        "public/assets/plugins/fullcalendar"
     );
