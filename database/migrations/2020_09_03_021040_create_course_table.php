@@ -17,7 +17,7 @@ class CreateCourseTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->string('course_id')->primary();
-            $table->string('course_name',500);
+            $table->string('name',500);
             $table->timestamps();
         });
     }
