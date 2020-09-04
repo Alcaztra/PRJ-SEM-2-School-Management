@@ -49739,6 +49739,30 @@ var app = new Vue({
   el: '#app'
 }); // $('.toast').toast(autohide=false);
 
+/* import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+        dateClick: function (info) {
+            alert('a day has been clicked!');
+        },
+        headerToolbar: {
+            start: 'prevYear,prev', // will normally be on the left. if RTL, will be on the right
+            center: 'title',
+            end: 'today,dayGridMonth,timeGridWeek,timeGridDay next,nextYear' // will normally be on the right. if RTL, will be on the left
+        }
+    });
+
+    calendar.render();
+}); */
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
