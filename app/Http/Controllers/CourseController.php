@@ -12,7 +12,9 @@ class CourseController extends Controller
     public function listCourses()
     {
         $courses = Course::all();
-        $subjects = DB::table('semesters')->get();
+        $subjects = DB::table('semesters')
+            ->leftJoin('subjects', 'subjects.subject_id', '=', 'semesters.subject_id')
+            ->get();
         return view('pages.courses.list-courses', ['courses' => $courses, 'subjects' => $subjects]);
     }
 
@@ -21,10 +23,12 @@ class CourseController extends Controller
         $subjects = Subject::all();
         return view('pages.courses.create-course', ['subjects' => $subjects]);
     }
+
     public function createCourse(Request $request)
     {
         if ($request->has("semester_1")) {
             $sem_1 = $request->semester_1;
+            // dd($sem_1);
             foreach ($sem_1 as $value) {
                 DB::table('semesters')->insert(['course_id' => $request->course_id, 'semester' => 1, 'subject_id' => $value]);
             }
@@ -53,6 +57,6 @@ class CourseController extends Controller
         $course->name = $request->name;
         $course->save();
 
-        return redirect()->intended(route('course.list'));
+        return redirect(route('course.list'));
     }
 }
