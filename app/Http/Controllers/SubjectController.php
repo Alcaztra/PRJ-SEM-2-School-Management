@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
+    public function getSubjects()
+    {
+        return Subject::all();
+    }
     public function listSubjects()
     {
-        $subjects = Subject::all();
-        return view('pages.subjects.list-subjects')->with('subjects', $subjects);
+
+        return view('pages.subjects.list-subjects')->with('subjects', $this->getSubjects());
     }
 
     public function showFormCreateSubject()
@@ -29,6 +33,6 @@ class SubjectController extends Controller
 
         $subject->save();
 
-        return redirect()->intended(route('subject.list'));
+        return redirect(route('subject.list'));
     }
 }

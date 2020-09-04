@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\_class;
 use App\Course;
+use App\Student;
+use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
@@ -32,6 +35,23 @@ class ClassController extends Controller
 
         $class->save();
 
-        return redirect()->intended(route('class.list'));
+        return redirect(route('class.list'));
+    }
+
+    public function showFormAddUser()
+    {
+        $classes = _class::all();
+        $teachers = Teacher::all();
+        return view('pages.classes.add-user', ['classes' => $classes, 'teachers' => $teachers]);
+    }
+
+    public function addUser(Request $request)
+    {
+        $class_id = $request->class_id;
+        $students = $request->students;
+        foreach ($students as $s) {
+            DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $s]);
+        }
+        return redirect(route('class.list'));
     }
 }

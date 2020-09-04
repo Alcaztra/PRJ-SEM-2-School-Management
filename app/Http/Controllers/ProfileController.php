@@ -68,7 +68,7 @@ class ProfileController extends Controller
         $result = DB::table('admins')->limit(1)->where('user_id', $user_id)->update(['password' => $password]);
         if ($result) {
             Auth::guard('admin')->logout();
-            return redirect()->intended(route('dashboard'));
+            return redirect(route('dashboard'));
         } else {
             print("<script>alert('Update fail..!!')</script>");
             return redirect()->back();

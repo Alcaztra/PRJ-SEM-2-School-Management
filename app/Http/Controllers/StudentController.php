@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    public function getStudents()
+    {
+        return Student::all();
+    }
+
     public function listStudents()
     {
-        $students = Student::all();
-        return view('pages.students.list-students')->with('students', $students);
+        return view('pages.students.list-students')->with('students', $this->getStudents());
     }
 
     public function showFormCreateStudent()

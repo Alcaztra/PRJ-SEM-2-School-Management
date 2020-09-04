@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    public function getTeachers()
+    {
+        return Teacher::all();;
+    }
+
     public function listTeachers()
     {
-        $teachers = Teacher::all();
-        return view('pages.teachers.list-teachers')->with('teachers', $teachers);
+        return view('pages.teachers.list-teachers')->with('teachers', $this->getTeachers());
     }
 
     public function showFormCreateTeacher()
@@ -30,6 +34,6 @@ class TeacherController extends Controller
         $teacher->address = $request->address;
 
         $teacher->save();
-        return redirect()->intended(route('teacher.list'));
+        return redirect(route('teacher.list'));
     }
 }
