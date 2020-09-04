@@ -18,6 +18,7 @@ class CreateClassTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->string('class_id')->primary();
             $table->string('room')->nullable();
+            $table->integer('size');
             $table->string('course_id');
             $table->integer('total_duarion');
             $table->date('start_day');

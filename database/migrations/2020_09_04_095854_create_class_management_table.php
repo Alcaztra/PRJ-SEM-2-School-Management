@@ -13,7 +13,7 @@ class CreateClassManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('class-mangagement', function (Blueprint $table) {
+        Schema::create('class-management', function (Blueprint $table) {
             $table->increments('id');
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
