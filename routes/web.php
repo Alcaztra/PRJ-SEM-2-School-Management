@@ -54,6 +54,8 @@ Route::group(['prefix' => 'student'], function () {
         Route::get('list', 'StudentController@listStudents')->name('student.list');
         Route::get('create', 'StudentController@showFormCreateStudent')->name('student.create');
         Route::post('create', 'StudentController@createStudent')->name('student.create.submit');
+        // test get ajax
+        Route::get('get-student', 'StudentController@getStudents');
     });
 });
 
@@ -90,10 +92,14 @@ Route::group(['prefix' => 'class'], function () {
         Route::get('list', 'ClassController@listClasses')->name('class.list');
         Route::get('create', 'ClassController@showFormCreateClass')->name('class.create');
         Route::post('create', 'ClassController@createClass')->name('class.create.submit');
+        // add user
+        Route::get('add', 'ClassController@showFormAddUser')->name('class.addUser');
+        Route::post('add', 'ClassController@addUser')->name('class.addUser.submit');
     });
 });
 
 // schedule
+// test
 Route::get('calendar', function () {
     return view('pages.calendar');
 });
