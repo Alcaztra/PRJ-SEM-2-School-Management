@@ -9,22 +9,38 @@
         <div class="col-lg-12 grid-margin">
             <div class="card">
                 <div class="card-body">
+                    <div class="col-sm-4 py-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="search" id="filterInput" placeholder="Class ID">
+                            {{-- <div class="input-group-append">
+                                <span class="btn btn-outline-dark" id="search">Search</span>
+                            </div> --}}
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-light table-hover">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Class ID</th>
-                                    <th>Room</th>
-                                    <th>Date Start</th>
+                                    <th scope="col">Class ID</th>
+                                    <th scope="col">Room</th>
+                                    <th scope="col">Course ID</th>
+                                    <th scope="col">Total Duration (hour)</th>
+                                    <th scope="col">Start Day</th>
+                                    <th scope="col">End Day (expected)</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="filterTable">
                                 @isset($classes)
                                     @foreach ($classes as $c)
                                         <tr>
-                                            <td>{{ $c->class_id }}</td>
+                                            <td scope="row">{{ $c->class_id }}</td>
                                             <td>{{ $c->room }}</td>
-                                            <td>{{ $c->date_start }}</td>
+                                            <td>{{ $c->course_id }}</td>
+                                            {{-- <td>{{ $c->calcDuration() }}</td>
+                                            --}}
+                                            <td>{{ $c->total_duration }}</td>
+                                            <td>{{ $c->start_day }}</td>
+                                            <td>{{ $c->getEndDay() }}</td>
                                         </tr>
                                     @endforeach
                                 @endisset
@@ -49,4 +65,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/filtertables.js') !!}
 @endpush

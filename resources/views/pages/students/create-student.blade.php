@@ -11,7 +11,7 @@
             $form_title = "Student Information";
             $action = route('student.create.submit');
             @endphp
-            @include('layout.user-form')
+            @include('layout.form-user')
         </div>
     </div>
 @endsection

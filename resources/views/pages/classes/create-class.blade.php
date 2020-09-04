@@ -20,8 +20,19 @@
                             {!! Form::text('room', '', ['id' => 'room', 'class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
-                            <label for="date_start">Date Start</label>
-                            {!! Form::date('date_start', '', ['id' => 'date_start', 'class' => 'form-control']) !!}
+                            <label for="start_day">Start Day</label>
+                            {!! Form::date('start_day', '', ['id' => 'start_day', 'class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            <label for="course_id">Course</label>
+                            <select name="course_id" id="course_id" class="custom-select">
+                                <option value="">- Select Course -</option>
+                                @isset($courses)
+                                    @foreach ($courses as $s)
+                                        <option value="{{ $s->course_id }}">{{ $s->course_id . ' - ' . $s->name }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>

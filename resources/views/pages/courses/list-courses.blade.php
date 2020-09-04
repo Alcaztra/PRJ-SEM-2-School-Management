@@ -11,11 +11,10 @@
                 <div class="card-body">
                     <div class="col-sm-4 py-2">
                         <div class="input-group">
-                            <input class="form-control" type="text" name="search" id="filterInput"
-                                placeholder="Course ID">
-                                {{-- <div class="input-group-append">
-                                    <span class="btn btn-outline-dark" id="search">Search</span>
-                                </div> --}}
+                            <input class="form-control" type="text" name="search" id="filterInput" placeholder="Course ID">
+                            {{-- <div class="input-group-append">
+                                <span class="btn btn-outline-dark" id="search">Search</span>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -38,32 +37,39 @@
                                             <td>{{ $c->name }}</td>
                                             <td>
                                                 <div class="list-group">
-                                                    <a href="#" class="list-group-item list-group-item-action">LBEP <span
-                                                            class="badge badge-dark">20</span></a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 2</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 3</a>
+                                                    @foreach ($subjects as $s)
+                                                        @if ($s->course_id == $c->course_id && $s->semester == 1)
+                                                            <a href="#"
+                                                                class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
+                                                        @endif
+                                                    @endforeach
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="list-group">
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 1</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 2</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 3</a>
+                                                    @foreach ($subjects as $s)
+                                                        @if ($s->course_id == $c->course_id && $s->semester == 2)
+                                                            <a href="#"
+                                                                class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
+                                                        @endif
+                                                    @endforeach
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="list-group">
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 1</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 2</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 3</a>
-                                                </div>
+                                                @foreach ($subjects as $s)
+                                                    @if ($s->course_id == $c->course_id && $s->semester == 3)
+                                                        <a href="#"
+                                                            class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
+                                                    @endif
+                                                @endforeach
                                             </td>
                                             <td>
-                                                <div class="list-group">
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 1</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 2</a>
-                                                    <a href="#" class="list-group-item list-group-item-action">Subject 3</a>
-                                                </div>
+                                                @foreach ($subjects as $s)
+                                                    @if ($s->course_id == $c->course_id && $s->semester == 4)
+                                                        <a href="#"
+                                                            class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
+                                                    @endif
+                                                @endforeach
                                             </td>
                                         </tr>
                                     @endforeach

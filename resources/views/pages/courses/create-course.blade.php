@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('course.create.submit') }}" method="post">
@@ -22,21 +22,42 @@
                         <div class="form-group">
                             <label for="">Semester</label>
                             <div class="input-group pb-2">
-                                <select class="custom-select custom-select" id="">
+                                <select class="custom-select col-md-4" id="semester_opt">
                                     <option value="">- Select semester -</option>
-                                    <option value="">Sem 1</option>
-                                    <option value="">Sem 2</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
                                 </select>
-                                <select class="custom-select custom-select" id="">
+                                <select class="custom-select" id="subject_opt">
                                     <option value="">- Select subject -</option>
-                                    <option value="">Subject 1</option>
-                                    <option value="">Subject 2</option>
+                                    @isset($subjects)
+                                        @foreach ($subjects as $s)
+                                            <option value="{{ $s->subject_id }}">{{ $s->name }}</option>
+                                        @endforeach
+                                    @endisset
                                 </select>
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-outline-primary">Add</button>
+                                    <button type="button" class="btn btn-outline-primary"
+                                        onclick="insertSubject()">Add</button>
                                 </div>
                             </div>
-                            <div class="table">
+                            <div id="data_table">
+                                <div id="sem_1">
+                                    <h4>Semester 1</h4>
+                                    <div class="d-flex"></div>
+                                </div>
+                                <div id="sem_2">
+                                    <h4>Semester 2</h4>
+                                </div>
+                                <div id="sem_3">
+                                    <h4>Semester 3</h4>
+                                </div>
+                                <div id="sem_4">
+                                    <h4>Semester 4</h4>
+                                </div>
+                            </div>
+                            {{-- <div class="table">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
                                         <tr>
@@ -47,7 +68,7 @@
                                             <th scope="col">Sem 4</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="data_table">
                                         <tr>
                                             <td scope="row">1</td>
                                             <td class="">subject 1
@@ -59,17 +80,9 @@
                                             <td>subject 4
                                                 <span class="badge badge-danger btn float-right">&times;</span></td>
                                         </tr>
-                                        <tr>
-                                            <td scope="row">2</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="table-danger">subject 2
-                                                <span class="badge badge-danger btn float-right">&times;</span></td>
-                                            <td></td>
-                                        </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>--}}
                         </div>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
@@ -86,4 +99,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/insertSubject.js') !!}
 @endpush

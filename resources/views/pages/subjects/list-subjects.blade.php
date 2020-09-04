@@ -24,6 +24,7 @@
                                     <th scope="col">Subject ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Number of Sessions</th>
+                                    <th scope="col">Duration (hour)</th>
                                 </tr>
                             </thead>
                             <tbody id="filterTable">
@@ -33,6 +34,7 @@
                                             <td scope="row">{{ $s->subject_id }}</td>
                                             <td>{{ $s->name }}</td>
                                             <td>{{ $s->NoS }}</td>
+                                            <td>{{ $s->duration }}</td>
                                         </tr>
                                     @endforeach
                                 @endisset

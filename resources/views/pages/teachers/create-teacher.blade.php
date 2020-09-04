@@ -11,7 +11,7 @@
             $form_title = "Teacher Information";
             $action = route('teacher.create.submit');
             @endphp
-            @include('layout.user-form')
+            @include('layout.form-user')
         </div>
     </div>
 @endsection
