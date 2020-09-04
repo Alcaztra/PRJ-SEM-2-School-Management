@@ -19,6 +19,7 @@ class CreateSubjectTable extends Migration
             $table->string('subject_id')->primary();
             $table->string('name',500);
             $table->integer('NoS');
+            $table->integer('duration');
             $table->timestamps();
         });
     }
