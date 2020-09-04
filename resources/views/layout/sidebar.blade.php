@@ -9,13 +9,15 @@
                     </div>
                     <div class="text-wrapper">
                         <p class="profile-name">{{ Auth::guard('admin')->user()->name }}</p>
-                        {{-- <div class="dropdown" data-display="static">
+                        <div class="dropdown" data-display="static">
                             <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown"
-                                href="#" data-toggle="dropdown" aria-expanded="false">
-                                <small class="designation text-muted">Mô tả tài khoản</small>
+                                data-toggle="dropdown" aria-expanded="false">
+                                <small
+                                    class="designation text-muted">{{ Auth::guard('admin')->user()->user_id }}</small>
                                 <span class="status-indicator online"></span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="UsersettingsDropdown">
+                            {{-- <div class="dropdown-menu"
+                                aria-labelledby="UsersettingsDropdown">
                                 <a class="dropdown-item p-0">
                                     <div class="d-flex border-bottom">
                                         <div class="py-3 px-4 d-flex align-items-center justify-content-center">
@@ -33,8 +35,8 @@
                                 <a class="dropdown-item mt-2"> Manage Accounts </a>
                                 <a class="dropdown-item"> Change Password </a>
                                 <a class="dropdown-item"> Sign Out </a>
-                            </div>
-                        </div> --}}
+                            </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,8 +76,8 @@
             </div>
         </li>
         <li class="nav-item {{ active_class(['subject/*']) }}">
-            <a class="nav-link" data-toggle="collapse" href="#subject" aria-expanded="{{ is_active_route(['subject/*']) }}"
-                aria-controls="">
+            <a class="nav-link" data-toggle="collapse" href="#subject"
+                aria-expanded="{{ is_active_route(['subject/*']) }}" aria-controls="">
                 <i class="menu-icon mdi mdi-tag-text-outline"></i>
                 <span class="menu-title">Subject Management</span>
                 <i class="menu-arrow"></i>
@@ -113,6 +115,11 @@
                         <a class="nav-link" href="{{ url('class/create') }}">
                             <i class="menu-icon mdi mdi-plus-circle-outline"></i>
                             Create New Class</a>
+                    </li>
+                    <li class="nav-item {{ active_class(['class/add']) }}">
+                        <a class="nav-link" href="{{ url('class/add') }}">
+                            <i class="menu-icon mdi mdi-plus-circle-outline"></i>
+                            Add Teacher | Student</a>
                     </li>
                 </ul>
             </div>
@@ -162,15 +169,15 @@
             </div>
         </li>
         <li class="nav-item {{ active_class(['schedule/*']) }}">
-            <a class="nav-link" data-toggle="collapse" href="#schedule" aria-expanded="{{ is_active_route(['subject/*']) }}"
-                aria-controls="">
+            <a class="nav-link" data-toggle="collapse" href="#schedule"
+                aria-expanded="{{ is_active_route(['subject/*']) }}" aria-controls="">
                 <i class="menu-icon mdi mdi-table-large"></i>
                 <span class="menu-title">Schedule</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse {{ show_class(['schedule/*']) }}" id="schedule">
                 <ul class="nav flex-column sub-menu">
-                    
+
                 </ul>
             </div>
         </li>
