@@ -77,6 +77,19 @@ class _class extends Model
     }
 
     /**
+     * Calculate class size
+     * 
+     * @return integer $size
+     */
+    public function calcSize()
+    {
+        $size = 0;
+        $size = DB::table('class-management')->where('class_id', $this->class_id)->count('user_id');
+        // dd($size);
+        return $size;
+    }
+
+    /**
      * Calculate the expected end date
      * 
      * @return object end_day
