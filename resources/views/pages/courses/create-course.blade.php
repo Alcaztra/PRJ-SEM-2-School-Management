@@ -42,19 +42,13 @@
                                         onclick="insertSubject()">Add</button>
                                 </div>
                             </div>
-                            <div id="data_table">
-                                <div id="sem_1">
-                                    <h4>Semester 1</h4>
-                                </div>
-                                <div id="sem_2">
-                                    <h4>Semester 2</h4>
-                                </div>
-                                <div id="sem_3">
-                                    <h4>Semester 3</h4>
-                                </div>
-                                <div id="sem_4">
-                                    <h4>Semester 4</h4>
-                                </div>
+                            <div class="col" id="data_table">
+                                @for ($i = 1; $i <= 4; $i++)
+                                    <div class="row ">
+                                        <div class="p-1 border" style="width: 150px">Semester {{ $i }}</div>
+                                        <div class="p-1 border" id="sem_{{ $i }}"></div>
+                                    </div>
+                                @endfor
                             </div>
                             {{-- <div class="table">
                                 <table class="table table-bordered">

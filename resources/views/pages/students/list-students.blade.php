@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 grid-margin">
-            @include('layout.list-user',['users'=>$students]);
+            @include('layout.list-user',['users'=>$students, 'search'=>'Student']);
         </div>
     </div>
 @endsection
@@ -19,4 +19,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/filtertables.js') !!}
 @endpush

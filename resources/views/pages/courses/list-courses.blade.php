@@ -35,42 +35,21 @@
                                         <tr>
                                             <td scope="row">{{ $c->course_id }}</td>
                                             <td>{{ $c->name }}</td>
-                                            <td>
-                                                <div class="list-group">
-                                                    @foreach ($subjects as $s)
-                                                        @if ($s->course_id == $c->course_id && $s->semester == 1)
-                                                            <a href="#"
-                                                                class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="list-group">
-                                                    @foreach ($subjects as $s)
-                                                        @if ($s->course_id == $c->course_id && $s->semester == 2)
-                                                            <a href="#"
-                                                                class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </td>
-                                            <td>
-                                                @foreach ($subjects as $s)
-                                                    @if ($s->course_id == $c->course_id && $s->semester == 3)
-                                                        <a href="#"
-                                                            class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                @foreach ($subjects as $s)
-                                                    @if ($s->course_id == $c->course_id && $s->semester == 4)
-                                                        <a href="#"
-                                                            class="list-group-item list-group-item-action">{{ $s->subject_id }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </td>
+                                            @for ($i = 1; $i <= 4; $i++)
+                                                <td style="border-left: 1px solid lightgray;">
+                                                    <div class="row" style="min-width: 300px">
+                                                        @foreach ($subjects as $s)
+                                                            @if ($s->course_id == $c->course_id && $s->semester == $i)
+                                                                <div class="col-sm-6 col-md-4 col-lg-3 p-0">
+                                                                    <button class="btn btn-block btn-outline-info"
+                                                                        data-toggle="tooltip"
+                                                                        title="{{ $s->name }}">{{ $s->subject_id }}</button>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </td>
+                                            @endfor
                                         </tr>
                                     @endforeach
                                 @endisset
