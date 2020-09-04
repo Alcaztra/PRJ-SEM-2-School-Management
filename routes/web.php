@@ -94,6 +94,9 @@ Route::group(['prefix' => 'class'], function () {
 });
 
 // schedule
+Route::get('calendar', function () {
+    return view('pages.calendar');
+});
 
 //demo
 Route::get('demo', function () {
