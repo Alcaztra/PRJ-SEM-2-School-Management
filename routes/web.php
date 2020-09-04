@@ -35,7 +35,7 @@ if (!Auth::guard('admin')->check()) {
 }
 
 // profile
-Route::group(['prefix' => 'group'], function () {
+Route::group(['prefix' => 'profile'], function () {
     //  profile pages
     Route::get('/', 'ProfileController@index')->name('profile');
     //  update profile
