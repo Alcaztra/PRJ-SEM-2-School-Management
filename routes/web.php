@@ -99,9 +99,8 @@ Route::group(['prefix' => 'class'], function () {
 });
 
 // schedule
-// test
-Route::get('calendar', function () {
-    return view('pages.calendar');
+Route::group(['prefix' => 'schedule'], function () {
+    Route::get('calendar', 'ScheduleController@index');
 });
 
 //demo
