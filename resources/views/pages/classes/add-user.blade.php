@@ -46,7 +46,7 @@
                                     @endforeach
                                     @endisset
                                 </select> --}}
-                                <input type="text" class="form-control" name="" id="inp_stu" placeholder="Student ID | Name"
+                                <input type="text" class="form-control" name="" id="inp_stu" placeholder="Enter Student ID | Name"
                                     autocomplete="off">
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-outline-primary" onclick="add()">Add</button>

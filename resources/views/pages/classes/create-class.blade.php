@@ -20,6 +20,22 @@
                             {!! Form::text('room', '', ['id' => 'room', 'class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
+                            <label for="">Study Shift</label>
+                            <div class="input-group">
+                                <select name="DoW" id="" class="custom-select">
+                                    <option value="">- Day of Week -</option>
+                                    {{-- <option value="0">Mon - Fri</option> --}}
+                                    <option value="1">Mon / Wed / Fri</option>
+                                    <option value="2">Tue / Thu / Sat</option>
+                                </select><select name="period" id="" class="custom-select">
+                                    <option value="">- Period -</option>
+                                    <option value="m">Morning</option>
+                                    <option value="a">Afternoon</option>
+                                    <option value="e">Evening</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="start_day">Start Day</label>
                             {!! Form::date('start_day', '', ['id' => 'start_day', 'class' => 'form-control']) !!}
                         </div>
