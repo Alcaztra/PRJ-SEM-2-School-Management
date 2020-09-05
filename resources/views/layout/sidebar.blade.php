@@ -176,8 +176,12 @@
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse {{ show_class(['schedule/*']) }}" id="schedule">
-                <ul class="nav flex-column sub-menu">
-
+                <ul class="nav flex-column sub-menu bg-secondary">
+                    <li class="nav-item {{ active_class(['schedule/calendar']) }}">
+                        <a class="nav-link" href="{{ url('schedule/calendar') }}">
+                            <i class="menu-icon mdi mdi-calendar-multiple"></i>
+                            Calendar</a>
+                    </li>
                 </ul>
             </div>
         </li>
