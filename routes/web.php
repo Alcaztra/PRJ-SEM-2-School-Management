@@ -55,7 +55,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::get('create', 'StudentController@showFormCreateStudent')->name('student.create');
         Route::post('create', 'StudentController@createStudent')->name('student.create.submit');
         // test get ajax
-        Route::get('get-student', 'StudentController@getStudents');
+        Route::get('get-students', 'StudentController@getStudents');
     });
 });
 
@@ -65,6 +65,8 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('list', 'TeacherController@listTeachers')->name('teacher.list');
         Route::get('create', 'TeacherController@showFormCreateTeacher')->name('teacher.create');
         Route::post('create', 'TeacherController@createTecher')->name('teacher.create.submit');
+
+        Route::get('get-teachers', 'TeacherController@getTeachers');
     });
 });
 
