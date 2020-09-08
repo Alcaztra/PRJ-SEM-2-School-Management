@@ -28,7 +28,7 @@
 
 <body data-base-url="{{ url('/') }}">
 
-    <div class="container-scroller" id="app">
+    <div class="container-scroller sidebar-dark" id="app">
         @include('layout.header')
         <div class="container-fluid page-body-wrapper">
             @include('layout.sidebar')
@@ -59,6 +59,13 @@
     <!-- end common js -->
 
     @stack('custom-scripts')
+    <script>
+        $(document).ready(
+            $("button.navbar-toggler > span.mdi").on('click', function() {
+                $(this).toggleClass("mdi-menu mdi-close")
+            })
+        );
+    </script>
 </body>
 
 </html>

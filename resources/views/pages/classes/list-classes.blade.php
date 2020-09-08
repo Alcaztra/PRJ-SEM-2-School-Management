@@ -38,7 +38,7 @@
                                             <td scope="row">{{ $c->class_id }}</td>
                                             <td>{{ $c->room }}</td>
                                             <td>{{ $c->course_id }}</td>
-                                            <td>{{ $c->getTeacher()->name }}</td>
+                                            <td>{{ $c->getTeacher()->name ?? ''}}</td>
                                             <td>{{ $c->calcSize() }}</td>
                                             {{-- <td>{{ $c->calcDuration() }}</td>
                                             --}}

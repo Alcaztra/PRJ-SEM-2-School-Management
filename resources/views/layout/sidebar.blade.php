@@ -13,7 +13,7 @@
                             <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown"
                                 data-toggle="dropdown" aria-expanded="false">
                                 <small
-                                    class="designation text-muted">{{ Auth::guard('admin')->user()->user_id }}</small>
+                                    class="designation text-secondary">{{ Auth::guard('admin')->user()->user_id }}</small>
                                 <span class="status-indicator online"></span>
                             </a>
                             {{-- <div class="dropdown-menu"
@@ -176,7 +176,7 @@
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse {{ show_class(['schedule/*']) }}" id="schedule">
-                <ul class="nav flex-column sub-menu bg-secondary">
+                <ul class="nav flex-column sub-menu">
                     <li class="nav-item {{ active_class(['schedule/calendar']) }}">
                         <a class="nav-link" href="{{ url('schedule/calendar') }}">
                             <i class="menu-icon mdi mdi-calendar-multiple"></i>

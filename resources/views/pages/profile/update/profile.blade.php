@@ -11,7 +11,7 @@
                 $form_title = "Profile Information";
                 $action = route('profile.update.profile.submit');
             @endphp
-            @include('layout.user-form')
+            @include('layout.form-user')
         </div>
     </div>
 @endsection

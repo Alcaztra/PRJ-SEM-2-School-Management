@@ -2,8 +2,6 @@
 @section('page_title', 'Dashboard')
     @push('plugin-styles')
         <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
-        <link href='fullcalendar/main.css' rel='stylesheet' />
-        <script src='fullcalendar/main.js'></script>
         {!! Html::style('/assets/plugins/fullcalendar/main.css') !!}
         {!! Html::script('/assets/plugins/fullcalendar/main.js') !!}
         {!! Html::script('/js/initCalendar.js') !!}

@@ -55,8 +55,8 @@
             <div class="card">
                 <div class="card-body">
                     <h4>Update Avatar</h4>
-                    <div class="d-flex justify-content-between">
-                        <div class="col">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <div class="col-12 col-sm-12 col-md-8">
                             <form action="{{ route('profile.update.avatar') }}" method="post"
                                   enctype="multipart/form-data">
                                 @csrf
@@ -75,7 +75,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-8 col-sm-4">
                             <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}"
                                  class="img-thumbnail"
                                  id="preview_image" alt="">
