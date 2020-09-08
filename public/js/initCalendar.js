@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         headerToolbar: {
             start: 'prevYear,prev', // will normally be on the left. if RTL, will be on the right
-            center: 'title',
-            end: 'today,dayGridMonth,timeGridWeek,timeGridDay next,nextYear' // will normally be on the right. if RTL, will be on the left
+            center: 'title today,dayGridMonth,timeGridWeek,timeGridDay',
+            end: 'next,nextYear' // will normally be on the right. if RTL, will be on the left
         }
     });
 
