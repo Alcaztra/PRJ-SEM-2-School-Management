@@ -52,11 +52,18 @@ class ClassController extends Controller
     public function addUser(Request $request)
     {
         $class_id = $request->class_id;
-        $teacher = $request->teacher_id;
-        DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $teacher]);
-        $students = $request->students;
-        foreach ($students as $s) {
-            DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $s]);
+
+        // dd($request);
+        if (isset($request->teacher_id)) {
+            $teacher = $request->teacher_id;
+            DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $teacher]);
+        }
+
+        if ($request->has('students')) {
+            $students = $request->students;
+            foreach ($students as $s) {
+                DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $s]);
+            }
         }
         return redirect(route('class.list'));
     }
