@@ -1,20 +1,11 @@
 @extends('layout.master')
-@section('page_title', 'Create new Teacher')
+@section('page_title', 'Student Details')
     @push('plugin-styles')
         <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
     @endpush
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Teacher Information</h4>
-                    @include('layout.form-user',['action'=>"teacher.create.submit"])
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('layout.user-details',['user'=>$student])
 @endsection
 
 @push('plugin-scripts')

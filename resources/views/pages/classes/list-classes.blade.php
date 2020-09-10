@@ -26,7 +26,7 @@
                                     <th scope="col">Course ID</th>
                                     <th scope="col">Teacher</th>
                                     <th scope="col">Size</th>
-                                    <th scope="col">Total Duration (hour)</th>
+                                    <th scope="col">Total Duration (hours)</th>
                                     <th scope="col">Start Day</th>
                                     <th scope="col">End Day (expected)</th>
                                 </tr>
@@ -35,14 +35,15 @@
                                 @isset($classes)
                                     @foreach ($classes as $c)
                                         <tr>
-                                            <td scope="row">{{ $c->class_id }}</td>
+                                            <td scope="row"><a href="{{ route('class.details', ['class_id' => $c->class_id]) }}"
+                                                    class="text-decoration-none">{{ $c->class_id }}</a></td>
                                             <td>{{ $c->room }}</td>
                                             <td>{{ $c->course_id }}</td>
-                                            <td>{{ $c->getTeacher()->name ?? ''}}</td>
+                                            <td>{{ $c->getTeacher()->name ?? 'N/A' }}</td>
                                             <td>{{ $c->calcSize() }}</td>
                                             {{-- <td>{{ $c->calcDuration() }}</td>
                                             --}}
-                                            <td>{{ $c->total_duration }}</td>
+                                            <td class="text-center">{{ $c->calcDuration() }}</td>
                                             <td>{{ $c->start_day }}</td>
                                             <td>{{ $c->getEndDay() }}</td>
                                         </tr>

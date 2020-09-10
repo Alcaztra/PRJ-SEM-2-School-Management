@@ -1,15 +1,19 @@
 @extends('layout.master')
 @section('page_title', 'Account Profile')
-@push('plugin-styles')
-    <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
-@endpush
+    @push('plugin-styles')
+        <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
+    @endpush
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    {!! $notify_update ?? "" !!}
+                    @if (Session::has('result') && Session::get('result'))
+                        <div class='alert alert-info alert-dismissible'>
+                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                            <strong>Notify !</strong> Profile updated, please login againt.</div>
+                    @endif
                     <h4 class="card-title">Profile Information</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -17,9 +21,9 @@
                                 <tr>
                                     <th class="text-uppercase">{{ $key }}</th>
                                     <td>
-                                        @if($key == 'avatar')
+                                        @if ($key == 'avatar')
                                             <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}"
-                                                 class="img-thumbnail" alt="">
+                                                class="img-thumbnail" alt="">
                                         @else
                                             {{ $value }}
                                         @endif
@@ -57,15 +61,14 @@
                     <h4>Update Avatar</h4>
                     <div class="d-flex flex-wrap justify-content-between">
                         <div class="col-12 col-sm-12 col-md-8">
-                            <form action="{{ route('profile.update.avatar') }}" method="post"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('profile.update.avatar') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="preview_image"
-                                               id="preview_image" accept=".jpg,.jpeg,.svg,.png,.gif">
+                                        <input type="file" class="custom-file-input" name="preview_image" id="preview_image"
+                                            accept=".jpg,.jpeg,.svg,.png,.gif">
                                         <label class="custom-file-label" for="preview_image"
-                                               aria-describedby="inputGroupFileAddon02">Choose
+                                            aria-describedby="inputGroupFileAddon02">Choose
                                             file</label>
                                     </div>
                                     <div class="input-group-append">
@@ -76,9 +79,8 @@
                             </form>
                         </div>
                         <div class="col-8 col-sm-4">
-                            <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}"
-                                 class="img-thumbnail"
-                                 id="preview_image" alt="">
+                            <img src="{{ asset('storage/uploads/avatar/' . $user_profile->avatar) }}" class="img-thumbnail"
+                                id="preview_image" alt="">
                         </div>
                     </div>
                     @if ($errors->any() && $errors->has('preview_image'))

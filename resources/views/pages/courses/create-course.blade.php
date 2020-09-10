@@ -50,32 +50,6 @@
                                     </div>
                                 @endfor
                             </div>
-                            {{-- <div class="table">
-                                <table class="table table-bordered">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Sem 1</th>
-                                            <th scope="col">sem 2</th>
-                                            <th scope="col">Sem 3</th>
-                                            <th scope="col">Sem 4</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data_table">
-                                        <tr>
-                                            <td scope="row">1</td>
-                                            <td class="">subject 1
-                                                <span class="badge badge-danger btn float-right">&times;</span></td>
-                                            <td class="table-danger">subject 2
-                                                <span class="badge badge-danger btn float-right">&times;</span></td>
-                                            <td>subject 3
-                                                <span class="badge badge-danger btn float-right">&times;</span></td>
-                                            <td>subject 4
-                                                <span class="badge badge-danger btn float-right">&times;</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>--}}
                         </div>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>

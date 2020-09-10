@@ -7,11 +7,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-6 grid-margin">
-            @php
-            $form_title = "Student Information";
-            $action = route('student.create.submit');
-            @endphp
-            @include('layout.form-user')
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Student Information</h4>
+                    @include('layout.form-user',['action'=>'student.create.submit'])
+                </div>
+            </div>
         </div>
     </div>
 @endsection

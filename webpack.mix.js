@@ -59,3 +59,11 @@ mix.copyDirectory("node_modules/@mdi", "public/assets/plugins/@mdi")
         "node_modules/fullcalendar",
         "public/assets/plugins/fullcalendar"
     );
+
+//
+mix.browserSync({
+    // host: '192.168.0.101'
+    // proxy: '192.168.0.101:8000',
+    proxy: '172.16.100.40:8000'
+    // port: 8000
+})
