@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -36,5 +37,22 @@ class StudentController extends Controller
 
         $student->save();
         return redirect()->intended(route('student.list'));
+    }
+
+    public function showStudentDetails($student_id)
+    {
+        $student = Student::where('user_id', $student_id)->first();
+        return view('pages.students.student-details')->with('student', $student);
+    }
+
+    public function resetPassword($student_id)
+    {
+        $student = Student::where('user_id', $student_id)
+            ->first();
+        $student->password = Hash::make('password');
+        $student->save();
+        $result = Hash::check('password', Student::find($student)->first()->password);
+
+        return back()->with('result', $result);
     }
 }

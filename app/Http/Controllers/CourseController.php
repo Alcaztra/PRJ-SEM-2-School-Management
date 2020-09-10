@@ -9,13 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
+    public static function getCourses()
+    {
+        return Course::all();
+    }
+
     public function listCourses()
     {
-        $courses = Course::all();
         $subjects = DB::table('semesters')
             ->leftJoin('subjects', 'subjects.subject_id', '=', 'semesters.subject_id')
             ->get();
-        return view('pages.courses.list-courses', ['courses' => $courses, 'subjects' => $subjects]);
+        return view('pages.courses.list-courses', ['courses' => $this->getCourses(), 'subjects' => $subjects]);
     }
 
     public function showFormCreateCourse()

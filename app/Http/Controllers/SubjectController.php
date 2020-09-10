@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    public function getSubjects()
+    public static function getSubjects()
     {
         return Subject::all();
     }

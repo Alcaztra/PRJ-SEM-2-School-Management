@@ -50,12 +50,10 @@ class ProfileController extends Controller
         $user->birthday = $request->birthday;
         $user->address = $request->address;
         // dd($user);
-        $user->save();
-
-        $notify_update = "<div class='alert alert-info alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        <strong>Notify !</strong> Profile updated, please login againt.</div>";
-        return view('pages.profile.profile')->with('notify_update', $notify_update);
+        $result = $user->save();
+        // dump($result);
+        // return view('pages.profile.profile')->with('notify_update', $notify_update);
+        return redirect(route('profile'))->with('result', $result);
     }
 
     public function updatePassword(Request $request)

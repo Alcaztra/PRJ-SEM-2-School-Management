@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
-    public function getTeachers()
+    public static function getTeachers()
     {
         return Teacher::all();;
     }
@@ -35,5 +36,22 @@ class TeacherController extends Controller
 
         $teacher->save();
         return redirect(route('teacher.list'));
+    }
+
+    public function showTeacherDetails($teacher_id)
+    {
+        $teacher = Teacher::where('user_id', $teacher_id)->first();
+        return view('pages.teachers.teacher-details')->with('teacher', $teacher);
+    }
+
+    public function resetPassword($teacher_id)
+    {
+        $teacher = Teacher::where('user_id', $teacher_id)
+            ->first();
+        $teacher->password = Hash::make('password');
+        $teacher->save();
+        $result = Hash::check('password', Teacher::find($teacher)->first()->password);
+
+        return back()->with('result', $result);
     }
 }
