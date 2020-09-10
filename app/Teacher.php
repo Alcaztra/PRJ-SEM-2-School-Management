@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class Teacher extends Authenticatable
 {
@@ -60,4 +61,13 @@ class Teacher extends Authenticatable
     protected $casts = [
         'birthday' => 'date'
     ];
+
+    public function getClasses()
+    {
+        $classes = DB::table('class-management')
+            ->where('teacher_id', $this->user_id)
+            ->select('class_id')
+            ->get();
+        return $classes;
+    }
 }

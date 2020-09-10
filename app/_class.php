@@ -33,9 +33,12 @@ class _class extends Model
     protected $fillable = [
         'class_id',
         'room',
+        'max_size',
         'course_id',
+        'DoW',
+        'period_id',
         'start_day',
-        'total_duration',
+        // 'total_duration',
         'step',
     ];
 
@@ -84,7 +87,7 @@ class _class extends Model
     public function calcSize()
     {
         $size = 0;
-        $size = DB::table('class-management')->where([['class_id', '=', $this->class_id], ['user_id', 'like', 'student%']])->count('user_id');
+        $size = DB::table('students')->where('class_id', '=', $this->class_id)->count('user_id');
         // dd($size);
         return $size;
     }
@@ -120,8 +123,9 @@ class _class extends Model
     public function getTeacher()
     {
         $teacher = DB::table('class-management')
-            ->leftJoin('teachers', 'class-management.user_id', '=', 'teachers.user_id')
+            ->leftJoin('teachers', 'user_id', '=', 'teacher_id')
             ->where('class_id', $this->class_id)
+            ->select('user_id', 'name')
             ->first();
         return $teacher;
     }
