@@ -61,9 +61,8 @@ mix.copyDirectory("node_modules/@mdi", "public/assets/plugins/@mdi")
     );
 
 //
-mix.browserSync({
-    // host: '192.168.0.101'
-    // proxy: '192.168.0.101:8000',
-    proxy: '172.16.100.40:8000'
-    // port: 8000
-})
+// mix.browserSync({
+//     // host: '192.168.0.101'
+//     proxy: '192.168.0.103:8000'
+//     // port: 8000
+// })
