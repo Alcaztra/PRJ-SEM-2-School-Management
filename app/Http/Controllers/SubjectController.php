@@ -35,4 +35,22 @@ class SubjectController extends Controller
 
         return redirect(route('subject.list'));
     }
+
+    public function showFormSubjectDetails($subject_id)
+    {
+        $subject = Subject::where('subject_id', $subject_id)->first();
+        return view('pages.subjects.subject-details')->with('subject', $subject);
+    }
+
+    public function subjectDetails(Request $request)
+    {
+        $subject = Subject::where('subject_id', $request->subject_id)->first();
+        $subject->name = $request->name;
+        $subject->NoS = $request->NoS;
+        $subject->duration = $request->NoS * 2;
+
+        $subject->save();
+
+        return redirect(route('subject.list'));
+    }
 }
