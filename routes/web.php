@@ -35,7 +35,7 @@ if (!Auth::guard('admin')->check()) {
 }
 
 // profile
-Route::group(['prefix' => 'group'], function () {
+Route::group(['prefix' => 'profile'], function () {
     //  profile pages
     Route::get('/', 'ProfileController@index')->name('profile');
     //  update profile
@@ -50,30 +50,89 @@ Route::group(['prefix' => 'group'], function () {
 
 //student
 Route::group(['prefix' => 'student'], function () {
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('student.list'));});
+        Route::get('list', 'StudentController@listStudents')->name('student.list');
+        Route::get('create', 'StudentController@showFormCreateStudent')->name('student.create');
+        Route::post('create', 'StudentController@createStudent')->name('student.create.submit');
+        // test get ajax
+        Route::get('get-students', 'StudentController@getStudents');
 
+        Route::group(['prefix' => '{student_id}'], function () {
+            Route::get('/', 'StudentController@showStudentDetails')->name('student.detail');
+            Route::get('reset-password', 'StudentController@resetPassword')->name('student.reset.password');
+        });
+    });
 });
 
 // teacher
 Route::group(['prefix' => 'teacher'], function () {
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('teacher.list'));});
+        Route::get('list', 'TeacherController@listTeachers')->name('teacher.list');
+        Route::get('create', 'TeacherController@showFormCreateTeacher')->name('teacher.create');
+        Route::post('create', 'TeacherController@createTecher')->name('teacher.create.submit');
+        Route::group(['prefix' => '{teacher_id}'], function () {
+            Route::get('/', 'TeacherController@showTeacherDetails')->name('teacher.detail');
+            Route::get('reset-password', 'TeacherController@resetPassword')->name('teacher.reset.password');
+        });
 
+        Route::get('get-teachers', 'TeacherController@getTeachers');
+    });
 });
 
 // course
 Route::group(['prefix' => 'course'], function () {
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('course.list'));});
+        Route::get('list', 'CourseController@listCourses')->name('course.list');
+        Route::get('create', 'CourseController@showFormCreateCourse')->name('course.create');
+        Route::post('create', 'CourseController@createCourse')->name('course.create.submit');
 
+        Route::group(['prefix' => '{course_id}'], function () {
+            Route::get('/', 'CourseController@showFormCourseDetails')->name('course.details');
+            Route::post('/', 'CourseController@courseDetails')->name('course.details.submit');
+        });
+    });
 });
 
 // subject
 Route::group(['prefix' => 'subject'], function () {
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('subject.list'));});
+        Route::get('list', 'SubjectController@listSubjects')->name('subject.list');
+        Route::get('create', 'SubjectController@showFormCreateSubject')->name('subject.create');
+        Route::post('create', 'SubjectController@createSubject')->name('subject.create.submit');
 
+        Route::group(['prefix' => '{subject_id}'], function () {
+            Route::get('/', 'SubjectController@showFormSubjectDetails')->name('subject.details');
+            Route::post('/', 'SubjectController@subjectDetails')->name('subject.details.submit');
+        });
+    });
 });
 
 // class
 Route::group(['prefix' => 'class'], function () {
-
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('class.list'));});
+        Route::get('list', 'ClassController@listClasses')->name('class.list');
+        Route::get('create', 'ClassController@showFormCreateClass')->name('class.create');
+        Route::post('create', 'ClassController@createClass')->name('class.create.submit');
+        // add user
+        Route::get('add', 'ClassController@showFormAddUser')->name('class.addUser');
+        Route::post('add', 'ClassController@addUser')->name('class.addUser.submit');
+        // class details
+        Route::group(['prefix' => '{class_id}'], function () {
+            Route::get('/', 'ClassController@showFormClassDetails')->name('class.details');
+            Route::post('/', 'ClassController@classDetails')->name('class.details.submit');
+        });
+    });
 });
 
 // schedule
+Route::group(['prefix' => 'schedule'], function () {
+    Route::get('calendar', 'ScheduleController@index');
+});
 
 //demo
 Route::get('demo', function () {

@@ -2,6 +2,7 @@
   "_args": [
     [
       "@mdi/font@4.9.95",
+      "E:\\FPT-Aptect\\SEM 2\\7-eProject\\PRJ-SEM-2-School-Management"
     ]
   ],
   "_from": "@mdi/font@4.9.95",
@@ -26,6 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@mdi/font/-/font-4.9.95.tgz",
   "_spec": "4.9.95",
+  "_where": "E:\\FPT-Aptect\\SEM 2\\7-eProject\\PRJ-SEM-2-School-Management",
   "author": {
     "name": "Austin Andrews",
     "url": "http://twitter.com/templarian"

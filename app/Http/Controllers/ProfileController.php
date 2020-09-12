@@ -50,12 +50,10 @@ class ProfileController extends Controller
         $user->birthday = $request->birthday;
         $user->address = $request->address;
         // dd($user);
-        $user->save();
-
-        $notify_update = "<div class='alert alert-info alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        <strong>Notify !</strong> Profile updated, please login againt.</div>";
-        return view('pages.profile.profile')->with('notify_update', $notify_update);
+        $result = $user->save();
+        // dump($result);
+        // return view('pages.profile.profile')->with('notify_update', $notify_update);
+        return redirect(route('profile'))->with('result', $result);
     }
 
     public function updatePassword(Request $request)
@@ -68,7 +66,7 @@ class ProfileController extends Controller
         $result = DB::table('admins')->limit(1)->where('user_id', $user_id)->update(['password' => $password]);
         if ($result) {
             Auth::guard('admin')->logout();
-            return redirect()->intended(route('dashboard'));
+            return redirect(route('dashboard'));
         } else {
             print("<script>alert('Update fail..!!')</script>");
             return redirect()->back();

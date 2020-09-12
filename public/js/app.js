@@ -49737,7 +49737,31 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-});
+}); // $('.toast').toast(autohide=false);
+
+/* import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+        dateClick: function (info) {
+            alert('a day has been clicked!');
+        },
+        headerToolbar: {
+            start: 'prevYear,prev', // will normally be on the left. if RTL, will be on the right
+            center: 'title',
+            end: 'today,dayGridMonth,timeGridWeek,timeGridDay next,nextYear' // will normally be on the right. if RTL, will be on the left
+        }
+    });
+
+    calendar.render();
+}); */
 
 /***/ }),
 
@@ -49873,8 +49897,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project-sem2-aptech\PRJ-SEM-2-School-Management\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\project-sem2-aptech\PRJ-SEM-2-School-Management\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\FPT-Aptect\SEM 2\7-eProject\PRJ-SEM-2-School-Management\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\FPT-Aptect\SEM 2\7-eProject\PRJ-SEM-2-School-Management\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

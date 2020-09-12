@@ -17,11 +17,7 @@ $violet: #41478a;
 $darkslategray: #2e383e;
 $dodger-blue: #3498db;
 $blue-teal-gradient: linear-gradient(120deg, #556cdc, #128bfc, #18bef1);
-$blue-teal-gradient-light: linear-gradient(
-    120deg,
-    rgba(0, 228, 208, 0.7),
-    rgba(89, 131, 232, 0.7)
-);
+$blue-teal-gradient-light: linear-gradient(120deg, rgba(0, 228, 208, 0.7), rgba(89, 131, 232, 0.7));
 
 $colors: (
     blue: $blue,
@@ -40,7 +36,7 @@ $colors: (
     gray-lighter: #e8eff4,
     gray-lightest: #e6e9ed,
     gray-dark: #0f1531,
-    black: #000000
+    black: #000000,
 );
 
 $theme-colors: (
@@ -51,7 +47,7 @@ $theme-colors: (
     warning: #ffaf00,
     danger: #ff0017,
     light: #fbfbfb,
-    dark: #252c46
+    dark: #252c46,
 );
 
 $theme-gradient-colors: (
@@ -62,7 +58,7 @@ $theme-gradient-colors: (
     warning: linear-gradient(to right, #f6e384, #ffd500),
     danger: linear-gradient(to right, #ffbf96, #fe7096),
     light: linear-gradient(to bottom, #f4f4f4, #e4e4e9),
-    dark: linear-gradient(89deg, #5e7188, #3e4b5b)
+    dark: linear-gradient(89deg, #5e7188, #3e4b5b),
 );
 
 ////////// COLOR SYSTEM //////////
@@ -88,7 +84,7 @@ $social-colors: (
     github: #333333,
     behance: #1769ff,
     dribbble: #ea4c89,
-    reddit: #ff4500
+    reddit: #ff4500,
 );
 
 ////////// SOCIAL COLORS //////////
@@ -126,7 +122,8 @@ $sidebar-light-category-color: #999999;
 $sidebar-light-profile-name-color: #404852;
 $sidebar-light-profile-title-color: #8d9498;
 
-$sidebar-dark-bg: #252c46;
+// $sidebar-dark-bg: #252c46;
+$sidebar-dark-bg: #383838;
 $sidebar-dark-menu-color: $white;
 $sidebar-dark-menu-active-bg: #2e3657;
 $sidebar-dark-menu-active-color: darken($white, 30%);
@@ -175,14 +172,18 @@ $icon-only-menu-bg-dark: $sidebar-dark-bg;
 ///////// NAVBAR ////////
 
 $navbar-height: 63px;
-$navbar-bg: linear-gradient(120deg, #2f78e9, #128bfc, #18bef1);
+// $navbar-bg: linear-gradient(120deg, #2f78e9, #128bfc, #18bef1);
+$navbar-bg: linear-gradient(45deg, #ffffff, #ffffffcb, #000000);
 $navbar-menu-color: #fff;
 $navbar-font-size: 12px;
 $navbar-icon-font-size: 1.25rem;
-$nvabar-brand-bg: #000000;
-$nvabar-toggler-color: #8e94a9;
+// $nvabar-brand-bg: #000000;
+$navbar-brand-bg: #5f5f5f;
+// $nvabar-toggler-color: #8e94a9;
+$navbar-toggler-color: #8e94a9;
 $navbar-search-bg: #eef0fa;
-$nvabar-search-icon-color: #8e94a9;
+// $nvabar-search-icon-color: #8e94a9;
+$navbar-search-icon-color: #8e94a9;
 $nav-dropdown-color: #111111;
 $navbar-item-bg: #3f3f40;
 $navbar-item-light-bg: #e6e5f2;
@@ -355,12 +356,10 @@ $modal-transition: transform 0.4s ease;
 $nav-tabs-border-color: #ebedf2;
 $nav-tabs-link-bg: #f6f8fa;
 $nav-tabs-link-color: #000000;
-$nav-tabs-link-hover-border-color: $nav-tabs-border-color $nav-tabs-border-color
-    $nav-tabs-border-color;
+$nav-tabs-link-hover-border-color: $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-border-color;
 $nav-tabs-link-active-color: $body-color;
 $nav-tabs-link-active-bg: $white;
-$nav-tabs-link-active-border-color: $nav-tabs-border-color
-    $nav-tabs-border-color $nav-tabs-link-active-bg;
+$nav-tabs-link-active-border-color: $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-link-active-bg;
 $nav-pills-custom-bg: #fcfcfd;
 $text-gray: gray;
 $circle-img-border: $white;

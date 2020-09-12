@@ -36,7 +36,6 @@ class Admin extends Authenticatable
         'user_id',
         'name',
         'avatar',
-        'image',
         'gender',
         'email',
         'phone',
