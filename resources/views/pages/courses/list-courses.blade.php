@@ -33,7 +33,10 @@
                                 @isset($courses)
                                     @foreach ($courses as $c)
                                         <tr>
-                                            <td scope="row">{{ $c->course_id }}</td>
+                                            <td scope="row">
+                                                <a class="text-decoration-none"
+                                                    href="{{ route('course.details', ['course_id' => $c->course_id]) }}">{{ $c->course_id }}</a>
+                                            </td>
                                             <td>{{ $c->name }}</td>
                                             @for ($i = 1; $i <= 4; $i++)
                                                 <td style="border-left: 1px solid lightgray;">

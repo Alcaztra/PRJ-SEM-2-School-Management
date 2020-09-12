@@ -51,7 +51,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3">Total student: {{ $class->calcSize() }} / {{ $class->max_size }} (Maximum)</td>
+                                <td colspan="3">Total student: {{ $class->calcSize() }}</td>
                             </tr>
                         </tfoot>
                     </table>

@@ -1,15 +1,22 @@
 @extends('layout.master')
-@section('page_title', 'Create new Subject')
+@section('page_title', 'Course Details')
     @push('plugin-styles')
         <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
     @endpush
 
 @section('content')
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    @include('layout.form-create-subject',['action'=>'subject.create.submit'])
+                    {{-- @dump($subjects,$course,$sub_sem) --}}
+                    @include('layout.form-create-course',[
+                    'action'=>'course.details.submit',
+                    'param'=>['course_id'=>$course->course_id],
+                    'subjects'=>$subjects,
+                    'course'=>$course,
+                    'sub_sem'=>$sub_sem
+                    ])
                 </div>
             </div>
         </div>
@@ -23,4 +30,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/insertSubject.js') !!}
 @endpush

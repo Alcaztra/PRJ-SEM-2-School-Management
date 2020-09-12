@@ -9,10 +9,10 @@
         <label for="room">Room</label>
         {!! Form::text('room', $class->room ?? '', ['id' => 'room', 'class' => 'form-control']) !!}
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="max_size">Max Size</label>
         {!! Form::number('max_size', $class->max_size ?? '', ['id' => 'max_size', 'class' => 'form-control']) !!}
-    </div>
+    </div> --}}
     <div class="form-group">
         <label for="">Study Shift</label>
         <div class="input-group">

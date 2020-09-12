@@ -31,7 +31,10 @@
                                 @isset($subjects)
                                     @foreach ($subjects as $s)
                                         <tr>
-                                            <td scope="row">{{ $s->subject_id }}</td>
+                                            <td scope="row">
+                                                <a class="text-decoration-none"
+                                                    href="{{ route('subject.details', ['subject_id' => $s->subject_id]) }}">{{ $s->subject_id }}</a>
+                                            </td>
                                             <td>{{ $s->name }}</td>
                                             <td>{{ $s->NoS }}</td>
                                             <td>{{ $s->duration }}</td>
