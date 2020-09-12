@@ -37,17 +37,8 @@
                         <div class="form-group">
                             <label for="inp_stu">Student List</label>
                             <div class="input-group">
-                                {{-- <select class="custom-select" name="student_id"
-                                    id="student_id">
-                                    <option value="">- Select Student -</option>
-                                    @isset($students)
-                                    @foreach ($students as $s)
-                                        <option value="{{ $s->user_id }}">{{ $s->name }}</option>
-                                    @endforeach
-                                    @endisset
-                                </select> --}}
-                                <input type="text" class="form-control" name="" id="inp_stu" placeholder="Enter Student ID | Name"
-                                    autocomplete="off">
+                                <input type="text" class="form-control" name="inp_stu" id="inp_stu"
+                                    placeholder="Enter Student ID | Name" autocomplete="off">
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-outline-primary" onclick="add()">Add</button>
                                 </div>
@@ -76,21 +67,34 @@
     <script>
         let students = new Array();
         let xml = new XMLHttpRequest();
-        let url = document.location.origin + "/student/get-student";
+        let url = document.location.origin + "/student/get-students";
+        console.log(url)
         let res = "";
-        xml.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // console.log(xml.response);
-                res = JSON.parse(xml.response);
-                // console.log(res);
-                res.forEach(u => {
-                    students.push(u.user_id + "|" + u.name);
-                });
-            }
-        }
-        // console.log(students);
-        xml.open("GET", url, true);
-        xml.send();
+        // xml.onreadystatechange = function() {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         // console.log(xml.response);
+        //         res = JSON.parse(xml.response);
+        //         // console.log(res);
+        //         res.forEach(u => {
+        //             students.push(u.user_id + "|" + u.name);
+        //         });
+        //     }
+        // }
+        // // console.log(students);
+        // xml.open("GET", url, true);
+        // xml.send();
+        $(document).ready(function() {
+            let req = $.ajax({
+                url: document.location.origin + "/student/get-students",
+                method: 'GET',
+                success: function(data) {
+                    // console.log(data);
+                    data.forEach(u => {
+                        students.push(u.user_id + "|" + u.name);
+                    });
+                }
+            })
+        });
         autocomplete(document.getElementById("inp_stu"), students);
 
         function add() {
@@ -109,6 +113,7 @@
             list.append(item);
             list.append(inp_data);
             $("#list_stu a").tooltip('enable');
+            $("input[name='inp_stu']").val('');
         }
 
     </script>

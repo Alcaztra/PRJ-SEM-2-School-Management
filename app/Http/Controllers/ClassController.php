@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
-    public function getClasses()
+    public static function getClasses()
     {
         return _class::all();
     }
@@ -36,9 +36,12 @@ class ClassController extends Controller
         $class = new _class();
         $class->class_id = $request->class_id;
         $class->room = $request->room;
+        // $class->max_size = $request->max_size;
+        $class->DoW = $request->DoW;
+        $class->period_id = $request->period_id;
         $class->start_day = $request->start_day;
         $class->course_id = $request->course_id;
-        $class->total_duration = $class->calcDuration();
+        // $class->total_duration = $class->calcDuration();
         $class->step = 2;
 
         $class->save();
@@ -56,12 +59,49 @@ class ClassController extends Controller
     public function addUser(Request $request)
     {
         $class_id = $request->class_id;
-        $teacher = $request->teacher_id;
-        DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $teacher]);
-        $students = $request->students;
-        foreach ($students as $s) {
-            DB::table('class-management')->insert(['class_id' => $class_id, 'user_id' => $s]);
+
+        // dd($request);
+        if (isset($request->teacher_id)) {
+            $teacher_id = $request->teacher_id;
+            DB::table('class-management')->insert(['class_id' => $class_id, 'teacher_id' => $teacher_id, 'created_at' => now()]);
         }
+
+        if ($request->has('students')) {
+            $students = $request->students;
+            foreach ($students as $s) {
+                DB::table('students')->where('user_id', $s)->update(['class_id' => $class_id, 'updated_at' => now()]);
+            }
+            $class = _class::where('class_id', $class_id)->first();
+            $class->size = $class->calcSize();
+            $class->save();
+        }
+
         return redirect(route('class.list'));
+    }
+
+    public function showFormClassDetails($class_id)
+    {
+        $class = _class::where('class_id', $class_id)->first();
+        $students = DB::table('students')
+            ->where('class_id', $class_id)
+            ->get();
+        return view('pages.classes.class-details')->with(['class' => $class, 'courses' => CourseController::getCourses(), 'students' => $students]);
+    }
+
+    public function classDetails(Request $request)
+    {
+        // dump($request);
+        $class = _class::where('class_id', $request->class_id)->first();
+        $class->room = $request->room;
+        // $class->max_size = $request->max_size;
+        $class->DoW = $request->DoW;
+        $class->period_id = $request->period_id;
+        $class->start_day = $request->start_day;
+        $class->course_id = $request->course_id;
+        // $class->total_duration = $class->calcDuration();
+
+        $class->save();
+
+        return back();
     }
 }

@@ -1,17 +1,18 @@
 @extends('layout.master')
 @section('page_title', 'Update Profile')
-@push('plugin-styles')
-    <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
-@endpush
+    @push('plugin-styles')
+        <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
+    @endpush
 
 @section('content')
     <div class="row">
         <div class="col-md-6 grid-margin">
-            @php
-                $form_title = "Profile Information";
-                $action = route('profile.update.profile.submit');
-            @endphp
-            @include('layout.form-user')
+            <div class="card">
+                <div class="card-body">
+                    <h4>Profile Information</h4>
+                    @include('layout.form-user',['action'=>'profile.update.profile.submit'])
+                </div>
+            </div>
         </div>
     </div>
 @endsection

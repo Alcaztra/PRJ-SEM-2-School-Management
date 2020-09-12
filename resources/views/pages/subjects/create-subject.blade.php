@@ -9,23 +9,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('subject.create.submit') }}" method="post">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="subject_id">Subject ID</label>
-                            {!! Form::text('subject_id', '', ['id' => 'subject_id', 'class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Subject tName</label>
-                            {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            <label for="nos">Number of Sessions</label>
-                            {!! Form::number('NoS', '', ['id' => 'nos', 'class' => 'form-control']) !!}
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Submit</button>
-                        @include('layout.show-form-errors')
-                    </form>
+                    @include('layout.form-create-subject',['action'=>'subject.create.submit'])
                 </div>
             </div>
         </div>

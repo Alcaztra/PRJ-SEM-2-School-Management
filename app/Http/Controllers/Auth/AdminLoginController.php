@@ -132,6 +132,7 @@ class AdminLoginController extends Controller
         // dd('authenticated',Auth::guard('admin')->user(),Auth::guard('admin')->check());
         // dd(Auth::guard('admin')->login($user));
         // Session::put('test', $user);
+        // echo ('<script>alert("login success")</script>');
         return redirect('/dashboard');
     }
 }

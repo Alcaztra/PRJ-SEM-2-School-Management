@@ -1,17 +1,21 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "fideloper/proxy": "4.0",
-        "laravel/framework": "5.5.*",
+        "fideloper/proxy": "4.4.0",
+        "laravel/framework": "^5.8.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "5.5.*"
+        "laravelcollective/html": "5.7.*"
     },
     "require-dev": {
+        "composer/composer": "^1.10",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
@@ -37,8 +41,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
@@ -51,6 +54,9 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-create-storage-link": [
+            "@php artisan storage:link"
         ]
     },
     "config": {

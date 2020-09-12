@@ -2,11 +2,7 @@
   "_args": [
     [
       "@mdi/font@4.9.95",
-<<<<<<< Updated upstream
-      "/Users/jyothish/Documents/star-laravel-free/template"
-=======
       "D:\\FPT-Aptech\\SEM 2\\project\\PRJ-SEM-2-School-Management"
->>>>>>> Stashed changes
     ]
   ],
   "_from": "@mdi/font@4.9.95",
@@ -31,11 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@mdi/font/-/font-4.9.95.tgz",
   "_spec": "4.9.95",
-<<<<<<< Updated upstream
-  "_where": "/Users/jyothish/Documents/star-laravel-free/template",
-=======
   "_where": "D:\\FPT-Aptech\\SEM 2\\project\\PRJ-SEM-2-School-Management",
->>>>>>> Stashed changes
   "author": {
     "name": "Austin Andrews",
     "url": "http://twitter.com/templarian"

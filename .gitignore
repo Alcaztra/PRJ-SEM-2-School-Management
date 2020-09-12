@@ -6,8 +6,14 @@
 .env
 .env.backup
 .phpunit.result.cache
+.idea/
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
 composer.lock
+resources/views/layouts/app.blade.php
+resources/views/home.blade.php
+resources/views/auth/passwords/email.blade.php
+resources/views/auth/passwords/reset.blade.php
+resources/views/auth/register.blade.php
