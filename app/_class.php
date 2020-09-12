@@ -33,7 +33,7 @@ class _class extends Model
     protected $fillable = [
         'class_id',
         'room',
-        'max_size',
+        // 'max_size',
         'course_id',
         'DoW',
         'period_id',

@@ -32,7 +32,7 @@ class ClassController extends Controller
         $class = new _class();
         $class->class_id = $request->class_id;
         $class->room = $request->room;
-        $class->max_size = $request->max_size;
+        // $class->max_size = $request->max_size;
         $class->DoW = $request->DoW;
         $class->period_id = $request->period_id;
         $class->start_day = $request->start_day;
@@ -89,7 +89,7 @@ class ClassController extends Controller
         // dump($request);
         $class = _class::where('class_id', $request->class_id)->first();
         $class->room = $request->room;
-        $class->max_size = $request->max_size;
+        // $class->max_size = $request->max_size;
         $class->DoW = $request->DoW;
         $class->period_id = $request->period_id;
         $class->start_day = $request->start_day;
