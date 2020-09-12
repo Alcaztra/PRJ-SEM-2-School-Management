@@ -51,6 +51,7 @@ Route::group(['prefix' => 'profile'], function () {
 //student
 Route::group(['prefix' => 'student'], function () {
     Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('student.list'));});
         Route::get('list', 'StudentController@listStudents')->name('student.list');
         Route::get('create', 'StudentController@showFormCreateStudent')->name('student.create');
         Route::post('create', 'StudentController@createStudent')->name('student.create.submit');
@@ -67,6 +68,7 @@ Route::group(['prefix' => 'student'], function () {
 // teacher
 Route::group(['prefix' => 'teacher'], function () {
     Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('teacher.list'));});
         Route::get('list', 'TeacherController@listTeachers')->name('teacher.list');
         Route::get('create', 'TeacherController@showFormCreateTeacher')->name('teacher.create');
         Route::post('create', 'TeacherController@createTecher')->name('teacher.create.submit');
@@ -82,24 +84,37 @@ Route::group(['prefix' => 'teacher'], function () {
 // course
 Route::group(['prefix' => 'course'], function () {
     Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('course.list'));});
         Route::get('list', 'CourseController@listCourses')->name('course.list');
         Route::get('create', 'CourseController@showFormCreateCourse')->name('course.create');
         Route::post('create', 'CourseController@createCourse')->name('course.create.submit');
+
+        Route::group(['prefix' => '{course_id}'], function () {
+            Route::get('/', 'CourseController@showFormCourseDetails')->name('course.details');
+            Route::post('/', 'CourseController@courseDetails')->name('course.details.submit');
+        });
     });
 });
 
 // subject
 Route::group(['prefix' => 'subject'], function () {
     Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('subject.list'));});
         Route::get('list', 'SubjectController@listSubjects')->name('subject.list');
         Route::get('create', 'SubjectController@showFormCreateSubject')->name('subject.create');
         Route::post('create', 'SubjectController@createSubject')->name('subject.create.submit');
+
+        Route::group(['prefix' => '{subject_id}'], function () {
+            Route::get('/', 'SubjectController@showFormSubjectDetails')->name('subject.details');
+            Route::post('/', 'SubjectController@subjectDetails')->name('subject.details.submit');
+        });
     });
 });
 
 // class
 Route::group(['prefix' => 'class'], function () {
     Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/', function(){return redirect(route('class.list'));});
         Route::get('list', 'ClassController@listClasses')->name('class.list');
         Route::get('create', 'ClassController@showFormCreateClass')->name('class.create');
         Route::post('create', 'ClassController@createClass')->name('class.create.submit');
