@@ -97,15 +97,27 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('plugin-scripts')
     {!! Html::script('/assets/plugins/chartjs/chart.min.js') !!}
     {!! Html::script('/assets/plugins/jquery-sparkline/jquery.sparkline.min.js') !!}
+    {!! Html::style('/assets/plugins/fullcalendar/main.css') !!}
+    {!! Html::script('/assets/plugins/fullcalendar/main.js') !!}
 @endpush
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/initCalendar.js') !!}
     {{-- <script>
         let stu = new XMLHttpRequest();
         let tea = new XMLHttpRequest();

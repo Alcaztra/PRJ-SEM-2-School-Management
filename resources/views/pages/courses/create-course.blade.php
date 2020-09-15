@@ -23,5 +23,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
-    {!! Html::script('/js/insertSubject.js') !!}
+    {!! Html::script('/js/createCourse.js') !!}
 @endpush

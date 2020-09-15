@@ -6,9 +6,11 @@
             <img src="{{ url('assets/images/favicon.svg') }}" alt="logo" /> </a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <button class="navbar-toggler text-dark align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-close icon-menu"></span>
-        </button>
+        @if (request()->getHost() == 'localhost')
+            <button class="navbar-toggler text-dark align-self-center" type="button" data-toggle="minimize">
+                <span class="mdi mdi-close icon-menu"></span>
+            </button>
+        @endif
         {{-- <ul class="navbar-nav navbar-nav-left header-links">
             <li class="nav-item d-none d-xl-flex">
                 <a href="#" class="nav-link">Sản phẩm <span class="badge badge-primary ml-1">New</span>
@@ -119,10 +121,27 @@
             <li class="nav-item dropdown d-none d-xl-inline-block">
                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
-                    <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('admin')->user()->name }}</span>
-                    <img class="img-xs rounded-circle"
-                        src="{{ asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) }}"
-                        alt="Profile image">
+                    @switch(request()->getHost())
+                        @case('localhost')
+                        <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('admin')->user()->name }}</span>
+                        <img class="img-xs rounded-circle"
+                            src="{{ null !== ($avatar = Auth::guard('admin')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
+                            alt="Profile image">
+                        @break
+                        @case('student.localhost')
+                        <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('student')->user()->name }}</span>
+                        <img class="img-xs rounded-circle"
+                            src="{{ null !== ($avatar = Auth::guard('student')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
+                            alt="Profile image">
+                        @break
+                        @case('teacher.localhost')
+                        <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('teacher')->user()->name }}</span>
+                        <img class="img-xs rounded-circle"
+                            src="{{ null !== ($avatar = Auth::guard('teacher')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
+                            alt="Profile image">
+                        @break
+                        @default
+                    @endswitch
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <a class="dropdown-item p-0">
@@ -139,9 +158,24 @@
                             </div>
                         </div>
                     </a>
-                    <a class="dropdown-item mt-2" href="{{ route('dashboard') }}"> Dashboard </a>
-                    <a class="dropdown-item mt-2" href="{{ route('profile') }}"> Manage Accounts </a>
-                    <a class="dropdown-item" href="{{ route('profile.update.password') }}"> Change Password </a>
+                    @switch(request()->getHost())
+                        @case('localhost')
+                        <a class="dropdown-item mt-2" href="{{ route('dashboard') }}"> Dashboard </a>
+                        <a class="dropdown-item mt-2" href="{{ route('profile') }}"> Manage Accounts </a>
+                        <a class="dropdown-item" href="{{ route('profile.update.password') }}"> Change Password </a>
+                        @break
+                        @case('student.localhost')
+                        <a class="dropdown-item mt-2" href="{{ route('student.dashboard') }}"> Dashboard </a>
+                        <a class="dropdown-item mt-2" href="{{ route('student.profile.update.profile') }}"> Manage Accounts </a>
+                        <a class="dropdown-item" href="{{ route('student.profile.update.password') }}"> Change Password </a>
+                        @break
+                        @case('teacher.localhost')
+                        <a class="dropdown-item mt-2" href="{{ route('teacher.dashboard') }}"> Dashboard </a>
+                        <a class="dropdown-item mt-2" href="{{ route('teacher.profile.update.profile') }}"> Manage Accounts </a>
+                        <a class="dropdown-item" href="{{ route('teacher.profile.update.password') }}"> Change Password </a>
+                        @break
+                        @default
+                    @endswitch
                     <a class="dropdown-item"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Sign Out
                     </a>
@@ -152,8 +186,24 @@
             data-toggle="offcanvas">
             <span class="mdi mdi-menu icon-menu"></span>
         </button>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+
+        @switch(request()->getHost())
+            @case('localhost')
+            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            @break
+            @case('student.localhost')
+            <form id="logout-form" action="{{ route('student.logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            @break
+            @case('teacher.localhost')
+            <form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            @break
+            @default
+        @endswitch
     </div>
 </nav>

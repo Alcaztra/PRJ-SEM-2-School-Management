@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>Profile Information</h4>
-                    @include('layout.form-user',['action'=>'profile.update.profile.submit'])
+                    @include('layout.form-user',['action'=>$action])
                 </div>
             </div>
         </div>

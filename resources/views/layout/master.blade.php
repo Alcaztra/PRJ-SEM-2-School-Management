@@ -26,12 +26,23 @@
     @stack('style')
 </head>
 
-<body data-base-url="{{ url('/') }}">
+<body data-base-url="{{ url('/') }}" class="sidebar-fixed">
 
     <div class="container-scroller sidebar-dark" id="app">
         @include('layout.header')
         <div class="container-fluid page-body-wrapper">
-            @include('layout.sidebar')
+            @switch(request()->getHost())
+                @case('localhost')
+                @include('layout.sidebar')
+                @break
+                @case('student.localhost')
+                @include('layout.student-sidebar')
+                @break
+                @case('teacher.localhost')
+                @include('layout.teacher-sidebar')
+                @break
+                @default
+            @endswitch
             <div class="main-panel">
                 <div class="content-wrapper">
                     @yield('content')
@@ -65,6 +76,7 @@
                 $(this).toggleClass("mdi-menu mdi-close")
             })
         );
+
     </script>
 </body>
 

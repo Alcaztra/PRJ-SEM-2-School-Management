@@ -4,7 +4,7 @@
             <div class="nav-link">
                 <div class="user-wrapper">
                     <div class="profile-image">
-                        <img src="{{ asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) }}"
+                        <img src="{{ null !== Auth::guard('admin')->user()->avatar ? asset('storage/uploads/avatar/' . Auth::guard('admin')->user()->avatar) : asset('assets\images\faces-clipart\pic-1.png') }}"
                             alt="profile image">
                     </div>
                     <div class="text-wrapper">
@@ -168,7 +168,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item {{ active_class(['schedule/*']) }}">
+        {{--<li class="nav-item {{ active_class(['schedule/*']) }}">
             <a class="nav-link" data-toggle="collapse" href="#schedule"
                 aria-expanded="{{ is_active_route(['subject/*']) }}" aria-controls="">
                 <i class="menu-icon mdi mdi-table-large"></i>
@@ -185,7 +185,7 @@
                 </ul>
             </div>
         </li>
-        {{-- <li class="nav-item {{ active_class(['demo/basic-ui/*']) }}">
+        <li class="nav-item {{ active_class(['demo/basic-ui/*']) }}">
             <a class="nav-link" data-toggle="collapse" href="#basic-ui"
                 aria-expanded="{{ is_active_route(['demo/basic-ui/*']) }}" aria-controls="basic-ui">
                 <i class="menu-icon mdi mdi-dna"></i>

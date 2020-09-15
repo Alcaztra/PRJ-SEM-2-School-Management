@@ -1,5 +1,5 @@
 <form action="{{ route($action, $param ?? '') }}" method="post">
-    @csrf
+    {{ csrf_field() }}
     {{-- USER_ID NAME GENDER EMAIL PHONE BIRTHDAY ADDRESS
     --}}
     <div class="form-group">

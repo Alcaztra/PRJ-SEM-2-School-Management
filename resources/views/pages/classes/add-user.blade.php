@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('class.addUser.submit') }}" method="post">
-                        @csrf
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label for="class_id">Class ID</label>
                             <select name="class_id" id="class_id" class="custom-select">
@@ -64,57 +64,5 @@
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
     {!! Html::script('/js/autocomplete.js') !!}
-    <script>
-        let students = new Array();
-        let xml = new XMLHttpRequest();
-        let url = document.location.origin + "/student/get-students";
-        console.log(url)
-        let res = "";
-        // xml.onreadystatechange = function() {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         // console.log(xml.response);
-        //         res = JSON.parse(xml.response);
-        //         // console.log(res);
-        //         res.forEach(u => {
-        //             students.push(u.user_id + "|" + u.name);
-        //         });
-        //     }
-        // }
-        // // console.log(students);
-        // xml.open("GET", url, true);
-        // xml.send();
-        $(document).ready(function() {
-            let req = $.ajax({
-                url: document.location.origin + "/student/get-students",
-                method: 'GET',
-                success: function(data) {
-                    // console.log(data);
-                    data.forEach(u => {
-                        students.push(u.user_id + "|" + u.name);
-                    });
-                }
-            })
-        });
-        autocomplete(document.getElementById("inp_stu"), students);
-
-        function add() {
-            let int_stu = $("#inp_stu").val();
-            if (int_stu == "") {
-                return;
-            }
-            let stu_id = stu_name = "";
-            stu_id = int_stu.split("|")[0];
-            stu_name = int_stu.split("|")[1];
-            // console.log(stu_id + "\n" + stu_name);
-            let list = $("#list_stu");
-            let item = "<a class='list-group-item cursor-pointer' data-toggle='tooltip' title='" + stu_id + "'>" +
-                stu_name + "</a>";
-            let inp_data = "<input type='hidden' name='students[]' value='" + stu_id + "' >";
-            list.append(item);
-            list.append(inp_data);
-            $("#list_stu a").tooltip('enable');
-            $("input[name='inp_stu']").val('');
-        }
-
-    </script>
+    {!! Html::script('/js/addUser.js') !!}
 @endpush

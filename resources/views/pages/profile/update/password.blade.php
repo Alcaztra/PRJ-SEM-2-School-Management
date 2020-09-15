@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('page_title', 'Update Password')
-@push('plugin-styles')
-    <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
-@endpush
+    @push('plugin-styles')
+        <!-- {!!  Html::style('/assets/plugins/plugin.css') !!} -->
+    @endpush
 
 @section('content')
     <div class="row">
@@ -10,8 +10,8 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Update Password</h4>
-                    <form action="{{ route('profile.update.password.submit') }}" method="post">
-                        @csrf
+                    <form action="{{ route($action, $param ?? '') }}" method="post">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label for="old_password">Old Password</label>
                             <input type="password" class="form-control" name="old_password" id="old_password"
@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label for="confirm_password">Confirm Password</label>
-                            <input type="password" class="form-control" name="confrm_password" id="confirm_password"
+                            <input type="password" class="form-control" name="confirm_password" id="confirm_password"
                                 aria-describedby="" placeholder="**********">
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
