@@ -31,8 +31,8 @@ class CourseController extends Controller
     public function createCourse(Request $request)
     {
         $validatedData = $request->validate([
-            'course_id' => 'required|unique:courses,course_id|max:255',
-            'name' => 'required',
+            'course_id' => 'required|regex:/^[a-zA-Z0-9]+$/u|max:255|unique:courses,course_id',
+            'name' => 'required|regex:/^[a-zA-Z0-9]+$/u|max:255',
         ]);
         for ($i = 1; $i <= 4; $i++) {
             if ($request->has("semester_$i")) {
