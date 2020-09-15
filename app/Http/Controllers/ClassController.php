@@ -30,8 +30,8 @@ class ClassController extends Controller
     public function createClass(Request $request)
     {
         $validatedData = $request->validate([
-            'class_id' => 'required|max:50',
-            'room' => 'required|size:10|numeric',
+            'class_id' => 'required|unique:classes,class_id|max:50',
+            'room' => 'required|min:6|numeric',
         ]);
         $class = new _class();
         $class->class_id = $request->class_id;
@@ -72,7 +72,7 @@ class ClassController extends Controller
                 DB::table('students')->where('user_id', $s)->update(['class_id' => $class_id, 'updated_at' => now()]);
             }
             $class = _class::where('class_id', $class_id)->first();
-            $class->size = $class->calcSize();
+            // $class->size = $class->calcSize();
             $class->save();
         }
 
