@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
@@ -49,4 +50,12 @@ class Course extends Model
      * @var array
      */
     protected $casts = [];
+
+    public function getSubjects()
+    {
+        return DB::table('semesters')->where('course_id', $this->course_id)
+            ->leftJoin('subjects', 'semesters.subject_id', '=', 'subjects.subject_id')
+            ->select('semesters.subject_id', 'name', 'semester')
+            ->get();
+    }
 }

@@ -99,10 +99,14 @@ class _class extends Model
      */
     public function calcEndDay()
     {
-        $days = round($this->calcDuration() / 4, 0, PHP_ROUND_HALF_UP);
         $start = date_create($this->start_day);
-        $i = 0;
+        if ($this->calcDuration() > 0) {
+            $days = round($this->calcDuration() / 4, 0, PHP_ROUND_HALF_UP);
+        } else {
+            return $start;
+        }
 
+        $i = 0;
         do {
             // calculate next day
             $end = date_add($start, date_interval_create_from_date_string($this->step . " days"));
@@ -128,5 +132,27 @@ class _class extends Model
             ->select('user_id', 'name')
             ->first();
         return $teacher;
+    }
+
+    public function getPeriod()
+    {
+        $period = DB::table('period')->where('id', $this->period_id)->select(['start_time', 'end_time'])->first();
+        return $period;
+    }
+
+    public function getCourse()
+    {
+        $course_name = Course::where('course_id', $this->course_id)->select('name')->first();
+        return $course_name;
+    }
+
+    public function getStudyShift()
+    {
+        switch ($this->DoW) {
+            case 1:
+                return 'Tue / Thu / Sat';
+            case 2:
+                return 'Mon / Wed / Fri';
+        }
     }
 }
