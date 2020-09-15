@@ -26,12 +26,12 @@ class StudentController extends Controller
     public function createStudent(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' => 'requiredmax:50',
-            'name' => 'required|max:255',
+            'user_id' => 'required|max:50',
+            'name' => 'required',
             'gender' => 'required',
-            'email' => 'required|email',
+            'email' => 'required',
             'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:15',
-            'birthday' => 'required',
+            'birthday' => 'required|date|before:-16 years',
             'address' => 'required',
         ]);
         $student = new Student();
