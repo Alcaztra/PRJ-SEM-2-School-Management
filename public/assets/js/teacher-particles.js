@@ -4,14 +4,14 @@
 
 /* To load a config file (particles.json) you need to host this demo (MAMP/WAMP/local)... */
 
-particlesJS.load('particles-js', '/assets/js/particles.json', function() {
+/* particlesJS.load('particles-js', '/assets/js/particles.json', function() {
   console.log('particles.js loaded - callback');
-});
+}); */
 
 
 /* Otherwise just put the config content (json): */
 
-/* particlesJS('particles-js',
+particlesJS('particles-js',
 
     {
         "particles": {
@@ -23,7 +23,7 @@ particlesJS.load('particles-js', '/assets/js/particles.json', function() {
                 }
             },
             "color": {
-                "value": "#ffffff"
+                "value": "#19d895"
             },
             "shape": {
                 "type": "circle",
@@ -63,13 +63,13 @@ particlesJS.load('particles-js', '/assets/js/particles.json', function() {
             "line_linked": {
                 "enable": true,
                 "distance": 150,
-                "color": "#ffffff",
+                "color": "#ccc",
                 "opacity": 0.4,
                 "width": 1
             },
             "move": {
                 "enable": true,
-                "speed": 6,
+                "speed": 3,
                 "direction": "none",
                 "random": false,
                 "straight": false,
@@ -86,10 +86,10 @@ particlesJS.load('particles-js', '/assets/js/particles.json', function() {
             "events": {
                 "onhover": {
                     "enable": true,
-                    "mode": "repulse"
+                    "mode": "grab"
                 },
                 "onclick": {
-                    "enable": true,
+                    "enable": false,
                     "mode": "push"
                 },
                 "resize": true
@@ -130,4 +130,4 @@ particlesJS.load('particles-js', '/assets/js/particles.json', function() {
         }
     }
 
-); */
+);
