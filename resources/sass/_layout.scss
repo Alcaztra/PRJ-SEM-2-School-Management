@@ -196,7 +196,8 @@
     .sidebar {
       position: fixed;
       max-height: auto;
-
+      left: 0;
+      
       .nav {
         max-height: calc(100vh - #{$navbar-height});
         overflow: auto;

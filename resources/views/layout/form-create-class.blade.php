@@ -1,5 +1,5 @@
 <form action="{{ route($action, $params ?? '') }}" method="post">
-    @csrf
+    {{ csrf_field() }}
     <div class="form-group">
         <label for="class_id">Class ID</label>
         {!! Form::text('class_id', $class->class_id ?? '', ['id' => 'class_id', 'class' => 'form-control', isset($class)

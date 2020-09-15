@@ -14,5 +14,15 @@
 @endpush
 
 @push('custom-scripts')
-    {!! Html::script('/assets/js/particles.js') !!}
+    @switch(request()->getHost())
+        @case('teacher.localhost')
+        {!! Html::script('/assets/js/teacher-particles.js') !!}
+        @break
+        @case('student.localhost')
+        {!! Html::script('/assets/js/student-particles.js') !!}
+        @break
+        @default
+        {!! Html::script('/assets/js/admin-particles.js') !!}
+    @endswitch
+
 @endpush
