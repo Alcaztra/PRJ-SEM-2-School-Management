@@ -19226,6 +19226,7 @@ small {
   .sidebar-fixed .sidebar {
     position: fixed;
     max-height: auto;
+    left: 0;
   }
 
   .sidebar-fixed .sidebar .nav {
@@ -19615,6 +19616,18 @@ small {
 
 .right-sidebar-toggler-wrapper .sidebar-toggler:last-child {
   border-bottom: none;
+}
+
+/* === table sticky header === */
+
+.table-sticky .table {
+  position: relative;
+}
+
+.table-sticky .table th {
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
 }
 
 
