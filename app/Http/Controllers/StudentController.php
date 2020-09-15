@@ -27,7 +27,7 @@ class StudentController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required|max:50',
-            'name' => 'required',
+            'name' => 'required|regex:/^[a-zA-Z0-9]+$/u|max:255',
             'gender' => 'required',
             'email' => 'required',
             'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:15',
