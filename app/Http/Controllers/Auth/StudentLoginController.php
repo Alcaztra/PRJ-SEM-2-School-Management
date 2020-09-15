@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class AdminLoginController extends Controller
+class StudentLoginController extends Controller
 {
     use RedirectsUsers;
 
@@ -17,7 +17,10 @@ class AdminLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/dashboard';
+    protected function redirectTo(){
+        return route('student.dashboard');
+    }
 
     /**
      * Create a new controller instance.
@@ -36,7 +39,7 @@ class AdminLoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('student-site.auth.login');
     }
 
     /**
@@ -109,7 +112,7 @@ class AdminLoginController extends Controller
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
-
+        // dd($request);
         return $this->authenticated($request, $this->guard()->user())
             ?: redirect()->intended($this->redirectPath());
     }
@@ -123,7 +126,8 @@ class AdminLoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->intended(route('dashboard'));
+        echo ("<script>alert('login success')</script>");
+        return redirect()->intended(route('student.dashboard'));
     }
 
     /**
@@ -184,6 +188,6 @@ class AdminLoginController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard('student');
     }
 }

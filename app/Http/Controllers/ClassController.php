@@ -16,6 +16,19 @@ class ClassController extends Controller
         return _class::all();
     }
 
+    public function getTeacher($class_id)
+    {
+        return DB::table('class-management')
+            ->where('class_id', $class_id)
+            ->select('teacher_id')
+            ->get();
+    }
+
+    public function getStudents($class_id)
+    {
+        return Student::where('class_id', $class_id)->select(['user_id', 'name'])->get();
+    }
+
     public function listClasses()
     {
         return view('pages.classes.list-classes')->with('classes', $this->getClasses());
@@ -54,18 +67,24 @@ class ClassController extends Controller
 
     public function addUser(Request $request)
     {
+        // date_default_timezone_set("Asia/Ho_Chi_Minh");
+        // dd(now("Asia/Ho_Chi_Minh"));
         $class_id = $request->class_id;
 
         // dd($request);
         if (isset($request->teacher_id)) {
             $teacher_id = $request->teacher_id;
-            DB::table('class-management')->insert(['class_id' => $class_id, 'teacher_id' => $teacher_id, 'created_at' => now()]);
+            if (DB::table('class-management')->where('class_id', $class_id)->count() == 0) {
+                DB::table('class-management')->insert(['class_id' => $class_id, 'teacher_id' => $teacher_id, 'created_at' => now("Asia/Ho_Chi_Minh")]);
+            } else {
+                DB::table('class-management')->where(['class_id' => $class_id])->update(['teacher_id' => $teacher_id, 'updated_at' => now("Asia/Ho_Chi_Minh")]);
+            }
         }
 
         if ($request->has('students')) {
             $students = $request->students;
             foreach ($students as $s) {
-                DB::table('students')->where('user_id', $s)->update(['class_id' => $class_id, 'updated_at' => now()]);
+                DB::table('students')->where('user_id', $s)->update(['class_id' => $class_id, 'updated_at' => now("Asia/Ho_Chi_Minh")]);
             }
             $class = _class::where('class_id', $class_id)->first();
             $class->size = $class->calcSize();
