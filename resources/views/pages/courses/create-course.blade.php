@@ -10,6 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     @include('layout.form-create-course',['action'=>'course.create.submit','subjects'=>$subjects])
+                    @include('layout.show-form-errors')
                 </div>
             </div>
         </div>
