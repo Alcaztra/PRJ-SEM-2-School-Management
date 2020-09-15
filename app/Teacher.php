@@ -64,10 +64,11 @@ class Teacher extends Authenticatable
 
     public function getClasses()
     {
-        $classes = DB::table('class-management')
-            ->where('teacher_id', $this->user_id)
-            ->select('class_id')
-            ->get();
+        $classes = array();
+        $class_id = DB::table('class-management')->where('teacher_id', $this->user_id)->select('class_id')->get();
+        foreach ($class_id as $c) {
+            array_push($classes, _class::where('class_id', $c->class_id)->first());
+        }
         return $classes;
     }
 }
