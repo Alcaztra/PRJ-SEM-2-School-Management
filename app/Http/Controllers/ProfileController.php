@@ -41,10 +41,10 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:15',
-            'birthday' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:14',
+            'birthday' => 'required|date|before:-16 years',
             'address' => 'required',
         ]);
         $user = Admin::where('user_id', $request->user_id)->first();
