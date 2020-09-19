@@ -81,14 +81,37 @@ class ClassController extends Controller
             }
         }
 
-        if ($request->has('students')) {
-            $students = $request->students;
-            foreach ($students as $s) {
-                DB::table('students')->where('user_id', $s)->update(['class_id' => $class_id, 'updated_at' => now("Asia/Ho_Chi_Minh")]);
+        $stu_db = Student::where('class_id', $class_id)->get();
+        // dd($stu_db, $request->students);
+        if (!$stu_db->isEmpty()) {
+            if (!$request->has('students')) {
+                foreach ($stu_db as $s_db) {
+                    $s_db->class_id = '';
+                    $s_db->save();
+                }
+            } else {
+                $stu_rq = $request->students;
+                // dd($stu_rq);
+                foreach ($stu_rq as $s_rq) {
+                    if (!$stu_db->contains($s_rq)) {
+                        $stu = Student::where('user_id', $s_rq)->first();
+                        $stu->class_id = $class_id;
+                        $stu->save();
+                    }
+                }
+                foreach ($stu_db as $s_db) {
+                    if (!in_array($s_db->user_id, $stu_rq)) {
+                        $s_db->class_id = '';
+                        $s_db->save();
+                    }
+                }
             }
-            $class = _class::where('class_id', $class_id)->first();
-            $class->size = $class->calcSize();
-            $class->save();
+        } elseif ($request->has('students')) {
+            foreach ($request->students as $stu_rq) {
+                $stu = Student::where('user_id', $stu_rq)->first();
+                $stu->class_id = $class_id;
+                $stu->save();
+            }
         }
 
         return redirect(route('class.list'));

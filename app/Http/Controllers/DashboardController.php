@@ -43,10 +43,35 @@ class DashboardController extends Controller
                 return view('pages.dashboard', ['counts' => $counts]);
                 break;
             case 'student.localhost':
-                $class_id = Auth::guard('student')->user()->class_id;
-                $class = _class::where('class_id', $class_id)->first();
-                $course = Course::where('course_id', $class->course_id)->first();
-                return view('student-site.pages.dashboard')->with(['class' => $class, 'course' => $course]);
+                $user = Auth::guard('student')->user();
+                $enroll_subject = array();
+                if (isset($user->class_id) && "" !== $user->class_id) {
+                    $class = _class::where('class_id', $user->class_id)->first();
+                    $course = Course::where('course_id', $class->course_id)->first();
+                    // $enroll_subject sub_id sub_name
+                    $enrolled = DB::table('enrollment')
+                        ->where('student_id', $user->user_id)
+                        ->leftJoin('subjects', 'subjects.subject_id', '=', 'enrollment.subject_id')
+                        ->select('enrollment.subject_id', 'name')
+                        ->get();
+                    $sub = $course->getSubjects();
+                    if ($enrolled->count() > 0) {
+                        // dump($enrolled, $sub);
+                        foreach ($sub as $s) {
+                            // dump($enrolled->contains('subject_id',$s->subject_id));
+                            if (!$enrolled->contains('subject_id', $s->subject_id)) {
+                                array_push($enroll_subject, $s);
+                            }
+                        }
+                    } else {
+                        $enroll_subject = $sub;
+                    }
+                    // dd($enroll_subject);
+                    return view('student-site.pages.dashboard')->with(['class' => $class, 'course' => $course, 'enroll_subject' => $enroll_subject, 'enrolled' => $enrolled]);
+                } else {
+                    return view('student-site.pages.dashboard');
+                }
+
                 break;
             case 'teacher.localhost':
                 $classes = Auth::guard('teacher')->user()->getClasses();

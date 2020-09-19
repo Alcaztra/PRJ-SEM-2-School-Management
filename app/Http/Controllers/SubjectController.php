@@ -28,8 +28,8 @@ class SubjectController extends Controller
         $subject = new Subject();
         $subject->subject_id = $request->subject_id;
         $subject->name = $request->name;
-        $subject->NoS = $request->NoS;
-        $subject->duration = $request->NoS * 2;
+        $subject->sessions = $request->sessions;
+        $subject->duration = $request->sessions * 2;
 
         $subject->save();
 
@@ -46,8 +46,8 @@ class SubjectController extends Controller
     {
         $subject = Subject::where('subject_id', $request->subject_id)->first();
         $subject->name = $request->name;
-        $subject->NoS = $request->NoS;
-        $subject->duration = $request->NoS * 2;
+        $subject->sessions = $request->sessions;
+        $subject->duration = $request->sessions * 2;
 
         $subject->save();
 

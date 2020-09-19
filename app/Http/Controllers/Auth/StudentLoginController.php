@@ -18,7 +18,8 @@ class StudentLoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/dashboard';
-    protected function redirectTo(){
+    protected function redirectTo()
+    {
         return route('student.dashboard');
     }
 
@@ -39,7 +40,11 @@ class StudentLoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('student-site.auth.login');
+        if (Auth::guard('student')->check()) {
+            return redirect($this->redirectTo());
+        } else {
+            return view('student-site.auth.login');
+        }
     }
 
     /**

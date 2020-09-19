@@ -40,7 +40,11 @@ class TeacherLoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('teacher-site.auth.login');
+        if (Auth::guard('teacher')->check()) {
+            return redirect($this->redirectTo());
+        } else {
+            return view('teacher-site.auth.login');
+        }
     }
 
     /**

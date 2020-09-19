@@ -36,7 +36,11 @@ class AdminLoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        if (Auth::guard('admin')->check()) {
+            return redirect($this->redirectTo);
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
