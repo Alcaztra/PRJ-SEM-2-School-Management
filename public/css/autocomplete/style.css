@@ -3,14 +3,17 @@
   display: inline-block
 }
 .autocomplete-items {
-  position: absolute;
+  position: relative;
   border: 1px solid #d4d4d4;
   border-bottom: none;
   border-top: none;
   z-index: 99;
   top: 100%;
   left: 0;
-  right: 0
+  width: inherit;
+  right: 0;
+  overflow-y: auto;
+  max-height: 20rem
 }
 .autocomplete-items div {
   padding: 10px;
