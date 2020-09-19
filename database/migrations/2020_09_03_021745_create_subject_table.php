@@ -18,7 +18,7 @@ class CreateSubjectTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->string('subject_id')->primary();
             $table->string('name',500);
-            $table->integer('NoS');
+            $table->integer('sessions');
             $table->integer('duration');
             $table->timestamps();
         });
