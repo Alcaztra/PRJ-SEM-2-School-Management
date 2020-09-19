@@ -17,3 +17,4 @@ resources/views/home.blade.php
 resources/views/auth/passwords/email.blade.php
 resources/views/auth/passwords/reset.blade.php
 resources/views/auth/register.blade.php
+resources/views/test.blade.php
