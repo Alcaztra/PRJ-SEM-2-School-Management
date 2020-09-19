@@ -5,7 +5,29 @@
     @endpush
 
 @section('content')
-    <div class="row">
+    <div class="row" id="states">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
+            <div class="card card-statistics">
+                <div class="card-body" data-toggle='modal' data-target='#enroll_subjects' role="button">
+                    <div
+                        class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+                        <div class="float-left">
+                            <i class="mdi mdi-bookmark-check text-success icon-lg"></i>
+                        </div>
+                        <div class="float-right">
+                            <strong class="mb-0 text-right">Enrolled Subject</strong>
+                            <div class="fluid-container">
+                                <h3 class="font-weight-medium text-right mb-0">
+                                    {{ $course->getSubjects()->count() - count($enroll_subject) . ' / ' . $course->getSubjects()->count() }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @include('layout.modal.enrolled-subjects',['id'=>'enroll_subjects',
+            'label'=>'list_enrolled_subjects','enrolled'=>$enrolled])
+        </div>
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
                 <div class="card-body">
@@ -79,49 +101,55 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="class-info">
         <div class="col grid-margin">
             <div class="card">
                 <div class="card-body">
                     <h4>Class Information</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
-                            <tr>
-                                <th class="text-uppercase w-25">Class ID</th>
-                                <td>{{ $class->class_id }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Room</th>
-                                <td>{{ $class->room }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Course</th>
-                                <td>{{ $class->course_id . ' | ' . $course->name }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Teacher</th>
-                                <td>{{ $class->getTeacher()->name }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Study Shift</th>
-                                <td>{{ $class->getStudyShift() }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Period</th>
-                                <td>{{ $class->getPeriod()->start_time . ' => ' . $class->getPeriod()->end_time }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Total Duration</th>
-                                <td>{{ $class->calcDuration() }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">Start Day</th>
-                                <td>{{ $class->start_day }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-uppercase">End Day (expected)</th>
-                                <td>{{ $class->getEndDay() }}</td>
-                            </tr>
+                            @isset($class)
+                                <tr>
+                                    <th class="text-uppercase w-25">Class ID</th>
+                                    <td>{{ $class->class_id }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Room</th>
+                                    <td>{{ $class->room }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Course</th>
+                                    <td>{{ $class->course_id . ' | ' . $course->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Teacher</th>
+                                    <td>{{ $class->getTeacher()->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Study Shift</th>
+                                    <td>{{ $class->getStudyShift() }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Period</th>
+                                    <td>{{ $class->getPeriod()->start_time . ' => ' . $class->getPeriod()->end_time }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Total Duration</th>
+                                    <td>{{ $class->calcDuration() }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Start Day</th>
+                                    <td>{{ $class->start_day }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">End Day (expected)</th>
+                                    <td>{{ $class->getEndDay() }}</td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td>Student does not have a class.</td>
+                                </tr>
+                            @endisset
                         </table>
                     </div>
                     <hr>
@@ -137,23 +165,25 @@
                                 </tr>
                             </thead>
                             <tbody id="filterTable">
-                                <tr>
-                                    @for ($i = 1; $i <= 4; $i++)
-                                        <td style="border-left: 1px solid lightgray;">
-                                            <div class="row" style="min-width: 300px">
-                                                @foreach ($course->getSubjects() as $s)
-                                                    @if ($s->semester == $i)
-                                                        <div class="col-sm-6 col-md-4 col-lg-3 p-0">
-                                                            <button class="btn btn-block btn-outline-info"
-                                                                data-toggle="tooltip"
-                                                                title="{{ $s->name }}">{{ $s->subject_id }}</button>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </td>
-                                    @endfor
-                                </tr>
+                                @isset($course)
+                                    <tr>
+                                        @for ($i = 1; $i <= 4; $i++)
+                                            <td style="border-left: 1px solid lightgray;">
+                                                <div class="row" style="min-width: 300px">
+                                                    @foreach ($course->getSubjects() as $s)
+                                                        @if ($s->semester == $i)
+                                                            <div class="col-sm-6 col-md-4 col-lg-3 p-0">
+                                                                <button class="btn btn-block btn-outline-info"
+                                                                    data-toggle="tooltip"
+                                                                    title="{{ $s->name }}">{{ $s->subject_id }}</button>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        @endfor
+                                    </tr>
+                                @endisset
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -162,16 +192,43 @@
                             </tfoot>
                         </table>
                     </div>
+                    <hr>
+                    <h4>Enrollment Subject</h4>
+                    <div class="input-group w-50" id="enroll_box">
+                        <select class="custom-select custom-select-sm" style="height: inherit" name="" id="">
+                            <option value="">- Subject -</option>
+                            @isset($enroll_subject)
+                                @foreach ($enroll_subject as $es)
+                                    <option value="{{ $es->subject_id }}">{{ $es->name }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                        <input type="text" class="form-control" name="enroll_key" id=""
+                            placeholder="[Class id] _ [Subject id]">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success"
+                                onclick="enrollSubject('{{ $class->class_id ?? '' }}')">Submit{{--
+                            </button> --}}
+                            {{-- <button type="button" class="btn btn-outline-success">
+                                --}}
+                                <span name='enrollSubject' class="d-none spinner-border spinner-border-sm"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="schedule">
         <div class="col-md-8 grid-margin">
             <div class="card">
                 <div class="card-body">
                     <h4>Schedule</h4>
-                    <div id="calendar"></div>
+                    <div id="calendar">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,7 +238,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="profile">
         <div class="col-lg-12 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -203,7 +260,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="change-avatar">
         <div class="col">
             <div class="card">
                 <div class="card-body">
@@ -225,4 +282,5 @@
     {!! Html::script('/assets/js/dashboard.js') !!}
     {!! Html::script('/js/getInputFileName.js') !!}
     {!! Html::script('/js/initCalendar.js') !!}
+    {!! HTML::script('/js/enrollSubject.js') !!}
 @endpush

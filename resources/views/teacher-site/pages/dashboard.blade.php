@@ -5,17 +5,16 @@
     @endpush
 
 @section('content')
-    <div class="row">
+    <div class="row" id="list-classes">
         <div class="col-lg-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <div class="col-sm-4 py-2">
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="search" id="filterInput" placeholder="Class ID">
-                            {{-- <div class="input-group-append">
-                                <span class="btn btn-outline-dark" id="search">Search</span>
-                            </div> --}}
-                        </div>
+                    <div class="col-md-6 pb-2 d-inline-flex">
+                        <h4 class="w-100">List Classes</h4>
+                        <input class="form-control" type="text" name="search" id="filterInput" placeholder="Class ID">
+                        {{-- <div class="input-group-append">
+                            <span class="btn btn-outline-dark" id="search">Search</span>
+                        </div> --}}
                     </div>
                     <div class="table-responsive table-sticky" style="overflow-y: auto; max-height: 60vh">
                         <table class="table table-light table-hover">
@@ -63,11 +62,82 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="attendance">
+        <div class="col grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-inline-block" attendance>
+                        <h4>Attendance</h4>
+                        <div class="spinner-border d-none" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_class">Select class</label>
+                        <select class="custom-select custom-select-sm" name="select_class" id="select_class">
+                            <option value="" selected>- Class Id -</option>
+                            @isset($classes)
+                                @foreach ($classes as $c)
+                                    <option value="{{ $c->class_id }}">{{ $c->class_id }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_subject">Select Subject</label>
+                        <select class="custom-select custom-select-sm" name="select_subject" id="select_subject">
+                            <option value="" selected>- Sebject Id -</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_date">Select Date</label>
+                        <input type="date" class="form-control" name="select_date" id="select_date" placeholder="">
+                    </div>
+                    <div class="form-group d-flex justify-content-around">
+                        <button class="btn btn-outline-info" onclick="getClass()">Get Class</button>
+                        <button class="btn btn-outline-warning" onclick="postAttendance()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-8 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <div id="calendar"></div>
+                    <div class="table-responsive table-sticky">
+                        <form action="return false" method="post" id="status">
+                            <table class="table table-striped" id="list_students">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Student Name</th>
+                                        <th class="text-center">Present</th>
+                                        <th class="text-center">Absent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- student here --}}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">#</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="schedule">
+        <div class="col-md-8 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div id="calendar">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +147,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="profile">
         <div class="col-lg-12 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -98,7 +168,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="change-avatar">
         <div class="col">
             <div class="card">
                 <div class="card-body">
@@ -120,24 +190,5 @@
     {!! Html::script('/assets/js/dashboard.js') !!}
     {!! Html::script('/js/getInputFileName.js') !!}
     {!! Html::script('/js/initCalendar.js') !!}
-    <script>
-        $(document).ready(function() {
-            let host = document.location.origin;
-            $('#class_details').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var recipent = button.data('class-id');
-                var modal = $(this);
-                $.get(host + '/class-details/' + recipent, function(data) {
-                    // console.log('here', button, recipent, data);
-                    for (const key in data) {
-                        if (data.hasOwnProperty(key)) {
-                            const element = data[key];
-                            $('#class_details td[name=' + key + ']').html(element);
-                        }
-                    }
-                });
-            });
-        });
-
-    </script>
+    {!! Html::script('/js/teacher-dashboard.js') !!}
 @endpush
