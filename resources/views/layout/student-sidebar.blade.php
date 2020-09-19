@@ -27,11 +27,35 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        {{-- <li class="nav-item {{ active_class(['profile']) }}">
-            <a class="nav-link" href="{{ route('student.profile') }}">
-                <i class="menu-icon mdi mdi-folder-account"></i>
+        <li class="nav-item {{ active_class(['dashboard#states']) }}">
+            <a class="nav-link" href="#states">
+                <i class="menu-icon mdi mdi-chart-bar"></i>
+                <span class="menu-title">Stat</span>
+            </a>
+        </li>
+        <li class="nav-item {{ active_class(['dashboard#class-info']) }}">
+            <a class="nav-link" href="#class-info">
+                <i class="menu-icon mdi mdi-tag-text-outline"></i>
+                <span class="menu-title">Class Info</span>
+            </a>
+        </li>
+        <li class="nav-item {{ active_class(['dashboard#schedule']) }}">
+            <a class="nav-link" href="#schedule">
+                <i class="menu-icon mdi mdi-table-large"></i>
+                <span class="menu-title">Schedule</span>
+            </a>
+        </li>
+        <li class="nav-item {{ active_class(['dashboard#profile']) }}">
+            <a class="nav-link" href="#profile">
+                <i class="menu-icon mdi mdi-account-card-details"></i>
                 <span class="menu-title">Profile</span>
             </a>
-        </li> --}}
+        </li>
+        <li class="nav-item {{ active_class(['dashboard#change-avatar']) }}">
+            <a class="nav-link" href="#change-avatar">
+                <i class="menu-icon mdi mdi-account-box-outline"></i>
+                <span class="menu-title">Avatar</span>
+            </a>
+        </li>
     </ul>
 </nav>

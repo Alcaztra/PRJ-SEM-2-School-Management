@@ -16,15 +16,15 @@
                     <table class="table table-striped">
                         <legend>User Details</legend>
                         <tr>
-                            <th>user_id</th>
+                            <th class="text-uppercase">user_id</th>
                             <td>{{ $user->user_id }}</td>
                         </tr>
                         <tr>
-                            <th>name</th>
+                            <th class="text-uppercase">name</th>
                             <td>{{ $user->name }}</td>
                         </tr>
                         <tr>
-                            <th>class_id</th>
+                            <th class="text-uppercase">class_id</th>
                             <td>
                                 @if (Request::is('teacher*'))
                                     <ul class="list-group">
@@ -38,23 +38,23 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>gender</th>
+                            <th class="text-uppercase">gender</th>
                             <td>{{ $user->gender }}</td>
                         </tr>
                         <tr>
-                            <th>email</th>
+                            <th class="text-uppercase">email</th>
                             <td>{{ $user->email }}</td>
                         </tr>
                         <tr>
-                            <th>phone</th>
+                            <th class="text-uppercase">phone</th>
                             <td>{{ $user->phone }}</td>
                         </tr>
                         <tr>
-                            <th>birthday</th>
+                            <th class="text-uppercase">birthday</th>
                             <td>{{ date_format($user->birthday, 'Y-m-d') }}</td>
                         </tr>
                         <tr>
-                            <th>address</th>
+                            <th class="text-uppercase">address</th>
                             <td>{{ $user->address }}</td>
                         </tr>
                     </table>
@@ -63,12 +63,12 @@
                 <div>
                     @if (Request::is('teacher*'))
                         <a href="{{ route('teacher.reset.password', ['teacher_id' => $user->user_id]) }}" role="button"
-                            class="btn btn-warning" data-toggle='tooltip' title="Reset password back to default">Reset
-                            Password</a>
+                            class="btn btn-warning" data-toggle='tooltip' title="Reset password back to default"
+                            onclick="return confirm('Reset password for this teacher..!!')">Reset Password</a>
                     @elseif (Request::is('student*'))
                         <a href="{{ route('student.reset.password', ['student_id' => $user->user_id]) }}" role="button"
-                            class="btn btn-warning" data-toggle='tooltip' title="Reset password back to default">Reset
-                            Password</a>
+                            class="btn btn-warning" data-toggle='tooltip' title="Reset password back to default"
+                            onclick="return confirm('Reset password for this student..!!')">Reset Password</a>
                     @endif
                 </div>
             </div>

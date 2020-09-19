@@ -10,8 +10,8 @@
         {!! Form::text('name', $subject->name ?? '', ['id' => 'name', 'class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-        <label for="nos">Number of Sessions</label>
-        {!! Form::number('NoS', $subject->NoS ?? '', ['id' => 'nos', 'class' => 'form-control']) !!}
+        <label for="sessions">Number of Sessions</label>
+        {!! Form::number('sessions', $subject->sessions ?? '', ['id' => 'sessions', 'class' => 'form-control']) !!}
     </div>
     <button type="submit" class="btn btn-secondary">Submit</button>
 </form>

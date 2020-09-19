@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLongTitle">Class Details</h4>
+                <div class="spinner-border d-none" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <button type="button" class="close mx-2" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,8 +23,8 @@
                             <td name='room'></td>
                         </tr>
                         <tr>
-                           <th class="text-uppercase">Size</th>
-                           <td name='size'></td> 
+                            <th class="text-uppercase">Size</th>
+                            <td name='size'></td>
                         </tr>
                         <tr>
                             <th class="text-uppercase">Course</th>

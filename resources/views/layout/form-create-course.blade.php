@@ -1,4 +1,4 @@
-<form action="{{ route($action, $param ?? '') }}" method="post">
+<form action="{{ route($action, $param ?? '') }}" method="post" id="create_course_form">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="course_id">Course ID</label>
@@ -40,23 +40,19 @@
                             @foreach ($sub_sem[$i] as $ss)
                                 @isset($ss)
                                     <p role='button' class="btn btn-outline-primary p-2 m-1 text-uppercase cursor-pointer"
-                                        data-toggle='tooltip' title="{{ $ss->name }}"
-                                        onclick="removeSubject( this,{{ $ss->subject_id }} )">{{ $ss->subject_id }}<span
-                                            class='mx-1'>&times;</span></p>
+                                        data-label='addItem' data-id='{{ $ss->subject_id }}' data-toggle='tooltip'
+                                        title="{{ $ss->name }}"
+                                        onclick="removeSubject( this,'{{ $ss->subject_id }}', {{ $i }} )">
+                                        {{ $ss->subject_id }}<span class='mx-1'>&times;</span></p>
+                                    <input type='hidden' readonly name='{{ 'semester_' . $i . '[]' }}' data-sem="{{ $i }}"
+                                        value='{{ $ss->subject_id }}'>
                                 @endisset
                             @endforeach
                         @endisset
                     </div>
                 </div>
             @endfor
-            @isset($sub_sem)
-                @for ($i = 1; $i <= 4; $i++)
-                    @foreach ($sub_sem[$i] as $ss)
-                        <input type='hidden' readonly name='{{ "semester_$ss->semester[]" }}' value='{{ $ss->subject_id }}'>
-                    @endforeach
-                @endfor
-            @endisset
         </div>
     </div>
-    <button type="submit" class="btn btn-secondary">Submit</button>
+    <button type="button" class="btn btn-secondary" onclick="checkValid()">Submit</button>
 </form>
