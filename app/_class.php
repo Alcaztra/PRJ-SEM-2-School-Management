@@ -27,7 +27,7 @@ class _class extends Model
 
     /**
      * The attributes that are mass assignable.
-     * NoS number of sessions
+     * 
      * @var array
      */
     protected $fillable = [

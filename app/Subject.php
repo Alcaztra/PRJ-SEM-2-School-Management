@@ -26,13 +26,13 @@ class Subject extends Model
 
     /**
      * The attributes that are mass assignable.
-     * NoS number of sessions
+     * 
      * @var array
      */
     protected $fillable = [
         'subject_id',
         'name',
-        'NoS',
+        'sessions',
         'duration',
     ];
 
