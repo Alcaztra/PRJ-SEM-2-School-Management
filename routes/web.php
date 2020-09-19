@@ -49,6 +49,8 @@ Route::domain('student.localhost')->name('student.')->group(function () {
         //  update avatar
         Route::post('update/avatar', 'ProfileController@updateAvatar')->name('profile.update.avatar');
     });
+
+    Route::post('enrollment', 'StudentController@enroll')->middleware('auth:student');
 });
 
 // sub-domain teacher
@@ -83,21 +85,10 @@ Route::domain('teacher.localhost')->name('teacher.')->group(function () {
     });
 
     // ajax
-    Route::get('class-details/{class_id}', function ($class_id) {
-        $tmp = _class::where('class_id', $class_id)->first();
-        $class = [
-            'class_id' => $tmp->class_id,
-            'room' => $tmp->room,
-            'size' => $tmp->calcSize(),
-            'course' => $tmp->course_id . " | " . $tmp->getCourse()->name,
-            'study_shift' => $tmp->getStudyShift(),
-            'period' => $tmp->getPeriod()->start_time . ' => ' . $tmp->getPeriod()->end_time,
-            'total_duration' => $tmp->calcDuration() . " (hours)",
-            'start_day' => $tmp->start_day,
-            'end_day' => $tmp->getEndDay(),
-        ];
-        return $class;
-    });
+    Route::get('class-details/{class_id}', 'TeacherController@getClassDetails');
+    Route::get('list-subjects/{class_id}', 'TeacherController@getListSubjects');
+    Route::get('list-students/{class_id}/{subject_id}/{date_picker}', 'TeacherController@getListStudents');
+    Route::post('attendace/{date_picker}', 'TeacherController@postAttendance');
 });
 
 Route::domain('localhost')->group(function () {
@@ -142,8 +133,8 @@ Route::domain('localhost')->group(function () {
             Route::get('list', 'StudentController@listStudents')->name('student.list');
             Route::get('create', 'StudentController@showFormCreateStudent')->name('student.create');
             Route::post('create', 'StudentController@createStudent')->name('student.create.submit');
-            // test get ajax
-            Route::get('get-students', 'StudentController@getStudents');
+            // ajax
+            Route::get('get-students', 'StudentController@getFreeStudents');
 
             Route::group(['prefix' => '{student_id}'], function () {
                 Route::get('/', 'StudentController@showStudentDetails')->name('student.detail');
@@ -179,6 +170,10 @@ Route::domain('localhost')->group(function () {
             Route::get('list', 'CourseController@listCourses')->name('course.list');
             Route::get('create', 'CourseController@showFormCreateCourse')->name('course.create');
             Route::post('create', 'CourseController@createCourse')->name('course.create.submit');
+
+            // ajax
+            Route::get('subject-order/{course_id}', 'CourseController@showSubjectsOrder');
+            Route::post('subject-order', 'CourseController@postOrder');
 
             Route::group(['prefix' => '{course_id}'], function () {
                 Route::get('/', 'CourseController@showFormCourseDetails')->name('course.details');
