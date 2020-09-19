@@ -101,7 +101,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <div id="calendar"></div>
+                    <div id="calendar">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -27,6 +27,13 @@
                     <p class="text-info">{{ $class->calcDuration() }} (hours)</p>
                     <h4>End Day (expected)</h4>
                     <p class="text-info">{{ $class->getEndDay() }}</p>
+                    {{-- <h4>Enroll Key</h4>
+                    <div class="input-group">
+                        <select class="custom-select custom-select-sm" style="height: inherit" name="" id="">
+                            <option value="">- Subject -</option>
+                        </select>
+                        <input type="text" class="form-control" name="" id="" placeholder="" readonly>
+                    </div> --}}
                     <table class="table table-striped">
                         <h4>List Students</h4>
                         <thead class="thead-dark">

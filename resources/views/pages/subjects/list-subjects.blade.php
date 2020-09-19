@@ -36,7 +36,7 @@
                                                     href="{{ route('subject.details', ['subject_id' => $s->subject_id]) }}">{{ $s->subject_id }}</a>
                                             </td>
                                             <td>{{ $s->name }}</td>
-                                            <td>{{ $s->NoS }}</td>
+                                            <td>{{ $s->sessions }}</td>
                                             <td>{{ $s->duration }}</td>
                                         </tr>
                                     @endforeach
