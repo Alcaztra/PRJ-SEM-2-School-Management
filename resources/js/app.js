@@ -56,3 +56,18 @@ document.addEventListener('DOMContentLoaded', function () {
     calendar.render();
 }); */
 
+import { Sortable } from '@shopify/draggable';
+
+const sortable = new Sortable(document.querySelectorAll("ul[name='drag_zone']"), {
+    draggable: "li"
+});
+
+
+// draggable.on('drag:start', () => console.log('drag:start'));
+// draggable.on('drag:move', () => console.log('drag:move'));
+// draggable.on('drag:stop', () => console.log('drag:stop'));
+
+// sortable.on('sortable:start', () => console.log('sortable:start'));
+// sortable.on('sortable:sort', () => console.log('sortable:sort'));
+// sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
+// sortable.on('sortable:stop', () => console.log('sortable:stop',sortable));

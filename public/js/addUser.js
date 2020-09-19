@@ -3,17 +3,19 @@ let xml = new XMLHttpRequest();
 let host = document.location.origin;
 
 function item(name, id) {
-    var style = 'list-group-item cursor-pointer';
-    var txt = "<a class='" + style + "' data-toggle='tooltip' data-id='" + id + "' data-label='addItem' onclick='removeStudent( this,\"" + id + "\" )'>" + name + " <span class='mx-1'>&times;</span></a>";
-    txt += "<input type='hidden' name='students[]' value='" + id + "'>";
+    var style = 'list-group-item cursor-pointer d-flex justify-content-between';
+    var txt = "<a class='" + style + "' data-toggle='tooltip' title='" + id + "' data-id='" + id + "' data-label='addItem' onclick='removeStudent( this,\"" + id + "\" )'>" + name + " <span class='mx-1'>&times;</span></a>";
+    txt += "<input type='hidden' form='add_user_form' name='students[]' value='" + id + "'>";
     return txt;
 }
 
 // console.log(host)
 let list = $("#list_stu");
 
+/* get list of free students */
 $.get(host + "/student/get-students", function (data) {
-    // console.log(data);
+    // console.log('data loaded.')
+    $("button span[name='loadStudents']").parent().toggle();
     data.forEach(u => {
         students.push(u.user_id + "|" + u.name);
     });
@@ -23,10 +25,19 @@ autocomplete(document.getElementById("inp_stu"), students);
 $("select#class_id").on('click', function () {
     let class_id = $(this).val();
     let teacher_id = '';
-    let list = $("#list_stu");
-
-    console.log(host + '/class/get-teacher/' + class_id);
+    list.empty();
+    let t_load, s_load;
+    t_load = s_load = false;
+    let spin = function () {
+        if (t_load && s_load) {
+            $("div[role='status']").toggleClass('d-none', true);
+        } else {
+            $("div[role='status']").toggleClass('d-none', false);
+        }
+    }
+    // console.log(host + '/class/get-teacher/' + class_id);
     if ("" !== class_id) {
+        spin();
         $.get(host + '/class/get-teacher/' + class_id, function (data) {
             if (data.length > 0) {
                 teacher_id = data[0].teacher_id;
@@ -34,18 +45,22 @@ $("select#class_id").on('click', function () {
             } else {
                 $("select#teacher_id").val('');
             }
+            t_load = true;
+            spin();
         });
         $.get(host + '/class/get-students/' + class_id, function (data) {
-            list.empty();
             if (data.length > 0) {
                 data.forEach(stu => {
-                    console.log(stu)
+                    // console.log(stu)
                     list.append(item(stu.name, stu.user_id));
                 });
                 $("#list_stu a").tooltip('enable');
             }
+            s_load = true;
+            spin();
         });
     }
+
 });
 
 function add() {
@@ -66,9 +81,9 @@ function add() {
 
 function removeStudent(item, input) {
     // console.log(item);
-    $("#list_stu a").tooltip('dispose');
+    $("#list_stu a").tooltip('hide');
     item.remove();
-    $("input[value='" + input + "']").remove();
+    $("input[value='" + input + "']").first().remove();
     validationAdd();
 }
 
@@ -88,3 +103,5 @@ function validationAdd() {
         }
     });
 }
+
+validationAdd();

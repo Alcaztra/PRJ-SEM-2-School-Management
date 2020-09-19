@@ -1,25 +1,32 @@
+let valid = false;
+
+validationAdd();
+
 function insertSubject() {
     let sem_opt = $("#sem_opt").val();
     let sub_opt = $("#sub_opt").val();
     let sub_opt_title = $("#sub_opt>option[value=" + sub_opt + "]").html();
-    let data_table = $("#data_table");
-    let input = "<input type='hidden' readonly name='semester_" + sem_opt + "[]' value='" + sub_opt + "'>";
-    let class_name = "btn btn-outline-primary p-2 m-1 text-uppercase cursor-pointer";
-    let test = "<p role='button' class='" + class_name + "' data-label='addItem' data-id='" + sub_opt + "' data-toggle='tooltip' title='" + sub_opt_title + "' onclick='removeSubject( this,\"" + sub_opt + "\" )'>" + sub_opt + " <span class='mx-1'>&times;</span></p>";
+
     if (sem_opt !== "" && sub_opt !== "") {
-        data_table.append(input);
-        $("#data_table #sem_" + sem_opt).append(test);
+        $("#data_table #sem_" + sem_opt).append(item(sem_opt, sub_opt, sub_opt_title));
     }
 
     $("#data_table p[role='button']").tooltip('enable');
     validationAdd()
 }
 
-function removeSubject(item, input) {
+function item(sem, sub, title) {
+    var style = "btn btn-outline-primary p-2 m-1 text-uppercase cursor-pointer";
+    var text = "<p role='button' class='" + style + "' data-label='addItem' data-id='" + sub + "' data-toggle='tooltip' title='" + title + "' onclick='removeSubject( this,\"" + sub + "\"," + sem + " )'>" + sub + " <span class='mx-1'>&times;</span></p>";
+    text += "<input type='hidden' readonly name='semester_" + sem + "[]' value='" + sub + "'>";
+    return text;
+}
+
+function removeSubject(item, input, sem) {
     // console.log(item);
-    $("#data_table p[role='button']").tooltip('dispose');
+    $("#data_table p[role='button']").tooltip('hide');
     item.remove();
-    $("input[value='" + input + "']").remove();
+    $("input[value='" + input + "'][name='semester_" + sem + "[]']").first().remove();
     validationAdd();
 }
 
@@ -35,9 +42,23 @@ function validationAdd() {
         if (f !== l) {
             $("p[data-id='" + e + "']").toggleClass('btn-outline-primary', false);
             $("p[data-id='" + e + "']").toggleClass('btn-outline-danger', true);
+            valid = false;
         } else {
             $("p[data-id='" + e + "']").toggleClass('btn-outline-primary', true);
             $("p[data-id='" + e + "']").toggleClass('btn-outline-danger', false);
+            valid = true;
         }
     });
+}
+
+function checkValid() {
+    let form = $('form#create_course_form');
+    // console.log(form);
+    if (valid) {
+        confirm('form is valid');
+        form.trigger('submit');
+    } else {
+        confirm('Form is invalid');
+    }
+    // alert('still not submit');
 }
