@@ -46,12 +46,14 @@ function getClass() {
     $('div[attendance] div[role="status"]').toggleClass('d-none', false);
     $.get(host + '/list-students/' + class_id + '/' + subject_id + '/' + date_picker,
         function (data) {
-            console.log(data);
+            console.log(data, data.length);
             $('table#list_students tbody').empty();
-            data.forEach(e => {
-                $('table#list_students tbody').append(row(e.user_id, e.name, e.status));
-                $('div[attendance] div[role="status"]').toggleClass('d-none', true);
-            });
+            if (data.length > 0) {
+                data.forEach(e => {
+                    $('table#list_students tbody').append(row(e.user_id, e.name, e.status));
+                });
+            }
+            $('div[attendance] div[role="status"]').toggleClass('d-none', true);
         });
     function row(id, name, status) {
         let txt = '<tr>';
