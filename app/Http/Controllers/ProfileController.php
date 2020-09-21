@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -87,8 +88,12 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $validate_result = $request->validate([
-            // 
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:14',
+            'birthday' => 'required|date|before:-16 years',
+            'address' => 'required',
         ]);
         // $user = Admin::where('user_id', $request->user_id)->first();
         $user = $this->user();
@@ -120,6 +125,22 @@ class ProfileController extends Controller
         // dd($this->guardName(), $request);
         $validate_result = $request->validate([
             // validate rule
+            'old_password' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $old = Auth::guard('admin')->user()->password;
+                    if (!Hash::check($value, $old)) {
+                        $fail($attribute . ' is incorrect.');
+                    }
+                },
+            ],
+            'new_password' => [
+                'required',
+                'min:6',
+                'max:50',
+                'different:old_password'
+            ],
+            'confirm_password' => ['same:new_password'],
         ]);
         $password = Hash::make($request->input('new_password'));
         // $user = Auth::guard($this->guardName())->user();

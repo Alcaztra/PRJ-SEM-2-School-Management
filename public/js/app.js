@@ -56936,8 +56936,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\FPT-Aptect\SEM 2\7-eProject\PRJ-SEM-2-School-Management\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\FPT-Aptect\SEM 2\7-eProject\PRJ-SEM-2-School-Management\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FPT-Aptech\SEM 2\project\PRJ-SEM-2-School-Management\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\FPT-Aptech\SEM 2\project\PRJ-SEM-2-School-Management\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

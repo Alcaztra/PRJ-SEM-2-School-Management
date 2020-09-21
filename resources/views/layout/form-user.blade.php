@@ -52,10 +52,4 @@
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
-@if ($errors->any())
-    <div class="content-wrapper">
-        @foreach ($errors as $e)
-            <p class="text-danger">{{ $e }}</p>
-        @endforeach
-    </div>
-@endif
+@include('layout.show-form-errors')

@@ -75,7 +75,7 @@ class AdminLoginController extends Controller
     {
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string',
+            'password' => 'required|string|min:6',
         ]);
     }
 

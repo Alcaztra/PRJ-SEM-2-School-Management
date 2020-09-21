@@ -15,27 +15,21 @@
                         <div class="form-group">
                             <label for="old_password">Old Password</label>
                             <input type="password" class="form-control" name="old_password" id="old_password"
-                                aria-describedby="" placeholder="**********">
+                                aria-describedby="" placeholder="**********" required>
                         </div>
                         <div class="form-group">
                             <label for="new_password">New Password</label>
                             <input type="password" class="form-control" name="new_password" id="new_password"
-                                aria-describedby="" placeholder="**********">
+                                aria-describedby="" placeholder="**********" required>
                         </div>
                         <div class="form-group">
                             <label for="confirm_password">Confirm Password</label>
                             <input type="password" class="form-control" name="confirm_password" id="confirm_password"
-                                aria-describedby="" placeholder="**********">
+                                aria-describedby="" placeholder="**********" required>
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
-                    @if ($errors->any())
-                        <div class="content-wrapper">
-                            @foreach ($errors as $e)
-                                <p class="text-danger">{{ $e }}</p>
-                            @endforeach
-                        </div>
-                    @endif
+                    @include('layout.show-form-errors')
                 </div>
             </div>
         </div>

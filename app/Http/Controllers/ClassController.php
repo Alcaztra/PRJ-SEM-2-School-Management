@@ -42,6 +42,10 @@ class ClassController extends Controller
 
     public function createClass(Request $request)
     {
+        $validatedData = $request->validate([
+            'class_id' => 'required|unique:classes,class_id|max:50',
+            'room' => 'required|min:6|numeric',
+        ]);
         $class = new _class();
         $class->class_id = $request->class_id;
         $class->room = $request->room;
