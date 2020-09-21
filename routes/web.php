@@ -223,12 +223,11 @@ Route::domain('localhost')->group(function () {
             });
         });
     });
-
-    // schedule
-    /* Route::group(['prefix' => 'schedule'], function () {
-        Route::get('calendar', 'ScheduleController@index');
-    }); */
 });
+
+// schedule
+Route::get('events/{class_id}', 'ScheduleController@getEvents');
+
 //demo
 Route::get('demo', function () {
     return redirect()->away('https://www.bootstrapdash.com/demo/star-laravel-free/template/');
