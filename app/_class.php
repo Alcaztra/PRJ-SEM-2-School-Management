@@ -95,7 +95,7 @@ class _class extends Model
     /**
      * Calculate the expected end date
      * 
-     * @return object end_day
+     * @return DateTime object
      */
     public function calcEndDay()
     {
@@ -106,16 +106,17 @@ class _class extends Model
             return $start;
         }
 
-        $i = 0;
-        do {
+        // total days left (days - 1)
+        for ($i = 0; $i < $days - 1; $i++) {
             // calculate next day
-            $end = date_add($start, date_interval_create_from_date_string($this->step . " days"));
-            $i++;
-            if ($this->step == 2 && $i == 3) {
+            if (date_format($start, 'w') == 5 || date_format($start, 'w') == 6) {
                 $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
-                $i = 0;
             }
-        } while (--$days > 1); // total days left (days - 1)
+            $end = date_add($start, date_interval_create_from_date_string($this->step . " days"));
+            if (date_format($end, 'w') == 5 || date_format($end, 'w') == 6) {
+                $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
+            }
+        }
         return $end;
     }
 

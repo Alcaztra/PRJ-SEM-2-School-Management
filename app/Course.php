@@ -51,6 +51,11 @@ class Course extends Model
      */
     protected $casts = [];
 
+    /**
+     * Get all subjects of course
+     * 
+     * @return array
+     */
     public function getSubjects()
     {
         return DB::table('semesters')->where('course_id', $this->course_id)
