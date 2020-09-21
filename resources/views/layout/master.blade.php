@@ -71,11 +71,17 @@
 
     @stack('custom-scripts')
     <script>
-        $(document).ready(
+        $(document).ready(function() {
             $("button.navbar-toggler > span.mdi").on('click', function() {
                 $(this).toggleClass("mdi-menu mdi-close")
-            })
-        );
+            });
+            $('img').each(function() {
+                let src = this.src;
+                this.onerror = function() {
+                    this.src = window.location.origin + "/assets/images/no_image_3x4.svg";
+                }
+            });
+        });
 
     </script>
 </body>

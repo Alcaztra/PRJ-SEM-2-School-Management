@@ -18,15 +18,19 @@
                             <strong class="mb-0 text-right">Enrolled Subject</strong>
                             <div class="fluid-container">
                                 <h3 class="font-weight-medium text-right mb-0">
-                                    {{ $course->getSubjects()->count() - count($enroll_subject) . ' / ' . $course->getSubjects()->count() }}
+                                    @isset($course)
+                                        {{ $course->getSubjects()->count() - count($enroll_subject) . ' / ' . $course->getSubjects()->count() }}
+                                    @endisset
                                 </h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('layout.modal.enrolled-subjects',['id'=>'enroll_subjects',
-            'label'=>'list_enrolled_subjects','enrolled'=>$enrolled])
+            @isset($enrolled)
+                @include('layout.modal.enrolled-subjects',['id'=>'enroll_subjects',
+                'label'=>'list_enrolled_subjects','enrolled'=>$enrolled])
+            @endisset
         </div>
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
@@ -111,7 +115,7 @@
                             @isset($class)
                                 <tr>
                                     <th class="text-uppercase w-25">Class ID</th>
-                                    <td>{{ $class->class_id }}</td>
+                                    <td id="class_id">{{ $class->class_id }}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-uppercase">Room</th>
@@ -123,7 +127,7 @@
                                 </tr>
                                 <tr>
                                     <th class="text-uppercase">Teacher</th>
-                                    <td>{{ $class->getTeacher()->name }}</td>
+                                    <td>{{ $class->getTeacher()->name ?? 'N/A' }}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-uppercase">Study Shift</th>
@@ -232,11 +236,11 @@
                 </div>
             </div>
         </div>
-        <div class="col grid-margin">
+        {{-- <div class="col grid-margin">
             <div class="card">
                 <div class="card-body"></div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="row" id="profile">
         <div class="col-lg-12 grid-margin">
@@ -283,4 +287,10 @@
     {!! Html::script('/js/getInputFileName.js') !!}
     {!! Html::script('/js/initCalendar.js') !!}
     {!! HTML::script('/js/enrollSubject.js') !!}
+    <script>
+        if (null !== $('#class_id')) {
+            getEvents($('#class_id').html());
+        }
+
+    </script>
 @endpush

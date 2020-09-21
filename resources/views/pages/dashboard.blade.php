@@ -109,6 +109,28 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Class</label>
+                        <div class="input-group">
+                            <select class="custom-select" name="" id="get_class">
+                                <option value="">- Select one -</option>
+                                @isset($classes)
+                                    @foreach ($classes as $c)
+                                        <option value="{{ $c->class_id }}">{{ $c->class_id }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-dark" onclick="getEvents()">Get</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
