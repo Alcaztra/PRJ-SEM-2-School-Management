@@ -93,7 +93,7 @@ class TeacherLoginController extends Controller
     {
         return $this->guard()->attempt(
             $this->credentials($request),
-            $request->filled('remember')
+            // $request->filled('remember')
         );
     }
 

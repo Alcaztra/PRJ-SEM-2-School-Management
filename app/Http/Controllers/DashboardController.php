@@ -39,8 +39,8 @@ class DashboardController extends Controller
                 $counts['courses'] = Course::all()->count();
                 $counts['classes'] = _class::all()->count();
                 $counts['subjects'] = Subject::all()->count();
-
-                return view('pages.dashboard', ['counts' => $counts]);
+                $classes = _class::all();
+                return view('pages.dashboard', ['counts' => $counts, 'classes' => $classes]);
                 break;
             case 'student.localhost':
                 $user = Auth::guard('student')->user();
