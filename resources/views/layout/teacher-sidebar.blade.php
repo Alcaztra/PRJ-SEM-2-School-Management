@@ -5,7 +5,7 @@
                 <div class="user-wrapper">
                     <div class="profile-image">
                         <img src="{{ null !== ($avatar = Auth::guard('teacher')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets\images\faces-clipart\pic-1.png') }}"
-                            alt="profile image">
+                            alt="">
                     </div>
                     <div class="text-wrapper">
                         <p class="profile-name">{{ Auth::guard('teacher')->user()->name }}</p>

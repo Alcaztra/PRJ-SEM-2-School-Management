@@ -1,4 +1,4 @@
-<form action="{{ route($action, $params ?? '') }}" method="post">
+<form action="{{ route($action, $params ?? '') }}" method="post" class="need-validate">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="class_id">Class ID</label>

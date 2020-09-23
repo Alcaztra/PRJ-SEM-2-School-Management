@@ -71,7 +71,7 @@
 
     @stack('custom-scripts')
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
             $("button.navbar-toggler > span.mdi").on('click', function() {
                 $(this).toggleClass("mdi-menu mdi-close")
             });

@@ -1,17 +1,25 @@
-<form action="{{ route($action, $param ?? '') }}" method="post">
+<form action="{{ route($action, $param ?? '') }}" method="post" class="need-validate">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="user_id">Account</label>
         {!! Form::text('user_id', $user_id ?? '', [
         'id' => 'user_id',
         'class' => 'form-control',
+        'pattern' => '[0-9a-zA-Z]*',
+        'required' => true,
+        'autocomplete' => 'off',
         'placeholder' => 'user id',
         ]) !!}
+        <div class="valid-feedback"></div>
+        <div class="invalid-feedback"></div>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        {!! Form::password('password', ['id' => 'password', 'class' => 'form-control', 'placeholder' => '*********'])
-        !!}
+        {!! Form::password('password', [
+        'id' => 'password',
+        'class' => 'form-control',
+        'placeholder' => '*********',
+        ]) !!}
     </div>
     {!! Form::submit('Login', ['class' => 'btn btn-outline-primary']) !!}
 </form>

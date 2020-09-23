@@ -10,7 +10,7 @@
         <div class="col-md-6 col-xl-4 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('class.addUser.submit') }}" method="post" id="add_user_form">
+                    <form action="{{ route('class.addUser.submit') }}" method="post" id="add_user_form" class="need-validate">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="class_id">Class ID</label>

@@ -10,22 +10,22 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Update Password</h4>
-                    <form action="{{ route($action, $param ?? '') }}" method="post">
+                    <form action="{{ route($action, $param ?? '') }}" method="post" class="need-validate">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="old_password">Old Password</label>
                             <input type="password" class="form-control" name="old_password" id="old_password"
-                                aria-describedby="" placeholder="**********" required>
+                                aria-describedby="" placeholder="**********" required minlength="6" pattern="[\w\d]*">
                         </div>
                         <div class="form-group">
                             <label for="new_password">New Password</label>
                             <input type="password" class="form-control" name="new_password" id="new_password"
-                                aria-describedby="" placeholder="**********" required>
+                                aria-describedby="" placeholder="**********" required minlength="6" pattern="[\w\d]*">
                         </div>
                         <div class="form-group">
                             <label for="confirm_password">Confirm Password</label>
                             <input type="password" class="form-control" name="confirm_password" id="confirm_password"
-                                aria-describedby="" placeholder="**********" required>
+                                aria-describedby="" placeholder="**********" required minlength="6" pattern="[\w\d]*">
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
