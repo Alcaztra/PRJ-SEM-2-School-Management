@@ -56802,6 +56802,15 @@ var sortable = new _shopify_draggable__WEBPACK_IMPORTED_MODULE_0__["Sortable"](d
 // sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
 // sortable.on('sortable:stop', () => console.log('sortable:stop',sortable));
 
+$(".was-validated .form-group .btn-group label").has('input[type=radio]:invalid').addClass('text-danger', true);
+$(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').addClass('text-success', true);
+$('.was-validated').on('change', function () {
+  $(".was-validated .form-group .btn-group label").has('input[type=radio]:invalid').toggleClass('text-success', false);
+  $(".was-validated .form-group .btn-group label").has('input[type=radio]:invalid').toggleClass('text-danger', true);
+  $(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').toggleClass('text-danger', false);
+  $(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').toggleClass('text-success', true);
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -56936,8 +56945,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FPT-Aptech\SEM 2\project\PRJ-SEM-2-School-Management\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FPT-Aptech\SEM 2\project\PRJ-SEM-2-School-Management\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\project-sem2-aptech\PRJ-SEM-2-School-Management\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\project-sem2-aptech\PRJ-SEM-2-School-Management\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

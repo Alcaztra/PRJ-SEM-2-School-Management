@@ -70,18 +70,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function getEvents(class_id) {
     let events;
+    $("#get_class").parents('div.form-group').addClass('was-validated');
     if ("" == class_id || undefined == class_id) {
         class_id = $("#get_class").val();
     }
-    $.get(window.location.origin + "/events/" + class_id, function (data) {
-        events = JSON.stringify(data);
-        console.log(data);
-        calendar.getEvents().forEach(e => {
-            e.remove();
+    if ("" !== class_id) {
+        $.get(window.location.origin + "/events/" + class_id, function (data) {
+            events = JSON.stringify(data);
+            // console.log(data);
+            calendar.getEvents().forEach(e => {
+                e.remove();
+            });
+            data.forEach(e => {
+                calendar.addEvent(e);
+                calendar.render();
+            });
         });
-        data.forEach(e => {
-            calendar.addEvent(e);
-            calendar.render();
-        });
-    });
+    }
 };

@@ -71,3 +71,12 @@ const sortable = new Sortable(document.querySelectorAll("ul[name='drag_zone']"),
 // sortable.on('sortable:sort', () => console.log('sortable:sort'));
 // sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
 // sortable.on('sortable:stop', () => console.log('sortable:stop',sortable));
+
+$(".was-validated .form-group .btn-group label").has('input[type=radio]:invalid').addClass('text-danger', true);
+$(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').addClass('text-success', true);
+$('.was-validated').on('change', function () {
+    $(".was-validated .form-group .btn-group label").has('input[type=radio]:invalid').toggleClass('text-success', false);
+    $(".was-validated .form-group .btn-group label").has('input[type=radio]:invalid').toggleClass('text-danger', true);
+    $(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').toggleClass('text-danger', false);
+    $(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').toggleClass('text-success', true);
+});

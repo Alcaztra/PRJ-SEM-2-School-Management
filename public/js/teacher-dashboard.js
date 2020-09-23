@@ -20,7 +20,7 @@ $('select#select_class').on('click', function () {
     let class_id = $(this).val();
     console.log(class_id);
     if ("" !== class_id) {
-        $('div[attendance] div[role="status"]').toggleClass('d-none', false);
+        $('#attendance div[role="status"]').toggleClass('d-none', false);
         $.get(host + '/list-subjects/' + class_id,
             function (data) {
                 // console.log(data);
@@ -31,30 +31,61 @@ $('select#select_class').on('click', function () {
                     txt += e.name;
                     txt += "</option>";
                     $('select#select_subject').append(txt);
-                    $('div[attendance] div[role="status"]').toggleClass('d-none', true);
+                    $('#attendance div[role="status"]').toggleClass('d-none', true);
                 });
 
             });
     }
 
 });
+
+/* let now = () => {
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth() + 1;
+    let date = new Date().getDate();
+    let now = "";
+    now += year + "-";
+    if (month < 10) {
+        now += "0" + month + "-";
+    } else {
+        now += month + "-";
+    }
+    if (date < 10) {
+        now += "0" + date;
+    } else {
+        now += date;
+    }
+    return now;
+}
+
+$('input#select_date').attr('max', now()); */
+
 function getClass() {
     let class_id = $('select#select_class').val();
     let subject_id = $('select#select_subject').val();
     let date_picker = $('input#select_date').val();
+
     // console.log(class_id, subject_id, date_picker);
-    $('div[attendance] div[role="status"]').toggleClass('d-none', false);
-    $.get(host + '/list-students/' + class_id + '/' + subject_id + '/' + date_picker,
-        function (data) {
-            console.log(data, data.length);
-            $('table#list_students tbody').empty();
-            if (data.length > 0) {
-                data.forEach(e => {
-                    $('table#list_students tbody').append(row(e.user_id, e.name, e.status));
-                });
-            }
-            $('div[attendance] div[role="status"]').toggleClass('d-none', true);
-        });
+    $("#attendance div[getClass]").toggleClass('was-validated', true);
+    // let now = new Date();
+    // let picker = new Date(date_picker);
+    // if (now.getTime() < picker.getTime()) {
+    //     console.log('select furture day')
+    // }
+    if ("" !== class_id && "" !== subject_id && "" !== date_picker) {
+        $('#attendance div[role="status"]').toggleClass('d-none', false);
+        $.get(host + '/list-students/' + class_id + '/' + subject_id + '/' + date_picker,
+            function (data) {
+                // console.log(data, data.length);
+                $('table#list_students tbody').empty();
+                if (data.length > 0) {
+                    data.forEach(e => {
+                        $('table#list_students tbody').append(row(e.user_id, e.name, e.status));
+                    });
+                }
+                $('#attendance div[role="status"]').toggleClass('d-none', true);
+            });
+    }
     function row(id, name, status) {
         let txt = '<tr>';
         txt += '<td name="student_id">' + id + '</td><td>' + name + '</td>';
@@ -80,7 +111,7 @@ function postAttendance() {
     // console.log($('form#status').serializeArray());
     let date_picker = $('input#select_date').val();
     let form_data = $('form#status').serializeArray();
-    $('div[attendance] div[role="status"]').toggleClass('d-none', false);
+    $('#attendance div[role="status"]').toggleClass('d-none', false);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -89,7 +120,7 @@ function postAttendance() {
     $.post(host + '/attendace/' + date_picker, { status: form_data }, function (data) {
         console.log(data);
         // window.open().document.write(data);
-        $('div[attendance] div[role="status"]').toggleClass('d-none', true);
+        $('#attendance div[role="status"]').toggleClass('d-none', true);
         getClass();
     }, 'json');
 }

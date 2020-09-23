@@ -19630,5 +19630,9 @@ small {
   position: sticky;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 
 /*# sourceMappingURL=app.css.map*/
