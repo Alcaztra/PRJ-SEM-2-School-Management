@@ -128,7 +128,7 @@ class ProfileController extends Controller
             'old_password' => [
                 'required',
                 function ($attribute, $value, $fail) {
-                    $old = Auth::guard('admin')->user()->password;
+                    $old = Auth::guard($this->guardName())->user()->password;
                     if (!Hash::check($value, $old)) {
                         $fail($attribute . ' is incorrect.');
                     }
@@ -159,9 +159,10 @@ class ProfileController extends Controller
     public function updateAvatar(Request $request)
     {
         $validate_result = $request->validate([
-            'files' => ['preview_image' => 'requried|image|size:4000']
+            // 'files' => ['preview_image' => 'requried|image|max:4096']
+            'preview_image' => 'required|image|max:4096'
         ]);
-        // dd($validate_result);
+        dd($validate_result);
         $file = $request->file('preview_image');
         if ($request->hasFile('preview_image')) {
             $file_name = $file->getClientOriginalName();
