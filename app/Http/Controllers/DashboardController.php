@@ -70,6 +70,8 @@ class DashboardController extends Controller
                     $now = date('Y-m-d');
                     // dd(strtotime($now));
                     $start_day = $class->start_day;
+                    $curr_sub = null;
+                    $next_sub = null;
                     foreach ($sub as $s) {
                         $subject = Subject::where('subject_id', $s->subject_id)->first();
                         $end_day = $subject->calcEndDay($start_day, $class->step);
@@ -81,7 +83,6 @@ class DashboardController extends Controller
                             $next_sub = Subject::where('subject_id', $next->subject_id)->first();
                             break;
                         }
-
                         $start_day = date_format(ScheduleController::nextStartday($subject->calcEndDay($start_day, $class->step), $class->step), "Y-m-d");
                     }
                     // dd($enroll_subject);
