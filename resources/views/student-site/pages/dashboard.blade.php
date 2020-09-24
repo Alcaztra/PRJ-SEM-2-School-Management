@@ -41,9 +41,15 @@
                             <i class="mdi mdi-book text-info icon-lg"></i>
                         </div>
                         <div class="float-right">
-                            <strong class="mb-0 text-right">Current Subject</strong>
+                            <strong class="mb-0 text-right">Current Subject: {{ $current_subject->subject_id }}</strong>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0"></h3>
+                                <strong class="font-weight-medium mb-0">
+                                    <ul class="list-unstyled">
+                                        <li>{{ $current_subject->name }}</li>
+                                        <li>Sessions: {{ $current_subject->sessions }}</li>
+                                        <li>Duration: {{ $current_subject->duration }}</li>
+                                    </ul>
+                                </strong>
                             </div>
                         </div>
                     </div>
@@ -59,16 +65,22 @@
                             <i class="mdi mdi-book text-primary icon-lg"></i>
                         </div>
                         <div class="float-right">
-                            <strong class="mb-0 text-right">Next Subject</strong>
+                            <strong class="mb-0 text-right">Next Subject: {{ $next_subject->subject_id }}</strong>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0"></h3>
+                                <strong class="font-weight-medium mb-0">
+                                    <ul class="list-unstyled">
+                                        <li>{{ $next_subject->name }}</li>
+                                        <li>Sessions: {{ $next_subject->sessions }}</li>
+                                        <li>Duration: {{ $next_subject->duration }}</li>
+                                    </ul>
+                                </strong>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
+        {{-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
                 <div class="card-body">
                     <div
@@ -85,7 +97,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
                 <div class="card-body">
@@ -97,7 +109,7 @@
                         <div class="float-right">
                             <strong class="mb-0 text-right">Next Exam</strong>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0"></h3>
+                                <h3 class="font-weight-medium text-right mb-0">{{ $next_exam }}</h3>
                             </div>
                         </div>
                     </div>

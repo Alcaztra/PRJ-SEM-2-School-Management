@@ -93,15 +93,40 @@ function validationAdd() {
         // console.log($(this))
         list.push($(this).data('id'));
     });
+    let check = false;
     list.forEach(e => {
         var f = list.indexOf(e);
         var l = list.lastIndexOf(e);
-        if (f !== l) {
-            $("a[data-id='" + e + "']").toggleClass('list-group-item-danger', true);
-        } else {
+        if (check = (f == l)) {
             $("a[data-id='" + e + "']").toggleClass('list-group-item-danger', false);
+        } else {
+            $("a[data-id='" + e + "']").toggleClass('list-group-item-danger', true);
         }
     });
+    return check;
 }
 
 validationAdd();
+
+$('#add_user_form').on('submit', function (event) {
+    event.preventDefault();
+    this.classList.add('was-validated');
+    $('#class_id').attr('required', 'required');
+    let valid = false;
+    let check_class = document.getElementById('class_id').checkValidity();
+    let check_student = validationAdd();
+    if (check_class) {
+        if (check_student && "" == $('#teacher_id').val()) {
+            if (confirm("The teacher has yet to be assigned.")) {
+                valid = true;
+            }
+        } else if (!check_student && $("#list_stu").contents().length == 0 && "" !== $('#teacher_id').val()) {
+            valid = true;
+        } else {
+            valid = true;
+        }
+    }
+    if (valid) {
+        document.getElementById('add_user_form').submit();
+    }
+});

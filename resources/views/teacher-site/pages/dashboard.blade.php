@@ -65,8 +65,8 @@
     <div class="row" id="attendance">
         <div class="col grid-margin">
             <div class="card">
-                <div class="card-body">
-                    <div class="d-inline-block" attendance>
+                <div class="card-body" getClass>
+                    <div class="d-inline-block">
                         <h4>Attendance</h4>
                         <div class="spinner-border d-none" role="status">
                             <span class="sr-only">Loading...</span>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label for="select_class">Select class</label>
-                        <select class="custom-select custom-select-sm" name="select_class" id="select_class">
+                        <select class="custom-select custom-select-sm" name="select_class" id="select_class" required>
                             <option value="" selected>- Class Id -</option>
                             @isset($classes)
                                 @foreach ($classes as $c)
@@ -85,13 +85,14 @@
                     </div>
                     <div class="form-group">
                         <label for="select_subject">Select Subject</label>
-                        <select class="custom-select custom-select-sm" name="select_subject" id="select_subject">
+                        <select class="custom-select custom-select-sm" name="select_subject" id="select_subject" required>
                             <option value="" selected>- Sebject Id -</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="select_date">Select Date</label>
-                        <input type="date" class="form-control" name="select_date" id="select_date" placeholder="">
+                        <input type="date" class="form-control" name="select_date" id="select_date"
+                            max="{{ date('Y-m-d') }}" placeholder="" required>
                     </div>
                     <div class="form-group d-flex justify-content-around">
                         <button class="btn btn-outline-info" onclick="getClass()">Get Class</button>
@@ -147,7 +148,7 @@
                     <div class="form-group">
                         <label for="">Class</label>
                         <div class="input-group">
-                            <select class="custom-select" name="" id="get_class">
+                            <select class="custom-select" name="" id="get_class" required>
                                 <option value="">- Select one -</option>
                                 @isset($classes)
                                     @foreach ($classes as $c)

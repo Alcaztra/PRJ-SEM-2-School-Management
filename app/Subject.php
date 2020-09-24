@@ -69,7 +69,7 @@ class Subject extends Model
             return $start;
         }
 
-        for ($i = 0; $i < $days - 1; $i++) {
+        for ($i = 0; $i < ($days - 1); $i++) {
             // calculate next day
             if (date_format($start, 'w') == 5 || date_format($start, 'w') == 6) {
                 $end = date_add($start, date_interval_create_from_date_string(1 . " days"));

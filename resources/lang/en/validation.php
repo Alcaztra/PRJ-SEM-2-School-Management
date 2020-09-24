@@ -129,9 +129,21 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'required' => 'Name field is required, contain characters and digits only.',
         ],
+        'email' =>[
+            'required' => 'Email is invalid.',
+        ],
+        'phone' =>[
+            'required' => 'Phone is invalid.',
+        ],
+        'birthday.before' => 'Age must be over 16.',
+        'address' =>[
+            'required' => 'Address cannot be blank.',
+        ],
+        'subject_id.regex' => 'Subject id contain characters and digits only.',
+        'course_id.regex' => 'Subject id contain characters and digits only.',
     ],
 
     /*

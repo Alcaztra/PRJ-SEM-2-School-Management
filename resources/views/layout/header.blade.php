@@ -77,7 +77,7 @@
                     </a>
                 </div>
             </li> --}}
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                     data-toggle="dropdown">
                     <i class="mdi mdi-bell-outline"></i>
@@ -117,7 +117,7 @@
                         </div>
                     </a>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown d-none d-xl-inline-block">
                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
@@ -126,19 +126,19 @@
                         <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('admin')->user()->name }}</span>
                         <img class="img-xs rounded-circle"
                             src="{{ null !== ($avatar = Auth::guard('admin')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
-                            alt="Profile image">
+                            alt="">
                         @break
                         @case('student.localhost')
                         <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('student')->user()->name }}</span>
                         <img class="img-xs rounded-circle"
                             src="{{ null !== ($avatar = Auth::guard('student')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
-                            alt="Profile image">
+                            alt="">
                         @break
                         @case('teacher.localhost')
                         <span class="profile-text d-none d-md-inline-flex">{{ Auth::guard('teacher')->user()->name }}</span>
                         <img class="img-xs rounded-circle"
                             src="{{ null !== ($avatar = Auth::guard('teacher')->user()->avatar) ? asset('storage/uploads/avatar/' . $avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
-                            alt="Profile image">
+                            alt="">
                         @break
                         @default
                     @endswitch

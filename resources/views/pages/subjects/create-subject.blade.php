@@ -10,6 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     @include('layout.form-create-subject',['action'=>'subject.create.submit'])
+                    @include('layout.show-form-errors')
                 </div>
             </div>
         </div>
@@ -23,4 +24,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/createSubject.js') !!}
 @endpush
