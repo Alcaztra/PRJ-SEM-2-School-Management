@@ -18,6 +18,9 @@
         {!! Form::password('password', [
         'id' => 'password',
         'class' => 'form-control',
+        'required',
+        'pattern' => '[\w\d]*',
+        'minlength' => 6,
         'placeholder' => '*********',
         ]) !!}
     </div>

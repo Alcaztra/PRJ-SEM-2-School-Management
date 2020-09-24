@@ -1,13 +1,24 @@
-<form action="{{ route($action, $param ?? '') }}" method="post" id="create_course_form" class="need-validate">
+<form action="{{ route($action, $param ?? '') }}" method="post" id="create_course_form"
+    class="need-validate">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="course_id">Course ID</label>
-        {!! Form::text('course_id', $course->course_id ?? '', ['id' => 'course_id', 'class' => 'form-control',
-        isset($course) ? 'readonly' : '']) !!}
+        {!! Form::text('course_id', $course->course_id ?? '', [
+        'id' => 'course_id',
+        'class' => 'form-control',
+        'required',
+        'pattern' => '[a-zA-Z0-9 ]*',
+        isset($course) ? 'readonly' : '',
+        ]) !!}
     </div>
     <div class="form-group">
         <label for="name">Course Name</label>
-        {!! Form::text('name', $course->name ?? '', ['id' => 'name', 'class' => 'form-control']) !!}
+        {!! Form::text('name', $course->name ?? '', [
+        'id' => 'name',
+        'class' => 'form-control',
+        'required',
+        'pattern' => '[a-zA-Z0-9 -]*',
+        ]) !!}
     </div>
     <div class="form-group">
         <label for="">Semester</label>

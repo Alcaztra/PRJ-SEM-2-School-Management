@@ -67,6 +67,8 @@
         'id' => 'phone',
         'class' => 'form-control',
         'pattern' => '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$',
+        'minlength' => 8,
+        'maxlength' => 14,
         'required',
         'autocomplete' => 'off',
         ]) !!}

@@ -80,3 +80,8 @@ $('.was-validated').on('change', function () {
     $(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').toggleClass('text-danger', false);
     $(".was-validated .form-group .btn-group label").has('input[type=radio]:valid').toggleClass('text-success', true);
 });
+
+$("form.need-validate").on('change', function () {
+    $(this).toggleClass('was-validated', true);
+
+});

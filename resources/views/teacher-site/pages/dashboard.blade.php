@@ -91,7 +91,8 @@
                     </div>
                     <div class="form-group">
                         <label for="select_date">Select Date</label>
-                        <input type="date" class="form-control" name="select_date" id="select_date" placeholder="" required>
+                        <input type="date" class="form-control" name="select_date" id="select_date"
+                            max="{{ date('Y-m-d') }}" placeholder="" required>
                     </div>
                     <div class="form-group d-flex justify-content-around">
                         <button class="btn btn-outline-info" onclick="getClass()">Get Class</button>

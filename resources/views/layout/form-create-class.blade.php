@@ -2,12 +2,22 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="class_id">Class ID</label>
-        {!! Form::text('class_id', $class->class_id ?? '', ['id' => 'class_id', 'class' => 'form-control', isset($class)
-        ? 'readonly' : '']) !!}
+        {!! Form::text('class_id', $class->class_id ?? '', [
+        'id' => 'class_id',
+        'class' => 'form-control',
+        'required',
+        'pattern' => '[a-zA-Z0-9.]*',
+        isset($class) ? 'readonly' : '',
+        ]) !!}
     </div>
     <div class="form-group">
         <label for="room">Room</label>
-        {!! Form::text('room', $class->room ?? '', ['id' => 'room', 'class' => 'form-control']) !!}
+        {!! Form::text('room', $class->room ?? '', [
+        'id' => 'room',
+        'class' => 'form-control',
+        'required',
+        'pattern' => '[a-zA-Z0-9 ]*',
+        ]) !!}
     </div>
     {{-- <div class="form-group">
         <label for="max_size">Max Size</label>
@@ -16,25 +26,30 @@
     <div class="form-group">
         <label for="">Study Shift</label>
         <div class="input-group">
-            <select name="DoW" id="" class="custom-select">
+            <select name="DoW" id="" class="custom-select" required>
                 <option value="">- Day of Week -</option>
                 <option value="1" {{ isset($class) && $class->DoW == 1 ? 'selected' : '' }}>Tue / Thu / Sat</option>
                 <option value="2" {{ isset($class) && $class->DoW == 2 ? 'selected' : '' }}>Mon / Wed / Fri</option>
-            </select><select name="period_id" id="" class="custom-select">
+            </select><select name="period_id" id="" class="custom-select" required>
                 <option value="">- Period -</option>
                 <option value="mor" {{ isset($class) && $class->period_id == 'mor' ? 'selected' : '' }}>Morning</option>
-                <option value="aft" {{ isset($class) && $class->period_id == 'aft' ? 'selected' : '' }}>Afternoon</option>
+                <option value="aft" {{ isset($class) && $class->period_id == 'aft' ? 'selected' : '' }}>Afternoon
+                </option>
                 <option value="eve" {{ isset($class) && $class->period_id == 'eve' ? 'selected' : '' }}>Evening</option>
             </select>
         </div>
     </div>
     <div class="form-group">
         <label for="start_day">Start Day</label>
-        {!! Form::date('start_day', $class->start_day ?? '', ['id' => 'start_day', 'class' => 'form-control']) !!}
+        {!! Form::date('start_day', $class->start_day ?? '', [
+        'id' => 'start_day',
+        'class' => 'form-control',
+        'required',
+        ]) !!}
     </div>
     <div class="form-group">
         <label for="course_id">Course</label>
-        <select name="course_id" id="course_id" class="custom-select">
+        <select name="course_id" id="course_id" class="custom-select" required>
             <option value="">- Select Course -</option>
             @isset($courses)
                 @foreach ($courses as $c)

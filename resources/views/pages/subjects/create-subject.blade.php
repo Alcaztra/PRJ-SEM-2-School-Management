@@ -24,4 +24,5 @@
 
 @push('custom-scripts')
     {!! Html::script('/assets/js/dashboard.js') !!}
+    {!! Html::script('/js/createSubject.js') !!}
 @endpush
