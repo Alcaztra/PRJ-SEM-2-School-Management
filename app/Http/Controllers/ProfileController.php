@@ -159,10 +159,20 @@ class ProfileController extends Controller
     public function updateAvatar(Request $request)
     {
         $validate_result = $request->validate([
-            // 'files' => ['preview_image' => 'requried|image|max:4096']
-            'preview_image' => 'required|image|max:4096'
+            // 'files' => ['preview_image' => 'requried|mimes:jpeg,svg,png,gif|max:5120']
+            'preview_image' => 'required|mimes:jpeg,svg,png,gif|max:5120',
+            'preview_image' => 'max:5120',
         ]);
-        dd($validate_result);
+        // dd($request);
+        /*  $validate_result = Validator::make($request->all(), [
+            'preview_image' => 'image|mimes:jpeg,svg,png,gif|size:5120',
+        ], [
+            'max' => 'Image cannot larger than 5MB',
+        ]);
+        if ($validate_result->fails()) {
+            return redirect()->back()->withErrors($validate_result)->withInput();
+        } */
+        // dd($validate_result);
         $file = $request->file('preview_image');
         if ($request->hasFile('preview_image')) {
             $file_name = $file->getClientOriginalName();
