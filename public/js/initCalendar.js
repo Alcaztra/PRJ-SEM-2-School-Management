@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // alert('a day has been clicked!');
         },
         headerToolbar: {
-            start: 'prevYear,prev', // will normally be on the left. if RTL, will be on the right
-            center: 'title today,dayGridMonth,timeGridWeek,timeGridDay',
-            end: 'next,nextYear' // will normally be on the right. if RTL, will be on the left
+            start: 'today,dayGridMonth,timeGridWeek', // will normally be on the left. if RTL, will be on the right
+            center: 'title',
+            end: 'prevYear,prev,next,nextYear' // will normally be on the right. if RTL, will be on the left
         },
         // events: [
         //     { // this object will be "parsed" into an Event Object
@@ -77,7 +77,7 @@ function getEvents(class_id) {
     if ("" !== class_id) {
         $.get(window.location.origin + "/events/" + class_id, function (data) {
             events = JSON.stringify(data);
-            // console.log(data);
+            console.log(data);
             calendar.getEvents().forEach(e => {
                 e.remove();
             });
