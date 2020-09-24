@@ -60,7 +60,8 @@ class Course extends Model
     {
         return DB::table('semesters')->where('course_id', $this->course_id)
             ->leftJoin('subjects', 'semesters.subject_id', '=', 'subjects.subject_id')
-            ->select('semesters.subject_id', 'name', 'semester')
+            ->select('semesters.subject_id', 'name', 'semester', 'subject_order')
+            ->orderBy('semester')->orderBy('subject_order')
             ->get();
     }
 }
