@@ -33,13 +33,13 @@ class StudentController extends Controller
     public function createStudent(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' => 'required|max:50',
-            'name' => 'required|regex:/^[a-zA-Z0-9]+$/u|max:255',
-            'gender' => 'required',
-            'email' => 'required',
-            'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:15',
-            'birthday' => 'required|date|before:-16 years',
-            'address' => 'required',
+            'user_id' => 'bail|required|regex:/[a-zA-Z0-9]*/|unique:students,user_id|max:50',
+            'name' => 'bail|required|regex:/[a-zA-Z0-9 ]*/|max:255',
+            'gender' => 'bail|required',
+            'email' => 'bail|required|regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/',
+            'phone' => 'bail|required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|min:8|max:14',
+            'birthday' => 'bail|required|date|before:-16 years',
+            'address' => 'bail|required',
         ]);
         $student = new Student();
         $student->user_id = $request->user_id;

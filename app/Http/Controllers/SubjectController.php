@@ -26,8 +26,8 @@ class SubjectController extends Controller
     public function createSubject(Request $request)
     {
         $validatedData = $request->validate([
-            'subject_id' => 'required|regex:/^[a-zA-Z0-9]+$/u|max:255|unique:subjects,subject_id',
-            'name' => 'required|regex:/^[a-zA-Z0-9]+$/u|max:255',
+            'subject_id' => 'bail|required|regex:/[a-zA-Z0-9]*/|unique:subjects,subject_id',
+            'name' => 'bail|required|regex:/[a-zA-Z0-9 ]*/',
         ]);
         $subject = new Subject();
         $subject->subject_id = $request->subject_id;

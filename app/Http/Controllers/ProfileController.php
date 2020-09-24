@@ -89,11 +89,11 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:14',
-            'birthday' => 'required|date|before:-16 years',
-            'address' => 'required',
+            'name' => 'bail|required',
+            'email' => 'bail|required',
+            'phone' => 'bail|required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:14',
+            'birthday' => 'bail|required|date|before:-16 years',
+            'address' => 'bail|required',
         ]);
         // $user = Admin::where('user_id', $request->user_id)->first();
         $user = $this->user();

@@ -43,8 +43,12 @@ class ClassController extends Controller
     public function createClass(Request $request)
     {
         $validatedData = $request->validate([
-            'class_id' => 'required|unique:classes,class_id|max:50',
-            'room' => 'required|min:6|numeric',
+            'class_id' => 'bail|required|regex:/[a-zA-Z0-9 ]*/|unique:classes,class_id|max:50',
+            'room' => 'bail|required|regex:/[a-zA-Z0-9 ]*/',
+            'DoW' => 'bail|required',
+            'period_id' => 'bail|required',
+            'start_day' => 'bail|required',
+            'course_id' => 'bail|required|exists:courses,course_id',
         ]);
         $class = new _class();
         $class->class_id = $request->class_id;
@@ -74,6 +78,10 @@ class ClassController extends Controller
         // date_default_timezone_set("Asia/Ho_Chi_Minh");
         // dd(now("Asia/Ho_Chi_Minh"));
         $class_id = $request->class_id;
+
+        $validatedData = $request->validate([
+            'class_id' => 'required|exists:classes,class_id'
+        ]);
 
         // dd($request);
         if (isset($request->teacher_id)) {
@@ -132,6 +140,13 @@ class ClassController extends Controller
 
     public function classDetails(Request $request)
     {
+        $validatedData = $request->validate([
+            'room' => 'bail|required|regex:/[a-zA-Z0-9 ]*/',
+            'DoW' => 'bail|required',
+            'period_id' => 'bail|required',
+            'start_day' => 'bail|required',
+            'course_id' => 'bail|required|exists:courses,course_id',
+        ]);
         // dump($request);
         $class = _class::where('class_id', $request->class_id)->first();
         $class->room = $request->room;
