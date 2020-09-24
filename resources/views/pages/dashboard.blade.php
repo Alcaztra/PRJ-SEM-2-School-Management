@@ -115,7 +115,7 @@
                     <div class="form-group">
                         <label for="">Class</label>
                         <div class="input-group">
-                            <select class="custom-select" name="" id="get_class">
+                            <select class="custom-select" name="" id="get_class" required>
                                 <option value="">- Select one -</option>
                                 @isset($classes)
                                     @foreach ($classes as $c)

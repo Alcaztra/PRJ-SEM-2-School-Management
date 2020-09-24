@@ -1,4 +1,4 @@
-<form action="{{ route($action, $param ?? '') }}" method="post" class="need-validate was-validated" id="create_subject">
+<form action="{{ route($action, $param ?? '') }}" method="post" class="need-validate" id="create_subject">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="subject_id">Subject ID</label>

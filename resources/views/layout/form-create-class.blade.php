@@ -26,11 +26,11 @@
     <div class="form-group">
         <label for="">Study Shift</label>
         <div class="input-group">
-            <select name="DoW" id="" class="custom-select" required>
+            <select name="DoW" class="custom-select" required>
                 <option value="">- Day of Week -</option>
                 <option value="1" {{ isset($class) && $class->DoW == 1 ? 'selected' : '' }}>Tue / Thu / Sat</option>
                 <option value="2" {{ isset($class) && $class->DoW == 2 ? 'selected' : '' }}>Mon / Wed / Fri</option>
-            </select><select name="period_id" id="" class="custom-select" required>
+            </select><select name="period_id" class="custom-select" required>
                 <option value="">- Period -</option>
                 <option value="mor" {{ isset($class) && $class->period_id == 'mor' ? 'selected' : '' }}>Morning</option>
                 <option value="aft" {{ isset($class) && $class->period_id == 'aft' ? 'selected' : '' }}>Afternoon

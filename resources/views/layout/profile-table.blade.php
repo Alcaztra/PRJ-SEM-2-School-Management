@@ -15,6 +15,8 @@
                     @if ($key == 'avatar')
                         <img src="{{ null !== $user_profile->avatar ? asset('storage/uploads/avatar/' . $user_profile->avatar) : asset('assets/images/faces-clipart/pic-1.png') }}"
                             class="img-thumbnail" alt="">
+                    @elseif ($key == 'birthday')
+                        {{ date_format(date_create($value), 'Y, M d') }}
                     @else
                         {{ $value }}
                     @endif
