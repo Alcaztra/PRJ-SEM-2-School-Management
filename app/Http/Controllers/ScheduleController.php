@@ -56,12 +56,12 @@ class ScheduleController extends Controller
         return response()->json($events);
     }
 
-    function nextStartday($day, $step)
+    static public function nextStartday($endDay, $step = null)
     {
-        if (date_format($day, 'w') == 0 || date_format($day, 'w') == 6) {
-            return date_add($day, date_interval_create_from_date_string(2 . " days"));
+        if (date_format($endDay, 'w') == 0 || date_format($endDay, 'w') == 6) {
+            return date_add($endDay, date_interval_create_from_date_string(2 . " days"));
         } else {
-            return date_add($day, date_interval_create_from_date_string(1 . " days"));
+            return date_add($endDay, date_interval_create_from_date_string(1 . " days"));
         }
     }
 }
