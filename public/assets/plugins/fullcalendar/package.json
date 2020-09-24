@@ -2,7 +2,7 @@
   "_args": [
     [
       "fullcalendar@5.3.1",
-      "D:\\FPT-Aptech\\SEM 2\\project\\PRJ-SEM-2-School-Management"
+      "E:\\FPT-Aptect\\SEM 2\\7-eProject\\PRJ-SEM-2-School-Management"
     ]
   ],
   "_from": "fullcalendar@5.3.1",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/fullcalendar/-/fullcalendar-5.3.1.tgz",
   "_spec": "5.3.1",
-  "_where": "D:\\FPT-Aptech\\SEM 2\\project\\PRJ-SEM-2-School-Management",
+  "_where": "E:\\FPT-Aptect\\SEM 2\\7-eProject\\PRJ-SEM-2-School-Management",
   "author": {
     "name": "Adam Shaw",
     "email": "arshaw@arshaw.com",
