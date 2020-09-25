@@ -58,7 +58,13 @@ function checkValid() {
         confirm('form is valid');
         form.trigger('submit');
     } else {
-        confirm('Form is invalid');
+        if ($('#data_table input').length == 0) {
+            if (confirm("Course has no subjects.")) {
+                form.trigger('submit');
+            }
+        } else {
+            confirm('Form is invalid');
+        }
     }
     // alert('still not submit');
 }

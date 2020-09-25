@@ -86,13 +86,19 @@
                     <div class="form-group">
                         <label for="select_subject">Select Subject</label>
                         <select class="custom-select custom-select-sm" name="select_subject" id="select_subject" required>
-                            <option value="" selected>- Sebject Id -</option>
+                            <option value="" selected>- Subject Id -</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="select_date">Select Date</label>
                         <input type="date" class="form-control" name="select_date" id="select_date"
                             max="{{ date('Y-m-d') }}" placeholder="" required>
+                    </div> --}}
+                    <div class="form-group">
+                        <label for="select_session">Select Session</label>
+                        <select class="custom-select custom-select-sm" name="select_session" id="select_session" required>
+                            <option value="" selected>- Session -</option>
+                        </select>
                     </div>
                     <div class="form-group d-flex justify-content-around">
                         <button class="btn btn-outline-info" onclick="getClass()">Get Class</button>

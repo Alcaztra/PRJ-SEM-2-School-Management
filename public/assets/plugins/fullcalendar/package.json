@@ -1,32 +1,28 @@
 {
-  "_args": [
-    [
-      "fullcalendar@5.3.1",
-      "E:\\FPT-Aptect\\SEM 2\\7-eProject\\PRJ-SEM-2-School-Management"
-    ]
-  ],
-  "_from": "fullcalendar@5.3.1",
+  "_from": "fullcalendar",
   "_id": "fullcalendar@5.3.1",
   "_inBundle": false,
   "_integrity": "sha512-qnZ0RpoWlp66+LWIQK0iT7nLPdlkR2i6uOn5fXEN7KM2VGeAlzWNFmjsMlP67UwraJdH1B0bYtQdaUK29llzkQ==",
   "_location": "/fullcalendar",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "tag",
     "registry": true,
-    "raw": "fullcalendar@5.3.1",
+    "raw": "fullcalendar",
     "name": "fullcalendar",
     "escapedName": "fullcalendar",
-    "rawSpec": "5.3.1",
+    "rawSpec": "",
     "saveSpec": null,
-    "fetchSpec": "5.3.1"
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/fullcalendar/-/fullcalendar-5.3.1.tgz",
-  "_spec": "5.3.1",
-  "_where": "E:\\FPT-Aptect\\SEM 2\\7-eProject\\PRJ-SEM-2-School-Management",
+  "_shasum": "2a4046ff0b47482ea79a729943f3fc4297493ef5",
+  "_spec": "fullcalendar",
+  "_where": "D:\\project-sem2-aptech\\PRJ-SEM-2-School-Management",
   "author": {
     "name": "Adam Shaw",
     "email": "arshaw@arshaw.com",
@@ -36,6 +32,8 @@
   "bugs": {
     "url": "https://fullcalendar.io/reporting-bugs"
   },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "An easily consumable combination of standard plugins",
   "devDependencies": {
     "@fullcalendar/bootstrap": "~5.3.1",

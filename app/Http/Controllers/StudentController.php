@@ -17,7 +17,7 @@ class StudentController extends Controller
 
     public function getFreeStudents()
     {
-        return Student::where('class_id', '')->get();
+        return Student::where('class_id', null)->orWhere('class_id', '')->get();
     }
 
     public function listStudents()

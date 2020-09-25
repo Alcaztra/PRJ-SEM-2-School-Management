@@ -14,7 +14,7 @@ let list = $("#list_stu");
 
 /* get list of free students */
 $.get(host + "/student/get-students", function (data) {
-    // console.log('data loaded.')
+    console.log('data loaded.', data)
     $("button span[name='loadStudents']").parent().toggle();
     data.forEach(u => {
         students.push(u.user_id + "|" + u.name);
@@ -116,14 +116,26 @@ $('#add_user_form').on('submit', function (event) {
     let check_class = document.getElementById('class_id').checkValidity();
     let check_student = validationAdd();
     if (check_class) {
-        if (check_student && "" == $('#teacher_id').val()) {
-            if (confirm("The teacher has yet to be assigned.")) {
+        if (check_student) {
+            if ("" == $('#teacher_id').val()) {
+                if (confirm("The teacher has yet to be assigned.")) {
+                    valid = true;
+                }
+            } else {
                 valid = true;
             }
-        } else if (!check_student && $("#list_stu").contents().length == 0 && "" !== $('#teacher_id').val()) {
-            valid = true;
         } else {
-            valid = true;
+            if ($("#list_stu").contents().length == 0) {
+                if ("" == $('#teacher_id').val()) {
+                    if (confirm("The teacher has yet to be assigned.\nClass has no students.")) {
+                        valid = true;
+                    }
+                } else {
+                    if (confirm("Class has no students.")) {
+                        valid = true;
+                    }
+                }
+            }
         }
     }
     if (valid) {

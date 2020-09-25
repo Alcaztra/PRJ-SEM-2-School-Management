@@ -149,8 +149,8 @@ class ProfileController extends Controller
         $user->password = $password;
         $result = $user->save();
         if ($result) {
-            Auth::guard($this->guardName())->logout();
-            // return redirect(route('dashboard'));
+            // Auth::guard($this->guardName())->logout();
+            return redirect(route('dashboard'));
         } else {
             return redirect()->back();
         }
@@ -160,8 +160,8 @@ class ProfileController extends Controller
     {
         $validate_result = $request->validate([
             // 'files' => ['preview_image' => 'requried|mimes:jpeg,svg,png,gif|max:5120']
-            'preview_image' => 'required|mimes:jpeg,svg,png,gif|max:5120',
-            'preview_image' => 'max:5120',
+            'preview_image' => 'required|mimes:jpg,jpeg,svg,png,gif|max:5120',
+            // 'preview_image' => 'max:5120',
         ]);
         // dd($request);
         /*  $validate_result = Validator::make($request->all(), [

@@ -25,18 +25,38 @@ $('select#select_class').on('click', function () {
             function (data) {
                 // console.log(data);
                 $('select#select_subject').empty();
-                $('select#select_subject').append("<option value='' selected>- Sebject Id -</option>");
-                data.forEach(e => {
-                    let txt = "<option value='" + e.subject_id + "'>";
-                    txt += e.name;
-                    txt += "</option>";
-                    $('select#select_subject').append(txt);
-                    $('#attendance div[role="status"]').toggleClass('d-none', true);
-                });
-
+                $('select#select_subject').append("<option value='' selected>- Subject Id -</option>");
+                if (data.length > 0) {
+                    data.forEach(e => {
+                        let txt = "<option value='" + e.subject_id + "'>";
+                        txt += e.name;
+                        txt += "</option>";
+                        $('select#select_subject').append(txt);
+                        $('#attendance div[role="status"]').toggleClass('d-none', true);
+                    });
+                }
             });
     }
+});
 
+$('#select_subject').on('click', function () {
+    let class_id = $('#select_class').val();
+    let subject_id = $(this).val();
+    $.get(host + '/list-subjects/' + class_id + '/' + subject_id,
+        function (data) {
+            console.log(data);
+            $('#select_session').empty();
+            $('#select_session').append("<option value='' selected>- Session -</option>");
+            if (data.length > 0) {
+                data.forEach(e => {
+                    let txt = "<option value='" + subject_id + '|' + e.session + "'>";
+                    txt += e.session;
+                    txt += "</option>";
+                    $('select#select_session').append(txt);
+                    $('#attendance div[role="status"]').toggleClass('d-none', true);
+                });
+            }
+        });
 });
 
 /* let now = () => {
@@ -63,7 +83,8 @@ $('input#select_date').attr('max', now()); */
 function getClass() {
     let class_id = $('select#select_class').val();
     let subject_id = $('select#select_subject').val();
-    let date_picker = $('input#select_date').val();
+    let session = $('#select_session').val();
+    // let date_picker = $('input#select_date').val();
 
     // console.log(class_id, subject_id, date_picker);
     $("#attendance div[getClass]").toggleClass('was-validated', true);
@@ -72,9 +93,9 @@ function getClass() {
     // if (now.getTime() < picker.getTime()) {
     //     console.log('select furture day')
     // }
-    if ("" !== class_id && "" !== subject_id && "" !== date_picker) {
+    if ("" !== class_id && "" !== subject_id && "" !== session) {
         $('#attendance div[role="status"]').toggleClass('d-none', false);
-        $.get(host + '/list-students/' + class_id + '/' + subject_id + '/' + date_picker,
+        $.get(host + '/list-students/' + class_id + '/' + subject_id + '/' + session,
             function (data) {
                 // console.log(data, data.length);
                 $('table#list_students tbody').empty();

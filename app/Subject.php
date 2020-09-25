@@ -82,4 +82,5 @@ class Subject extends Model
         $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
         return $end;
     }
+
 }

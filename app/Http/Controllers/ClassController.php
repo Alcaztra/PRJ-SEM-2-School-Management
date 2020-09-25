@@ -77,6 +77,7 @@ class ClassController extends Controller
     {
         // date_default_timezone_set("Asia/Ho_Chi_Minh");
         // dd(now("Asia/Ho_Chi_Minh"));
+        // dd($request);
         $class_id = $request->class_id;
 
         $validatedData = $request->validate([
@@ -91,14 +92,17 @@ class ClassController extends Controller
             } else {
                 DB::table('class-management')->where(['class_id' => $class_id])->update(['teacher_id' => $teacher_id, 'updated_at' => now("Asia/Ho_Chi_Minh")]);
             }
+        } else if (DB::table('class-management')->where('class_id', $class_id)->count() != 0) {
+            DB::table('class-management')->where('class_id', $class_id)->delete();
         }
+
 
         $stu_db = Student::where('class_id', $class_id)->get();
         // dd($stu_db, $request->students);
         if (!$stu_db->isEmpty()) {
             if (!$request->has('students')) {
                 foreach ($stu_db as $s_db) {
-                    $s_db->class_id = '';
+                    $s_db->class_id = null;
                     $s_db->save();
                 }
             } else {
@@ -126,7 +130,7 @@ class ClassController extends Controller
             }
         }
 
-        return redirect(route('class.list'));
+        return redirect(route('class.details', ['class_id' => $class_id]));
     }
 
     public function showFormClassDetails($class_id)

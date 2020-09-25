@@ -2,15 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\_class;
-use App\Course;
-use App\Student;
-use App\Teacher;
-use DateTimeZone;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-
 class TeacherController extends Controller
 {
     public static function getTeachers()
@@ -93,17 +84,41 @@ class TeacherController extends Controller
         return $course->getSubjects();
     }
 
-    public function getListStudents($class_id, $subject_id, $date_picker)
+    public function getSessions($class_id, $subject_id)
+    {
+        $data = array();
+        $class = _class::where('class_id', $class_id)->first();
+        $course = Course::where('course_id', $class->course_id)->first();
+        $start_day = $class->start_day;
+        $duration_before = 0;
+
+        // get order list subjects
+        $subjects = $course->getSubjects();
+        $curr_sub = DB::table('semesters')->where(['course_id'=>$class->course_id,'subject_id'=>$subject_id])->first();
+        foreach ($subjects as $s) {
+            if ($subject_id != $s->subject_id) {
+                DB::table('subjects')->where('subject_id',$s->subject_id)->select('duration')->first();
+            }
+        }
+
+
+        return $data;
+    }
+
+    // public function getListStudents($class_id, $subject_id, $date_picker)
+    public function getListStudents($class_id, $subject_id)
     {
         $data = array();
         date_default_timezone_set("Asia/Ho_Chi_Minh");
+
         $students = DB::table('enrollment')
             ->where('enrollment.class_id', $class_id)
             ->where('subject_id', $subject_id)
             ->leftJoin('students', 'user_id', '=', 'student_id')
             ->select(['user_id', 'name'])
             ->get();
-        $date_before = date_sub(date_create($date_picker), date_interval_create_from_date_string("1 days"));
+
+        /* $date_before = date_sub(date_create($date_picker), date_interval_create_from_date_string("1 days"));
         $date_after = date_add(date_create($date_picker), date_interval_create_from_date_string("1 days"));
         foreach ($students as $s) {
             $checked = DB::table('attendance')
@@ -124,7 +139,7 @@ class TeacherController extends Controller
                 // $stu = Student::where('user_id', $s->user_id)->first();
                 array_push($data, ['user_id' => $s->user_id, 'name' => $s->name, 'status' => 0]);
             }
-        }
+        } */
 
         return $data;
     }

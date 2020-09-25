@@ -35,6 +35,12 @@ class CourseController extends Controller
             'course_id' => 'bail|regex:/[a-zA-Z0-9 ]*/|unique:courses,course_id',
             'name' => 'bail|regex:/[a-zA-Z0-9 ]*/',
         ]);
+
+        $course = new Course();
+        $course->course_id = $request->course_id;
+        $course->name = $request->name;
+        $course->save();
+
         for ($i = 1; $i <= 4; $i++) {
             if ($request->has("semester_$i")) {
                 $sem = $request->input("semester_$i");
@@ -44,11 +50,6 @@ class CourseController extends Controller
                 }
             }
         }
-
-        $course = new Course();
-        $course->course_id = $request->course_id;
-        $course->name = $request->name;
-        $course->save();
 
         return redirect(route('course.details', ['course_id' => $course->course_id]));
     }
