@@ -67,6 +67,14 @@ class DashboardController extends Controller
                         $enroll_subject = $sub;
                     }
 
+                    $attendance_status = array();
+                    foreach ($enrolled as $e) {
+                        $present = DB::table('attendance')
+                            ->where(['student_id' => $user->user_id, 'subject_id' => $e->subject_id, 'status' => 1])->count();
+                        $sessions = Subject::where('subject_id', $e->subject_id)->first()->sessions;
+                        array_push($attendance_status, ['subject_id' => $e->subject_id, 'present' => $present, 'sessions' => $sessions]);
+                    }
+
                     $now = date('Y-m-d');
                     // dd(strtotime($now));
                     $start_day = $class->start_day;
@@ -91,6 +99,7 @@ class DashboardController extends Controller
                         'course' => $course,
                         'enroll_subject' => $enroll_subject,
                         'enrolled' => $enrolled,
+                        'attendance' => $attendance_status,
                         'current_subject' => $curr_sub,
                         'next_subject' => $next_sub,
                         'next_exam' => date_format($end_day, "Y,M d"),

@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\_class;
+use App\Course;
+use App\Subject;
+use App\Teacher;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 class TeacherController extends Controller
 {
     public static function getTeachers()
@@ -84,29 +92,68 @@ class TeacherController extends Controller
         return $course->getSubjects();
     }
 
-    public function getSessions($class_id, $subject_id)
+    public function getSessions($subject_id)
+    {
+        return Subject::where('subject_id', $subject_id)->first()->sessions;
+    }
+
+    /* public function tmp()
     {
         $data = array();
         $class = _class::where('class_id', $class_id)->first();
         $course = Course::where('course_id', $class->course_id)->first();
         $start_day = $class->start_day;
-        $duration_before = 0;
 
         // get order list subjects
         $subjects = $course->getSubjects();
-        $curr_sub = DB::table('semesters')->where(['course_id'=>$class->course_id,'subject_id'=>$subject_id])->first();
+        // get order of current subject
+        $curr_sub_pos = DB::table('semesters')->where(['course_id' => $class->course_id, 'subject_id' => $subject_id])->first();
+
+        $sessions_before = 0;
         foreach ($subjects as $s) {
-            if ($subject_id != $s->subject_id) {
-                DB::table('subjects')->where('subject_id',$s->subject_id)->select('duration')->first();
+            if ($s->semester < $curr_sub_pos->semester && $s->subject_order < $curr_sub_pos->subject_order) {
+                $sub = Subject::where('subject_id', $s->subject_id)->first();
+                $sessions_before += $sub->sessions;
+            } else if ($s->semester == $curr_sub_pos->semester && $s->subject_order == $curr_sub_pos->subject_order) {
+                break;
             }
         }
 
+        // calculate days before
+        $days = round($sessions_before / 2, 0, PHP_ROUND_HALF_UP);
+        $start = date_create($start_day);
+        $end = null;
+        for ($i = 0; $i < ($days - 1); $i++) {
+            // calculate next day
+            if (date_format($start, 'w') == 5 || date_format($start, 'w') == 6) {
+                $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
+            }
+            $end = date_add($start, date_interval_create_from_date_string($class->step . " days"));
+            if (date_format($end, 'w') == 5 || date_format($end, 'w') == 6) {
+                $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
+            }
+        }
+        // $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
 
-        return $data;
-    }
+        $curr_sessions = Subject::where('subject_id', $subject_id)->first()->duration;
+
+        $days = round($curr_sessions / 2, 0, PHP_ROUND_HALF_UP);
+        $start = $end;
+        for ($i = 0; $i < $days; $i++) {
+            // calculate next day
+            if (date_format($start, 'w') == 5 || date_format($start, 'w') == 6) {
+                $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
+                array_push($data, []);
+            }
+            $end = date_add($start, date_interval_create_from_date_string($class->step . " days"));
+            if (date_format($end, 'w') == 5 || date_format($end, 'w') == 6) {
+                $end = date_add($start, date_interval_create_from_date_string(1 . " days"));
+            }
+        }
+    } */
 
     // public function getListStudents($class_id, $subject_id, $date_picker)
-    public function getListStudents($class_id, $subject_id)
+    public function getListStudents($class_id, $subject_id, $session)
     {
         $data = array();
         date_default_timezone_set("Asia/Ho_Chi_Minh");
@@ -118,67 +165,44 @@ class TeacherController extends Controller
             ->select(['user_id', 'name'])
             ->get();
 
-        /* $date_before = date_sub(date_create($date_picker), date_interval_create_from_date_string("1 days"));
-        $date_after = date_add(date_create($date_picker), date_interval_create_from_date_string("1 days"));
         foreach ($students as $s) {
             $checked = DB::table('attendance')
-                ->where('student_id', $s->user_id)
-                ->where('created_at', '>', date_format($date_before, "Y-m-d"))
-                ->where('created_at', '<', date_format($date_after, "Y-m-d"))
-                ->select(['status', 'created_at'])
+                ->where(['student_id' => $s->user_id, 'subject_id' => $subject_id, 'session' => $session])
                 ->get();
             if ($checked->count() !== 0) {
-                $save_day = strtotime(date_format(date_create($checked[0]->created_at), "Y-m-d"));
-                $check_day = strtotime($date_picker);
-                if ($save_day == $check_day) {
-                    // return student
-                    array_push($data, ['user_id' => $s->user_id, 'name' => $s->name, 'status' => $checked[0]->status]);
+                foreach ($checked as $c) {
+                    array_push($data, ['user_id' => $s->user_id, 'name' => $s->name, 'status' => $c->status]);
                 }
             } else {
                 // return student
                 // $stu = Student::where('user_id', $s->user_id)->first();
                 array_push($data, ['user_id' => $s->user_id, 'name' => $s->name, 'status' => 0]);
             }
-        } */
+        }
 
         return $data;
     }
 
-    public function postAttendance(Request $request, $date_picker)
+    public function postAttendance(Request $request, $subject_id, $session)
     {
         $update = $result = 0;
         $status = $request->status;
         foreach ($status as $s) {
             $checked = DB::table('attendance')
-                ->where('student_id', $s['name'])
-                ->select(['created_at'])
+                ->where(['student_id' => $s['name'], 'subject_id' => $subject_id, 'session' => $session])
                 ->get();
             if ($checked->count() == 0) {
                 $result = DB::table('attendance')->insert([
                     'student_id' => $s['name'],
+                    'subject_id' => $subject_id,
+                    'session' => $session,
                     'status' => $s['value'],
                     'created_at' => now("Asia/Ho_Chi_Minh")
                 ]);
             } else {
-                foreach ($checked as $c) {
-                    $save_day = strtotime(date_format(date_create($c->created_at), "Y-m-d"));
-                    $check_day = strtotime($date_picker);
-                    if ($save_day == $check_day) {
-                        $update = DB::table('attendance')
-                            ->where('student_id', $s['name'])
-                            ->update([
-                                'status' => $s['value'],
-                                'updated_at' => now("Asia/Ho_Chi_minh")
-                            ]);
-                        // return [$save_day, $check_day];
-                    } else {
-                        $result = DB::table('attendance')->insert([
-                            'student_id' => $s['name'],
-                            'status' => $s['value'],
-                            'created_at' => now("Asia/Ho_Chi_Minh")
-                        ]);
-                    }
-                }
+                $result = DB::table('attendance')
+                    ->where(['student_id' => $s['name'], 'subject_id' => $subject_id, 'session' => $session])
+                    ->update(['status' => $s['value'], 'created_at' => now("Asia/Ho_Chi_Minh")]);
             }
         }
         // return view('test', ['data' => $request->status]);

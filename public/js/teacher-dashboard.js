@@ -3,7 +3,6 @@ $('#class_details').on('show.bs.modal', function (event) {
     $('#class_details div[role="status"]').toggleClass('d-none', false);
     var button = $(event.relatedTarget);
     var recipent = button.data('class-id');
-    var modal = $(this);
     $.get(host + '/class-details/' + recipent, function (data) {
         // console.log('here', button, recipent, data);
         for (const key in data) {
@@ -18,7 +17,7 @@ $('#class_details').on('show.bs.modal', function (event) {
 
 $('select#select_class').on('click', function () {
     let class_id = $(this).val();
-    console.log(class_id);
+    // console.log('get class_id: ' + class_id);
     if ("" !== class_id) {
         $('#attendance div[role="status"]').toggleClass('d-none', false);
         $.get(host + '/list-subjects/' + class_id,
@@ -42,21 +41,23 @@ $('select#select_class').on('click', function () {
 $('#select_subject').on('click', function () {
     let class_id = $('#select_class').val();
     let subject_id = $(this).val();
-    $.get(host + '/list-subjects/' + class_id + '/' + subject_id,
-        function (data) {
-            console.log(data);
-            $('#select_session').empty();
-            $('#select_session').append("<option value='' selected>- Session -</option>");
-            if (data.length > 0) {
-                data.forEach(e => {
-                    let txt = "<option value='" + subject_id + '|' + e.session + "'>";
-                    txt += e.session;
-                    txt += "</option>";
-                    $('select#select_session').append(txt);
-                    $('#attendance div[role="status"]').toggleClass('d-none', true);
-                });
-            }
-        });
+    if ("" !== subject_id) {
+        $.get(host + '/list-sessions/' + subject_id,
+            function (data) {
+                // console.log(data);
+                $('#select_session').empty();
+                $('#select_session').append("<option value='' selected>- Session -</option>");
+                if (data.length > 0) {
+                    for (let i = 1; i <= data; i++) {
+                        let txt = "<option value='" + i + "'>";
+                        txt += "Session " + i;
+                        txt += "</option>";
+                        $('select#select_session').append(txt);
+                        $('#attendance div[role="status"]').toggleClass('d-none', true);
+                    }
+                }
+            });
+    }
 });
 
 /* let now = () => {
@@ -130,7 +131,9 @@ function getClass() {
 
 function postAttendance() {
     // console.log($('form#status').serializeArray());
-    let date_picker = $('input#select_date').val();
+    // let date_picker = $('input#select_date').val();
+    let subject_id = $('select#select_subject').val();
+    let session = $('#select_session').val();
     let form_data = $('form#status').serializeArray();
     $('#attendance div[role="status"]').toggleClass('d-none', false);
     $.ajaxSetup({
@@ -138,8 +141,8 @@ function postAttendance() {
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
         }
     });
-    $.post(host + '/attendace/' + date_picker, { status: form_data }, function (data) {
-        console.log(data);
+    $.post(host + '/attendance/' + subject_id + '/' + session, { status: form_data }, function (data) {
+        // console.log(data);
         // window.open().document.write(data);
         $('#attendance div[role="status"]').toggleClass('d-none', true);
         getClass();

@@ -88,9 +88,9 @@ Route::domain('teacher.localhost')->name('teacher.')->group(function () {
     Route::get('class-details/{class_id}', 'TeacherController@getClassDetails');
     Route::get('list-subjects/{class_id}', 'TeacherController@getListSubjects');
     // Route::get('list-students/{class_id}/{subject_id}/{date_picker}', 'TeacherController@getListStudents');
-    Route::get('list-subjects/{class_id}/{subject_id}', 'TeacherController@getSessions');
-    Route::get('list-subjects/{class_id}/{subject_id}/{sessions}', 'TeacherController@getListStudents');
-    Route::post('attendace/{date_picker}', 'TeacherController@postAttendance');
+    Route::get('list-sessions/{subject_id}', 'TeacherController@getSessions');
+    Route::get('list-students/{class_id}/{subject_id}/{session}', 'TeacherController@getListStudents');
+    Route::post('attendance/{subject_id}/{session}', 'TeacherController@postAttendance');
 });
 
 Route::domain('localhost')->group(function () {

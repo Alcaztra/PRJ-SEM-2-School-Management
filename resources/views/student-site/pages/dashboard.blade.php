@@ -16,12 +16,13 @@
                         </div>
                         <div class="float-right">
                             <strong class="mb-0 text-right">Enrolled Subject</strong>
-                            <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">
+                            <div class="fluid-container text-right">
+                                <h3 class="font-weight-medium mb-0">
                                     @isset($course)
                                         {{ $course->getSubjects()->count() - count($enroll_subject) . ' / ' . $course->getSubjects()->count() }}
                                     @endisset
                                 </h3>
+                                <i>More details</i>
                             </div>
                         </div>
                     </div>
@@ -29,7 +30,7 @@
             </div>
             @isset($enrolled)
                 @include('layout.modal.enrolled-subjects',['id'=>'enroll_subjects',
-                'label'=>'list_enrolled_subjects','enrolled'=>$enrolled])
+                'label'=>'list_enrolled_subjects','enrolled'=>$enrolled, 'attendance'=>$attendance])
             @endisset
         </div>
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
@@ -97,10 +98,21 @@
                             <i class="mdi mdi-bulletin-board text-warning icon-lg"></i>
                         </div>
                         <div class="float-right">
-                            <strong class="mb-0 text-right">Attendance Status</strong>
+                            @isset($attendance)
+                            <strong class="mb-0 text-right">Attendance status:</strong>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0"></h3>
+                                <strong class="font-weight-medium mb-0">
+                                    <ul class="list-unstyled">
+                                        @foreach ($attendance as $a)
+                                            <li>{{ $a['subject_id'] }}: {{ $a['present'] }} / {{ $a['sessions'] }}
+                                                ( {{ ($a['present'] / $a['sessions']) * 100 }}% )</li>
+                                        @endforeach
+                                    </ul>
+                                </strong>
                             </div>
+                            @else
+                            <strong class="mb-0 text-right">Attendance status: N/A</strong>
+                            @endisset
                         </div>
                     </div>
                 </div>

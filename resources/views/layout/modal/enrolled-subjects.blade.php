@@ -1,6 +1,6 @@
 <div class="modal fade" id="{{ $id ?? '' }}" tabindex="-1" role="dialog" aria-labelledby="{{ $label ?? '' }}"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: fit-content;">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLongTitle">List Enrolled Subjects</h4>
@@ -15,6 +15,7 @@
                             <tr>
                                 <th>Subject ID</th>
                                 <th>Subject Name</th>
+                                <th>Attendance</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,12 +24,21 @@
                                     <tr>
                                         <td>{{ $s->subject_id }}</td>
                                         <td>{{ $s->name }}</td>
+                                        <td>
+                                            @foreach ($attendance as $a)
+                                                @if ($s->subject_id == $a['subject_id'])
+                                                    {{ $a['present'] }} / {{ $a['sessions'] }} ( {{ ($a['present'] / $a['sessions']) * 100 }}% )
+                                                @endif
+                                            @endforeach
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endisset
                         </tbody>
                         <tfoot>
-                            <tr><td colspan="2">#</td></tr>
+                            <tr>
+                                <td colspan="2">#</td>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
