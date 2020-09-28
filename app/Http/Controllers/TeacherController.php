@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\_class;
 use App\Course;
+use App\Http\Requests\UserProfile;
 use App\Subject;
 use App\Teacher;
 use Illuminate\Http\Request;
@@ -27,16 +28,11 @@ class TeacherController extends Controller
         return view('pages.teachers.create-teacher');
     }
 
-    public function createTecher(Request $request)
+    public function createTeacher(UserProfile $request)
     {
         $validatedData = $request->validate([
             'user_id' => 'bail|required|regex:/[a-zA-Z0-9]*/|unique:teachers,user_id|max:50',
-            'name' => 'bail|required|regex:/[a-zA-Z0-9 ]*/|max:255',
-            'gender' => 'bail|required',
-            'email' => 'bail|required|regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/',
-            'phone' => 'bail|required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|min:8|max:14',
-            'birthday' => 'bail|required|date|before:-16 years',
-            'address' => 'bail|required',
+            
         ]);
         $teacher = new Teacher();
         $teacher->user_id = $request->user_id;

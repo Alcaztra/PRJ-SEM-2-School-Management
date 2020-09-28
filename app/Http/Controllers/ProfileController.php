@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -86,15 +87,15 @@ class ProfileController extends Controller
         return view('pages.profile.update.password')->with(['action' => $action]);
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UserProfile $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'bail|required',
-            'email' => 'bail|required',
-            'phone' => 'bail|required|regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$/|max:14',
-            'birthday' => 'bail|required|date|before:-16 years',
-            'address' => 'bail|required',
-        ]);
+        // $validatedData = $request->validate([
+        //     'name' => 'bail|required|regex:/[a-zA-Z \.]*/',
+        //     'email' => 'bail|required|email',
+        //     'phone' => 'bail|required|regex:/^[+]?[(]?[0-9]{1,4}[)]?[\s\d]*$/|max:14',
+        //     'birthday' => 'bail|required|date|before:-16 years',
+        //     'address' => 'bail|required',
+        // ]);
         // $user = Admin::where('user_id', $request->user_id)->first();
         $user = $this->user();
         $user->name = $request->name;

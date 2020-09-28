@@ -44,8 +44,8 @@
         </div>
         <div class="col" id="data_table">
             @for ($i = 1; $i <= 4; $i++)
-                <div class="row ">
-                    <div class="p-1 border" style="width: 150px">Semester {{ $i }}</div>
+                <div class="row d-flex flex-md-nowrap">
+                    <div class="p-1 border" style="min-width: 100px">Semester {{ $i }}</div>
                     <div class="p-1 border" id="sem_{{ $i }}">
                         @isset($sub_sem)
                             @foreach ($sub_sem[$i] as $ss)

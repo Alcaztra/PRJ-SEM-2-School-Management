@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\_class;
 use App\Course;
+use App\Http\Requests\ClassDetails;
 use App\Student;
 use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ClassController extends Controller
 {
@@ -40,18 +42,13 @@ class ClassController extends Controller
         return view('pages.classes.create-class', ['courses' => $courses]);
     }
 
-    public function createClass(Request $request)
+    public function createClass(ClassDetails $request)
     {
         $validatedData = $request->validate([
-            'class_id' => 'bail|required|regex:/[a-zA-Z0-9 ]*/|unique:classes,class_id|max:50',
-            'room' => 'bail|required|regex:/[a-zA-Z0-9 ]*/',
-            'DoW' => 'bail|required',
-            'period_id' => 'bail|required',
-            'start_day' => 'bail|required',
-            'course_id' => 'bail|required|exists:courses,course_id',
+            'class_id' => 'bail|required|regex:/[a-zA-Z0-9.]*/',
         ]);
         $class = new _class();
-        $class->class_id = $request->class_id;
+        $class->class_id = Str::upper($request->class_id);
         $class->room = $request->room;
         // $class->max_size = $request->max_size;
         $class->DoW = $request->DoW;
@@ -142,15 +139,8 @@ class ClassController extends Controller
         return view('pages.classes.class-details')->with(['class' => $class, 'courses' => CourseController::getCourses(), 'students' => $students]);
     }
 
-    public function classDetails(Request $request)
+    public function classDetails(ClassDetails $request)
     {
-        $validatedData = $request->validate([
-            'room' => 'bail|required|regex:/[a-zA-Z0-9 ]*/',
-            'DoW' => 'bail|required',
-            'period_id' => 'bail|required',
-            'start_day' => 'bail|required',
-            'course_id' => 'bail|required|exists:courses,course_id',
-        ]);
         // dump($request);
         $class = _class::where('class_id', $request->class_id)->first();
         $class->room = $request->room;

@@ -28,8 +28,8 @@
         <div class="input-group">
             <select name="DoW" class="custom-select" required>
                 <option value="">- Day of Week -</option>
-                <option value="1" {{ isset($class) && $class->DoW == 1 ? 'selected' : '' }}>Tue / Thu / Sat</option>
-                <option value="2" {{ isset($class) && $class->DoW == 2 ? 'selected' : '' }}>Mon / Wed / Fri</option>
+                <option value="1" {{ isset($class) && $class->DoW == 1 ? 'selected' : '' }}>Mon / Wed / Fri</option>
+                <option value="2" {{ isset($class) && $class->DoW == 2 ? 'selected' : '' }}>Tue / Thu / Sat</option>
             </select><select name="period_id" class="custom-select" required>
                 <option value="">- Period -</option>
                 <option value="mor" {{ isset($class) && $class->period_id == 'mor' ? 'selected' : '' }}>Morning</option>
@@ -64,3 +64,4 @@
     </div>
     <button type="submit" class="btn btn-secondary">Submit</button>
 </form>
+@include('layout.show-form-errors')

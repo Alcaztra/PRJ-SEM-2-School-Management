@@ -10,7 +10,6 @@
             <div class="card">
                 <div class="card-body">
                     @include('layout.form-create-class',['action'=>'class.create.submit'])
-                    @include('layout.show-form-errors')
                 </div>
             </div>
         </div>

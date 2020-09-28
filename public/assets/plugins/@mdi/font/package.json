@@ -2,7 +2,7 @@
   "_args": [
     [
       "@mdi/font@4.9.95",
-      "D:\\project-sem2-aptech\\PRJ-SEM-2-School-Management"
+      "C:\\source"
     ]
   ],
   "_from": "@mdi/font@4.9.95",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@mdi/font/-/font-4.9.95.tgz",
   "_spec": "4.9.95",
-  "_where": "D:\\project-sem2-aptech\\PRJ-SEM-2-School-Management",
+  "_where": "C:\\source",
   "author": {
     "name": "Austin Andrews",
     "url": "http://twitter.com/templarian"

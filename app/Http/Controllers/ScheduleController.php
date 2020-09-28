@@ -27,7 +27,7 @@ class ScheduleController extends Controller
         $subjects = $course->getSubjects();
         $events = array();
         $start_day = $class->start_day;
-        $DoW = [$class->step];
+        $DoW = [$class->DoW];
         $i = 0;
         while (true) {
             $next = $DoW[$i++] + $class->step;
@@ -35,6 +35,26 @@ class ScheduleController extends Controller
                 break;
             }
             array_push($DoW, $next);
+        }
+
+        $start = date_create($start_day);
+        switch (date_format($start, 'w')) {
+            case "1":
+            case "3":
+            case "5":
+                if ($class->DoW == 2) {
+                    $start_day = date_format(date_add($start, date_interval_create_from_date_string(1 . " days")), "Y-m-d");
+                }
+                break;
+            case "2":
+            case "4":
+                if ($class->DoW == 1) {
+                    $start_day = date_format(date_add($start, date_interval_create_from_date_string(1 . " days")), "Y-m-d");
+                }
+                break;
+            default:
+                # code...
+                break;
         }
 
         foreach ($subjects as $s) {
@@ -49,7 +69,8 @@ class ScheduleController extends Controller
             $event->endTime = $period->end_time;
             $event->classNames = [$this->class_name[array_rand($this->class_name, 1)]];
             array_push($events, $event);
-            $start_day = date_format($this->nextStartday($sub->calcEndDay($start_day, $class->step), $class->step), "Y-m-d");
+            $endDay = $sub->calcEndDay($start_day, $class->step);
+            $start_day = date_format($this->nextStartday($endDay, $class->step), "Y-m-d");
         }
 
 
@@ -59,9 +80,10 @@ class ScheduleController extends Controller
     static public function nextStartday($endDay, $step = null)
     {
         if (date_format($endDay, 'w') == 0 || date_format($endDay, 'w') == 6) {
-            return date_add($endDay, date_interval_create_from_date_string(2 . " days"));
+            return date_add($endDay, date_interval_create_from_date_string($step . " days"));
         } else {
-            return date_add($endDay, date_interval_create_from_date_string(1 . " days"));
+            // return date_add($endDay, date_interval_create_from_date_string(1 . " days"));
+            return $endDay;
         }
     }
 }

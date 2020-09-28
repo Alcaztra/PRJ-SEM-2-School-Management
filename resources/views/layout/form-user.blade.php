@@ -19,7 +19,7 @@
         {!! Form::text('name', $user_profile->name ?? '', [
         'id' => 'name',
         'class' => 'form-control',
-        'pattern' => '[a-zA-Z \.]*',
+        'pattern' => '[a-zA-Z \.\p{L}]*',
         'required',
         'autocomplete' => 'off',
         ]) !!}
@@ -56,7 +56,7 @@
         {!! Form::email('email', $user_profile->email ?? '', [
         'id' => 'email',
         'class' => 'form-control',
-        'pattern' => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$',
+        'pattern' => '[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$',
         'required',
         'autocomplete' => 'off',
         ]) !!}
@@ -66,7 +66,7 @@
         {!! Form::tel('phone', $user_profile->phone ?? '', [
         'id' => 'phone',
         'class' => 'form-control',
-        'pattern' => '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\d]*$',
+        'pattern' => '^[+]?[(]?[0-9]{1,4}[)]?[\s\d]*$',
         'minlength' => 8,
         'maxlength' => 14,
         'required',
@@ -79,7 +79,7 @@
         'id' => 'birthday',
         'class' => 'form-control',
         'required',
-        'max' => date('Y-m-d'),
+        'max' => date_format(date_sub(date_create(date('Y') . '-12-31'), date_interval_create_from_date_string('16 years')), 'Y-m-d'),
         ]) !!}
     </div>
     <div class="form-group">
@@ -88,6 +88,7 @@
         'id' => 'address',
         'class' => 'form-control',
         'required',
+        'pattern' => '[a-zA-Z0-9 ,.-/()\p{L}]*',
         'autocomplete' => 'off',
         ]) !!}
     </div>

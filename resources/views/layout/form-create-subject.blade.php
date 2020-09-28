@@ -6,7 +6,7 @@
         'id' => 'subject_id',
         'class' => 'form-control',
         'required',
-        'pattern' => '[a-zA-Z0-9]*',
+        'pattern' => '[a-zA-Z0-9\-]*',
         isset($subject) ? 'readonly' : '',
         ]) !!}
     </div>
@@ -16,7 +16,7 @@
         'id' => 'name',
         'class' => 'form-control',
         'required',
-        'pattern' => '[a-zA-Z0-9 -]*',
+        'pattern' => '[a-zA-Z0-9 (),.]*[^.]$',
         ]) !!}
     </div>
     <div class="form-group">
@@ -24,6 +24,7 @@
         {!! Form::number('sessions', $subject->sessions ?? '', [
         'id' => 'sessions',
         'class' => 'form-control',
+        'required',
         'min' => 0,
         ]) !!}
     </div>

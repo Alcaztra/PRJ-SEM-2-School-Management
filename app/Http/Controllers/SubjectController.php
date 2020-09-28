@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SubjectController extends Controller
 {
@@ -26,11 +27,12 @@ class SubjectController extends Controller
     public function createSubject(Request $request)
     {
         $validatedData = $request->validate([
-            'subject_id' => 'bail|required|regex:/[a-zA-Z0-9]*/|unique:subjects,subject_id',
-            'name' => 'bail|required|regex:/[a-zA-Z0-9 ]*/',
+            'subject_id' => 'bail|required|regex:/[a-zA-Z0-9-]*/|unique:subjects,subject_id',
+            'name' => 'bail|required|regex:/[a-zA-Z0-9 (),]*/',
+            'sessions' => 'bail|required|numeric|min:0',
         ]);
         $subject = new Subject();
-        $subject->subject_id = $request->subject_id;
+        $subject->subject_id = Str::upper($request->subject_id);
         $subject->name = $request->name;
         $subject->sessions = $request->sessions;
         $subject->duration = $request->sessions * 2;

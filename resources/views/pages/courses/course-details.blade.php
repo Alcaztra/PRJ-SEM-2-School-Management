@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-xl-6">
+        <div class="col-md-8 col-xl-6 grid-margin">
             <div class="card">
                 <div class="card-body">
                     {{-- @dump($subjects,$course,$sub_sem) --}}
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col col-xl-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">

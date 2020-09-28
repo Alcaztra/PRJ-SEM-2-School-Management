@@ -153,7 +153,7 @@ Route::domain('localhost')->group(function () {
             });
             Route::get('list', 'TeacherController@listTeachers')->name('teacher.list');
             Route::get('create', 'TeacherController@showFormCreateTeacher')->name('teacher.create');
-            Route::post('create', 'TeacherController@createTecher')->name('teacher.create.submit');
+            Route::post('create', 'TeacherController@createTeacher')->name('teacher.create.submit');
             Route::group(['prefix' => '{teacher_id}'], function () {
                 Route::get('/', 'TeacherController@showTeacherDetails')->name('teacher.detail');
                 Route::get('reset-password', 'TeacherController@resetPassword')->name('teacher.reset.password');
