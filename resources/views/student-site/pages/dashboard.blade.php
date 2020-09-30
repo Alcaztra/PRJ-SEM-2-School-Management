@@ -320,7 +320,8 @@
     {!! Html::script('/js/initCalendar.js') !!}
     {!! HTML::script('/js/enrollSubject.js') !!}
     <script>
-        if (null !== $('#class_id')) {
+        let class_id = document.getElementById('class_id');
+        if (null !== class_id) {
             getEvents($('#class_id').html());
         }
 
