@@ -141,10 +141,15 @@ function postAttendance() {
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
         }
     });
-    $.post(host + '/attendance/' + subject_id + '/' + session, { status: form_data }, function (data) {
-        // console.log(data);
-        // window.open().document.write(data);
+    if (form_data.length > 0) {
+        $.post(host + '/attendance/' + subject_id + '/' + session, { status: form_data }, function (data) {
+            // console.log(data);
+            // window.open().document.write(data);
+            $('#attendance div[role="status"]').toggleClass('d-none', true);
+            getClass();
+        }, 'json');
+    } else {
         $('#attendance div[role="status"]').toggleClass('d-none', true);
-        getClass();
-    }, 'json');
+    }
+
 }
